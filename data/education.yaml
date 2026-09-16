@@ -1,7 +1,7 @@
 # Education entries. `tags` drive which variants surface an entry via skills/domain
 # filtering; education is normally shown in full regardless (see variants.yaml).
 - id: digipen-sit-beng
-  institution: "DigiPen Institute of Technology & Singapore Institute of Technology"
+  institution: "DigiPen Institute of Technology & SIT"
   degree: "B.Eng. Mechatronics Systems"
   dates: "Aug 2023 – May 2027"
   tags: [robotics-embedded, hardware-mechatronics]

@@ -40,7 +40,7 @@ be installed — pandoc, LaTeX, and the fonts all live in the build image.
 
 ```
 make build VARIANT=full                      # -> dist/resume-full.pdf, dist/resume-full.docx
-make build VARIANT=mha-drone-example
+make build VARIANT=mha-drone
 make build-all                               # builds every variant in data/variants.yaml
 ```
 
@@ -52,7 +52,8 @@ image (a few minutes); after that it's cached.
 Defined in `data/variants.yaml`:
 
 - `full` — everything, the master reference
-- `mha-drone-example` — recreates the tailored resume built manually in `Checklist.md`
+- `mha-drone` — the tailored submission for the MHA Embodied AI lead: capstone first
+  under Projects, then reverse-chronological experience including National Service
 - `ai-ml-focused` — leads with AI/ML work
 - `robotics-embedded-focused` — leads with robotics/embedded work
 
@@ -78,19 +79,75 @@ only if you want to change the docx's fonts/colors/styles:
 make reference-docx
 ```
 
-## Fidelity to the original template
+## Design: ATS-safe over template-exact
 
-The layout (blue name/contact header, gray section headings with a rule,
-bold-title/right-aligned-date entries, numbered projects) is modeled on the
-coach-provided template in `archive/1 - Resume Building Tool_V8.pdf`. The PDF
-substitutes free metric-compatible fonts (Caladea/Carlito) for Word's
+The layout is single-column on purpose: name on its own line, contact info as
+plain text below it, "Title, Company — Date" on one plain line, skills as
+comma-separated lines, awards as a plain bullet list. No side-by-side columns
+and no tables anywhere in the document. This was a deliberate tradeoff — the
+original coach-provided template (`archive/1 - Resume Building Tool_V8.pdf`)
+used two-column layouts (name/contact side by side, date right-aligned via a
+table), which can get extracted in the wrong order or mangled by some ATS
+(Applicant Tracking System) parsers. ATS-compatibility was prioritized over
+matching that template's exact visual layout. Section headings (gray, bold,
+ruled) and the typographic scale (9pt body / 12pt entry titles / 15pt section
+headings / 18pt name) still echo the original template's hierarchy.
+
+The PDF substitutes free metric-compatible fonts (Caladea/Carlito) for Word's
 Cambria/Calibri; the `.docx` references the real font names, so it renders
 with actual Cambria/Calibri when opened in Microsoft Word.
 
+## Page limit
+
+`mha-drone`, `ai-ml-focused`, and `robotics-embedded-focused` are
+meant to fit 2 pages (all currently do; `mha-drone` is tuned to fill both). `full` is the
+comprehensive master reference and is not expected to fit 2 pages.
+
+## C.A.R (Context-Action-Result) bullets and the numbers policy
+
+Experience, Projects, and Volunteering bullets follow a Context-Action-Result
+structure. **Only figures traceable to a verified source appear in `data/`** —
+the `1,200`-video dataset, `33` sources, `3 dB` at hover, `90.03` AUROC, the
+`~0.3` operating threshold, `10,000` ear savers, `1,000+` teaching hours, `5`
+MODI projects. Earlier drafts carried invented placeholder metrics (`___`) and
+two unverified "+50%" claims; those were removed rather than guessed at, on the
+principle that a reader who knows the domain will probe any number on the page.
+
+If you later confirm a real figure, add it to the relevant bullet in `data/` and
+rebuild — don't hand-edit the `.docx`, or the next build will drop it.
+
 ## Open items
 
-- `data/projects.yaml`'s `capstone-quiet-quadcopter` entry has draft bullets
-  with unfilled placeholders (`[team size]`, `[result: ...]`) transcribed from
-  `Checklist.md`, plus an unresolved question about whether it's the same
-  build as the `aeroacoustic-stealth` project. Resolve both before using that
-  variant for a real submission.
+Things that need a real answer from Ariff, not from the data:
+
+- **Date conflict.** National Service (`spf-procom`, Jan 2021 – Nov 2022) overlaps
+  the SOLUSTAR internship (May – Aug 2022), the start of SUTD (Aug 2022), and
+  Ngee Ann Polytechnic (Sep 2022). At least the SOLUSTAR overlap looks wrong for
+  a full-time NS posting. Verify and correct the dates before sending.
+- **MOE certification title.** `data/awards.yaml` uses the generic "MOE (Ministry
+  of Education) Instructor Certification". Replace with the exact title printed
+  on the certificate.
+- **C.A.R. results.** See `CAR-gaps.md` — ~15 bullets still end on an action or a
+  purpose rather than an outcome, each with a recommended Result and the figure
+  left blank.
+- **New volunteering entry** requested but not yet supplied.
+
+## Capstone source of truth
+
+The `capstone-quiet-quadcopter` entry is written strictly from the MET4004
+project proposal (submitted 10 Jul 2026). Corrections that proposal forced:
+
+- **The sponsor is KLASS, not MHA.** MHA appears nowhere in the 26-page proposal.
+  KLASS provides $6,000 SGD of funding and owns all resulting IP.
+- The noise-reduction mechanisms are injection-molded toroidal propellers, custom
+  ducts with acoustic lining and **serrated trailing edges** (on the duct, not
+  owl-wing blades), 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning.
+- A PRISMA-ScR review of 33 sources, a six-state factorial bench test, the 3 dB
+  duct/battery mass finding, and an early-2027 conference abstract all appeared in
+  earlier drafts but are **not** in the proposal. They were cut.
+- The GPS-denied UAV navigation work was the capstone's original scope, descoped
+  for time. It is not a separate project and was removed.
+
+**The proposal PDF is gitignored** (`*projectproposal*`) — it is sponsor-owned IP
+and contains teammates' and supervisors' personal contact details. Do not commit it
+to this public repository.

@@ -1,6 +1,6 @@
 IMAGE := resume-builder
 VARIANT ?= full
-VARIANTS := full mha-drone-example ai-ml-focused robotics-embedded-focused
+VARIANTS := full mha-drone ai-ml-focused robotics-embedded-focused
 DOCKER_RUN := docker run --rm -v $(CURDIR):/work -w /work --user $(shell id -u):$(shell id -g) $(IMAGE)
 
 .PHONY: build-image build build-all docs reference-docx shell

@@ -5,6 +5,7 @@
 ## AI, Vision & Audio Analytics _(tag: ai-ml)_
 - Deep Learning
 - Computer Vision
+- Multimodal ML
 - Deepfake Detection
 - Generative AI
 - OpenCV
@@ -26,25 +27,39 @@
 - Model Benchmarking
 - Zero-shot Learning
 
-## Robotics & Autonomous Systems _(tag: robotics-embedded)_
+## Robotics, UAV & Autonomous Systems _(tag: robotics-embedded)_
 - Embodied AI
 - ROS
 - SLAM (3D LiDAR)
-- Visual-Inertial Odometry (VIO)
+- Perception
 - Sensor Fusion
-- RTOS
-- PID Control
+- Visual-Inertial Odometry (VIO)
+- Autonomous Mobile Robots
+- Quadcopter Design
+- UAV Flight Testing
 - UAV Aeroacoustics
+- Acoustic Noise Reduction
 - PX4 Autopilot
 - ArduPilot
 - Pixhawk
+
+## Embedded, Hardware & Test _(tag: hardware-mechatronics)_
+- Embedded C / C++
+- RTOS
+- Microcontrollers (STM32, Arduino)
+- PID Control
+- Closed-Loop IoT Control
+- PCB Design
+- Firmware Development
+- Hardware Prototyping
+- Experimental Design
+- Test & Validation
 
 ## Software & Fullstack _(tag: software-fullstack)_
 - Python (NumPy, Pandas)
 - C++17
 - C#
 - Java
-- Embedded C
 - TypeScript
 - React
 - Zustand

@@ -3,13 +3,12 @@
 One-time generator for templates/reference.docx, pandoc's "reference doc"
 mechanism for styling the .docx output. Starts from pandoc's own default
 reference.docx (a .docx is just a zip of XML — no Word/LibreOffice needed)
-and edits word/styles.xml to add:
-  - Title: bold blue, large
+and edits word/styles.xml to add an ATS-safe (single-column, no tables)
+typographic scale:
+  - Title: bold blue, large (unused directly, kept as a sane fallback)
   - Heading 1: gray, bold, caps, bottom border (section headings)
-  - ResumeName: bold blue, large (used for the name header line)
-  - ContactBlock: bold blue, right-aligned (contact block lines)
-  - EntryHeader: bold, with a right-aligned tab stop at the right margin, so
-    the `<w:tab/>` trick in resume.md.j2 right-aligns entry dates.
+  - ResumeName: bold blue, large (the name header line)
+  - EntryHeader: bold, with space before each entry for visual separation
 
 OOXML's schema requires style/pPr children in a strict sequence — this script
 inserts new elements at the schema-correct position (not just appended) so
@@ -34,8 +33,12 @@ ET.register_namespace("w", W_NS)
 BLUE = "1F4E79"
 GRAY = "808080"
 
-# Right-margin tab stop for EntryHeader, in twentieths of a point (1440 = 1in).
-RIGHT_TAB_TWIPS = "9600"
+# Typographic scale (half-points = pt * 2), matching templates/resume.latex:
+# body 9pt -> entry title 12pt -> section heading 15pt -> name 18pt.
+BODY_SIZE = 18
+ENTRY_HEADER_SIZE = 24
+SECTION_HEADING_SIZE = 30
+NAME_SIZE = 36
 
 STYLE_CHILD_ORDER = [
     "name", "aliases", "basedOn", "next", "link", "autoRedefine", "hidden",
@@ -149,18 +152,10 @@ def style_bottom_border(style_el):
     bottom.set(w("color"), GRAY)
 
 
-def style_right_align(style_el):
+def style_space_before(style_el, twips):
     ppr = get_pPr(style_el)
-    jc = insert_in_order(ppr, ET.Element(w("jc")), PPR_CHILD_ORDER)
-    jc.set(w("val"), "right")
-
-
-def style_right_tab(style_el, pos):
-    ppr = get_pPr(style_el)
-    tabs = get_or_create(ppr, "tabs", PPR_CHILD_ORDER)
-    tab = ET.SubElement(tabs, w("tab"))
-    tab.set(w("val"), "right")
-    tab.set(w("pos"), pos)
+    spacing = get_or_create(ppr, "spacing", PPR_CHILD_ORDER)
+    spacing.set(w("before"), twips)
 
 
 def find_style(root, style_id):
@@ -200,29 +195,31 @@ def main():
         tree = ET.parse(styles_path)
         root = tree.getroot()
 
+        normal = find_style(root, "Normal")
+        if normal is not None:
+            style_run_props(normal, size=BODY_SIZE)
+        else:
+            print("warning: 'Normal' style not found in pandoc's default reference.docx")
+
         title = find_style(root, "Title")
         if title is not None:
-            style_run_props(title, color=BLUE, bold=True, size=56)
+            style_run_props(title, color=BLUE, bold=True, size=NAME_SIZE)
         else:
             print("warning: 'Title' style not found in pandoc's default reference.docx")
 
         heading1 = find_style(root, "Heading1")
         if heading1 is not None:
-            style_run_props(heading1, color=GRAY, bold=True, caps=True)
+            style_run_props(heading1, color=GRAY, bold=True, caps=True, size=SECTION_HEADING_SIZE)
             style_bottom_border(heading1)
         else:
             print("warning: 'Heading1' style not found in pandoc's default reference.docx")
 
         resume_name = new_paragraph_style(root, "ResumeName", "Resume Name")
-        style_run_props(resume_name, color=BLUE, bold=True, size=56)
-
-        contact_block = new_paragraph_style(root, "ContactBlock", "Contact Block")
-        style_right_align(contact_block)
-        style_run_props(contact_block, color=BLUE, bold=True)
+        style_run_props(resume_name, color=BLUE, bold=True, size=NAME_SIZE)
 
         entry_header = new_paragraph_style(root, "EntryHeader", "Entry Header")
-        style_right_tab(entry_header, RIGHT_TAB_TWIPS)
-        style_run_props(entry_header, bold=True)
+        style_space_before(entry_header, "120")  # 6pt gap before each new entry
+        style_run_props(entry_header, bold=True, size=ENTRY_HEADER_SIZE)
 
         tree.write(styles_path, xml_declaration=True, encoding="UTF-8")
 

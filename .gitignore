@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 .DS_Store
 .claude/
+
+# Sponsor-owned / confidential source material — never commit
+met4004-projectproposal-*.pdf
+*projectproposal*

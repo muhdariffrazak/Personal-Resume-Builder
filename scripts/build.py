@@ -8,7 +8,9 @@ Usage: python3 scripts/build.py --variant full
 import argparse
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
 import yaml
 from jinja2 import Environment, FileSystemLoader
@@ -18,6 +20,38 @@ DATA = ROOT / "data"
 TEMPLATES = ROOT / "templates"
 BUILD = ROOT / "build"
 DIST = ROOT / "dist"
+
+W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+ET.register_namespace("w", W_NS)
+
+
+def dedupe_docx_styles(docx_path):
+    """
+    Pandoc's docx writer adds its own stub definition for a custom-style it
+    encounters, even when a full definition for that same styleId already
+    exists in --reference-doc, leaving duplicate <w:style> elements with
+    undefined precedence in Word. Keep only the first (our styled) one.
+    """
+    with zipfile.ZipFile(docx_path) as zf:
+        entries = {name: zf.read(name) for name in zf.namelist()}
+
+    styles_xml = entries["word/styles.xml"]
+    tree = ET.ElementTree(ET.fromstring(styles_xml))
+    root = tree.getroot()
+
+    seen = set()
+    for style in list(root.findall(f"{{{W_NS}}}style")):
+        style_id = style.get(f"{{{W_NS}}}styleId")
+        if style_id in seen:
+            root.remove(style)
+        else:
+            seen.add(style_id)
+
+    entries["word/styles.xml"] = ET.tostring(root, xml_declaration=True, encoding="UTF-8")
+
+    with zipfile.ZipFile(docx_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for name, data in entries.items():
+            zf.writestr(name, data)
 
 
 def load_yaml(name):
@@ -209,6 +243,7 @@ def main():
             check=True,
             cwd=variant_build_dir,
         )
+        dedupe_docx_styles(docx_path)
         print(f"Built {docx_path}")
     else:
         print(f"Skipped docx build: {reference_docx} not found (run scripts/build_reference_docx.py first)")

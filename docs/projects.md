@@ -2,79 +2,65 @@
 
 # Projects
 
-## Capstone (MET4004) — Quiet Quadcopter for Indoor Flight
-*Project Lead | MHA*
-**Status:** DRAFT
-> **TODO:** Draft bullets below are transcribed from Checklist.md's action plan and still
-contain unresolved placeholders ([team size], [result: ...]) — fill these in
-with real numbers before using in an actual resume submission. Checklist.md
-also raises an open question that hasn't been resolved: is the 5-inch
-acoustic-stealth quadcopter (see the `aeroacoustic-stealth` project below) the
-same build as this capstone, or a separate personal project? Resolve this and
-update both entries accordingly — do not assume either way.
+## Capstone (MET4004) — Acoustic Noise Reduction for Drones
+*Project Lead — Software & Electronics | KLASS | Aug 2026 – Apr 2027*
 
-- Led a [team size]-person team through literature review, design, and bench and flight testing, managing schedule risk and coordinating with [MHA / sponsor] and academic supervisors, [result: e.g. milestones met on schedule].
-- Designed a two-stage test campaign (a six-state factorial bench test isolating each noise-reduction mechanism, plus a flight validation stage) meeting FYP requirements while generating data for a conference abstract targeted for early 2027.
-- Led a PRISMA-ScR scoping review of 33 sources on drone noise reduction to guide design decisions.
-- Identified that underestimated duct and battery mass cost roughly 3 dB at hover, redirecting design effort toward mass reduction.
-
-## Autonomous UAV Navigation in GPS-Denied Environments
-
-- Formulated engineering architectures for indoor UAV navigation utilizing Visual-Inertial Odometry (VIO), spatial AI depth cameras (Luxonis OAK-D Pro), and 1D Time-of-Flight sensors mapped across Raspberry Pi and Pixhawk/ArduPilot controllers.
-
-## Aeroacoustic Stealth for Unmanned Systems
-> **TODO:** See open question on capstone-quiet-quadcopter above regarding overlap with this project.
-
-- Investigated noise reduction strategies for UAVs—combining toroidal propellers, biomimetic owl-wing serrated blade designs, low-KV motors, and Field Oriented Control ESCs—to suppress acoustic signatures.
+- Leading a 3-person team to deliver a proof-of-concept indoor drone for industry sponsor KLASS, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope.
+- Owning the software and electronics workstream, selecting a low-noise propulsion stack of 5-inch injection-molded toroidal propellers, custom ducts with acoustic lining and serrated trailing edges, 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning to shift tonal whine into less perceptible bands.
+- Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight for stable station-keeping in GPS-denied indoor flight.
+- Designed the acoustic validation campaign to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, enabling direct benchmarking against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements.
+- Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards, quantifying perceived annoyance beyond raw sound-pressure level.
 
 ## Autonomous Trolley Collection Robot
 
-- Developed an autonomous robot for collecting stray trolleys using an STM32F7 microcontroller with RTOS, implementing tasks for obstacle detection, joystick control, and a custom serial communication protocol.
+- Developed an autonomous robot for collecting stray trolleys on an STM32F7 microcontroller running an RTOS, implementing concurrent tasks for obstacle detection and joystick control over a custom serial communication protocol.
 
 ## Custom 3D Printer Development
 
-- Built a custom 3D printer, incorporating off-the-shelf modules and developing custom firmware in C++ (Marlin), increasing reliability and accuracy by 50%.
+- Built a custom 3D printer from off-the-shelf modules, developing custom firmware in C++ (Marlin) and tuning it for print reliability and dimensional accuracy.
 
 ## AI-Generated Video & Audio Forensics Benchmarking
 *Sep 2025 – Aug 2026*
 
-- Reproduced and benchmarked state-of-the-art vision and audio AI models (NSG-VD, D3, ReStraV, SpeechForensics) to evaluate real-time transparency and explainability in threat detection against proprietary pipelines.
-- Integrated advanced optical flow (RAFT), segmentation (SAM 2), and point-tracking algorithms (CoTracker) to analyze physical motion derivatives in video sequences for mission-critical data.
+- Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC, achieving 90.03 AUROC on the NSG-VD replication.
+- Integrated optical flow (RAFT), segmentation (SAM 2), and point-tracking (CoTracker) algorithms to analyze physical motion derivatives in video sequences for mission-critical data.
+- Evaluated audio-visual synchronization as a deepfake detection signal, selecting a ~0.3 operating threshold through ROC analysis.
 
 **Source:** pulled from [Machine Learning & Fullstack Engineer (Intern), KLASS Engineering and Solutions](experience.md#machine-learning-fullstack-engineer-intern-klass-engineering-and-solutions)
 
 ## Synthetic Multimodal Deepfake Dataset Pipeline
 *Sep 2025 – Aug 2026*
 
-- Engineered a comprehensive data generation pipeline linking video extension models (Wan2.2), voice cloning (Chatterbox), and lip-synchronization (LatentSync) to curate a balanced 1,200-video dataset for benchmarking.
+- Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-synchronization (LatentSync) models to curate a balanced 1,200-video benchmark dataset.
 
 **Source:** pulled from [Machine Learning & Fullstack Engineer (Intern), KLASS Engineering and Solutions](experience.md#machine-learning-fullstack-engineer-intern-klass-engineering-and-solutions)
 
 ## Multi-Model AI Endpoint Platform
 *Sep 2025 – Aug 2026*
 
-- Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, and deployed fullstack architectures (React, Zustand, FastAPI, WebSockets) for multi-model AI endpoints.
+- Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for an internal AI chatbot platform.
+- Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits before committing cluster time to full-scale benchmarking runs.
 
 **Source:** pulled from [Machine Learning & Fullstack Engineer (Intern), KLASS Engineering and Solutions](experience.md#machine-learning-fullstack-engineer-intern-klass-engineering-and-solutions)
 
 ## Stair-Climbing Robot Fall-Risk Prediction (LSTM)
 *Aug 2022 – May 2024*
 
-- Built a specialized predictive safety model to detect a stair-climbing robot's fall risk, deploying Long Short-Term Memory networks (LSTMs) to improve physical safety metrics by 50%.
+- Built a predictive safety model to detect a stair-climbing robot's fall risk, deploying Long Short-Term Memory networks (LSTMs) over sensor time-series data.
 
-**Source:** pulled from [Volunteer / Full Time Research Assistant, Singapore University of Technology & Design (SUTD) - ROAR Lab](experience.md#volunteer-full-time-research-assistant-singapore-university-of-technology-design-sutd---roar-lab)
+**Source:** pulled from [Research Assistant (Full Time / Volunteer), SUTD – ROAR Lab](experience.md#research-assistant-full-time-volunteer-sutd-roar-lab)
 
-## Autonomous Vehicle Intelligent Lighting System
+## Panthera Autonomous Vehicle — Intelligent Lighting System
 *Aug 2022 – May 2024*
 
-- Led the design and development of an intelligent lighting control system for an autonomous vehicle, integrating it seamlessly with the main navigation system via RTOS and APIs.
+- Led the design of the full intelligent lighting control system for Panthera, an autonomous vehicle developed under National Robotics Programme funding, implementing it as a rosserial node on an Arduino that subscribed to cmd_vel, IMU, and vehicle-state topics under an RTOS to drive turn, warning, and hazard signaling; the platform passed T1 autonomous testing at CETRAN.
 
-**Source:** pulled from [Volunteer / Full Time Research Assistant, Singapore University of Technology & Design (SUTD) - ROAR Lab](experience.md#volunteer-full-time-research-assistant-singapore-university-of-technology-design-sutd---roar-lab)
+**Source:** pulled from [Research Assistant (Full Time / Volunteer), SUTD – ROAR Lab](experience.md#research-assistant-full-time-volunteer-sutd-roar-lab)
 
 ## Experimental Thermal Chamber for Embodied AI Testing
 *Aug 2024 – May 2025*
 
-- Designed and implemented an experimental temperature chamber to simulate human body heat signatures and extreme physical environments for environmental robotics testing.
-- Engineered a closed-loop, thermistor-based control system to regulate precise environmental variables, ensuring high-fidelity data collection.
+- Designed and built an experimental temperature chamber simulating human body heat signatures and extreme physical environments for faculty-led embodied AI and robotics hardware testing.
+- Engineered a closed-loop, thermistor-based IoT control system to hold chamber temperature at setpoint, enabling high-fidelity data collection.
 
 **Source:** pulled from [Student Research Engineer, Singapore Institute of Technology (SIT)](experience.md#student-research-engineer-singapore-institute-of-technology-sit)

@@ -7,7 +7,7 @@
 - id: full
   label: "Full / Master Resume"
   description: "Everything, default ordering. The master reference other variants are cut down from."
-  sections: [experience, projects, education, skills, awards, volunteering]
+  sections: [experience, projects, skills, education, awards, volunteering]
   experience: all
   projects: all
   education: all
@@ -15,23 +15,29 @@
   awards: all
   volunteering: all
 
-- id: mha-drone-example
-  label: "MHA Embodied AI Lead — Drone-Tailored (example)"
-  description: "Recreates the tailored resume built manually in Checklist.md: capstone/projects first, then SUTD, then KLASS, rest condensed."
-  sections: [projects, experience, education, skills, awards]
+- id: mha-drone
+  label: "MHA Embodied AI Lead — Drone-Tailored"
+  description: "The real submission built from Checklist.md/To-Do.md: capstone first under Projects, then reverse-chronological experience including National Service. Targets 2 pages."
+  sections: [projects, experience, education, skills, awards, volunteering]
   projects:
-    include: [capstone-quiet-quadcopter, uav-navigation, aeroacoustic-stealth]
+    include: [capstone-quiet-quadcopter, trolley-robot]
   experience:
-    include: [sutd, klass, sit]
+    include: [klass, sit, sutd, spf-procom, solustar, vm-education, nullspace]
     bullets:
+      klass: [klass-benchmarking, klass-video-analytics, klass-data-generation, klass-hpc, klass-fullstack]
+      sit: all
       sutd: all
-      klass: all
-      sit: [sit-validation-protocols]
+      spf-procom: all
+      solustar: [solustar-pcb, solustar-firmware]
+      vm-education: [vm-curriculum-design]
+      nullspace: [nullspace-curriculum]
   education: all
   skills:
-    include: [robotics-embedded, ai-ml]
-  awards: none
-  volunteering: none
+    include: [robotics-embedded, hardware-mechatronics, ai-ml, software-fullstack]
+  awards:
+    include: [moe-instructor-cert]
+  volunteering:
+    include: [sg-makers-covid]
 
 - id: ai-ml-focused
   label: "AI / ML Focused"
@@ -54,7 +60,7 @@
   experience:
     include: [sutd, sit, klass]
   projects:
-    include: [uav-navigation, aeroacoustic-stealth, trolley-robot, custom-3d-printer, av-intelligent-lighting-system, experimental-thermal-chamber]
+    include: [capstone-quiet-quadcopter, trolley-robot, custom-3d-printer, av-intelligent-lighting-system, experimental-thermal-chamber]
   skills:
     include: [robotics-embedded, hardware-mechatronics]
   education: all

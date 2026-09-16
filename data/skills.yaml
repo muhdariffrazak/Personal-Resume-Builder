@@ -5,6 +5,7 @@
   entries:
     - "Deep Learning"
     - "Computer Vision"
+    - "Multimodal ML"
     - "Deepfake Detection"
     - "Generative AI"
     - "OpenCV"
@@ -28,20 +29,37 @@
     - "Model Benchmarking"
     - "Zero-shot Learning"
 
-- domain: "Robotics & Autonomous Systems"
+- domain: "Robotics, UAV & Autonomous Systems"
   tag: robotics-embedded
   entries:
     - "Embodied AI"
     - "ROS"
     - "SLAM (3D LiDAR)"
-    - "Visual-Inertial Odometry (VIO)"
+    - "Perception"
     - "Sensor Fusion"
-    - "RTOS"
-    - "PID Control"
+    - "Visual-Inertial Odometry (VIO)"
+    - "Autonomous Mobile Robots"
+    - "Quadcopter Design"
+    - "UAV Flight Testing"
     - "UAV Aeroacoustics"
+    - "Acoustic Noise Reduction"
     - "PX4 Autopilot"
     - "ArduPilot"
     - "Pixhawk"
+
+- domain: "Embedded, Hardware & Test"
+  tag: hardware-mechatronics
+  entries:
+    - "Embedded C / C++"
+    - "RTOS"
+    - "Microcontrollers (STM32, Arduino)"
+    - "PID Control"
+    - "Closed-Loop IoT Control"
+    - "PCB Design"
+    - "Firmware Development"
+    - "Hardware Prototyping"
+    - "Experimental Design"
+    - "Test & Validation"
 
 - domain: "Software & Fullstack"
   tag: software-fullstack
@@ -50,7 +68,6 @@
     - "C++17"
     - "C#"
     - "Java"
-    - "Embedded C"
     - "TypeScript"
     - "React"
     - "Zustand"

@@ -2,7 +2,7 @@
 
 # Education
 
-## DigiPen Institute of Technology & Singapore Institute of Technology
+## DigiPen Institute of Technology & SIT
 *B.Eng. Mechatronics Systems | Aug 2023 – May 2027*
 
 - Relevant Coursework: Mechanics, Control Systems, Robotics, Embedded Systems, Machine Learning, Systems and Software Engineering

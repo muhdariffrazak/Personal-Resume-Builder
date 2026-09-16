@@ -8,54 +8,31 @@
 # --- Standalone projects (previously the flat "Specialized Projects Database") ---
 
 - id: capstone-quiet-quadcopter
-  title: "Capstone (MET4004) — Quiet Quadcopter for Indoor Flight"
-  role: "Project Lead"
-  sponsor: "MHA"
-  dates: null
-  tags: [robotics-embedded, hardware-mechatronics, leadership]
-  status: DRAFT
-  todo: |
-    Draft bullets below are transcribed from Checklist.md's action plan and still
-    contain unresolved placeholders ([team size], [result: ...]) — fill these in
-    with real numbers before using in an actual resume submission. Checklist.md
-    also raises an open question that hasn't been resolved: is the 5-inch
-    acoustic-stealth quadcopter (see the `aeroacoustic-stealth` project below) the
-    same build as this capstone, or a separate personal project? Resolve this and
-    update both entries accordingly — do not assume either way.
+  title: "Capstone (MET4004) — Acoustic Noise Reduction for Drones"
+  role: "Project Lead — Software & Electronics"
+  sponsor: "KLASS"
+  dates: "Aug 2026 – Apr 2027"
+  tags: [robotics-embedded, hardware-mechatronics, leadership, uav]
   bullets:
-    - text: "Led a [team size]-person team through literature review, design, and bench and flight testing, managing schedule risk and coordinating with [MHA / sponsor] and academic supervisors, [result: e.g. milestones met on schedule]."
-    - text: "Designed a two-stage test campaign (a six-state factorial bench test isolating each noise-reduction mechanism, plus a flight validation stage) meeting FYP requirements while generating data for a conference abstract targeted for early 2027."
-    - text: "Led a PRISMA-ScR scoping review of 33 sources on drone noise reduction to guide design decisions."
-    - text: "Identified that underestimated duct and battery mass cost roughly 3 dB at hover, redirecting design effort toward mass reduction."
-
-- id: uav-navigation
-  title: "Autonomous UAV Navigation in GPS-Denied Environments"
-  dates: null
-  tags: [robotics-embedded, hardware-mechatronics]
-  bullets:
-    - text: "Formulated engineering architectures for indoor UAV navigation utilizing Visual-Inertial Odometry (VIO), spatial AI depth cameras (Luxonis OAK-D Pro), and 1D Time-of-Flight sensors mapped across Raspberry Pi and Pixhawk/ArduPilot controllers."
-
-- id: aeroacoustic-stealth
-  title: "Aeroacoustic Stealth for Unmanned Systems"
-  dates: null
-  tags: [hardware-mechatronics, robotics-embedded]
-  todo: "See open question on capstone-quiet-quadcopter above regarding overlap with this project."
-  bullets:
-    - text: "Investigated noise reduction strategies for UAVs—combining toroidal propellers, biomimetic owl-wing serrated blade designs, low-KV motors, and Field Oriented Control ESCs—to suppress acoustic signatures."
+    - text: "Leading a 3-person team to deliver a proof-of-concept indoor drone for industry sponsor KLASS, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope."
+    - text: "Owning the software and electronics workstream, selecting a low-noise propulsion stack of 5-inch injection-molded toroidal propellers, custom ducts with acoustic lining and serrated trailing edges, 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning to shift tonal whine into less perceptible bands."
+    - text: "Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight for stable station-keeping in GPS-denied indoor flight."
+    - text: "Designed the acoustic validation campaign to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, enabling direct benchmarking against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements."
+    - text: "Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards, quantifying perceived annoyance beyond raw sound-pressure level."
 
 - id: trolley-robot
   title: "Autonomous Trolley Collection Robot"
   dates: null
   tags: [robotics-embedded, hardware-mechatronics]
   bullets:
-    - text: "Developed an autonomous robot for collecting stray trolleys using an STM32F7 microcontroller with RTOS, implementing tasks for obstacle detection, joystick control, and a custom serial communication protocol."
+    - text: "Developed an autonomous robot for collecting stray trolleys on an STM32F7 microcontroller running an RTOS, implementing concurrent tasks for obstacle detection and joystick control over a custom serial communication protocol."
 
 - id: custom-3d-printer
   title: "Custom 3D Printer Development"
   dates: null
   tags: [hardware-mechatronics]
   bullets:
-    - text: "Built a custom 3D printer, incorporating off-the-shelf modules and developing custom firmware in C++ (Marlin), increasing reliability and accuracy by 50%."
+    - text: "Built a custom 3D printer from off-the-shelf modules, developing custom firmware in C++ (Marlin) and tuning it for print reliability and dimensional accuracy."
 
 # --- Projects extracted out of job bullets (cross-referenced, not duplicated) ---
 
@@ -67,6 +44,7 @@
   bullets:
     - ref: "klass:klass-benchmarking"
     - ref: "klass:klass-video-analytics"
+    - ref: "klass:klass-av-sync"
 
 - id: synthetic-multimodal-dataset-pipeline
   title: "Synthetic Multimodal Deepfake Dataset Pipeline"
@@ -82,7 +60,8 @@
   tags: [software-fullstack, infra-cloud]
   source: {experience_id: klass}
   bullets:
-    - ref: "klass:klass-hpc-fullstack"
+    - ref: "klass:klass-fullstack"
+    - ref: "klass:klass-hpc"
 
 - id: stair-climbing-fall-risk-lstm
   title: "Stair-Climbing Robot Fall-Risk Prediction (LSTM)"
@@ -93,7 +72,7 @@
     - ref: "sutd:sutd-safety-lstm"
 
 - id: av-intelligent-lighting-system
-  title: "Autonomous Vehicle Intelligent Lighting System"
+  title: "Panthera Autonomous Vehicle — Intelligent Lighting System"
   dates: "Aug 2022 – May 2024"
   tags: [robotics-embedded, leadership]
   source: {experience_id: sutd}

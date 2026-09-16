@@ -1,35 +1,28 @@
-{# Generated Pandoc-flavored Markdown. Two tricks make one file drive both the
-   PDF (LaTeX) and DOCX builds:
-   1. Inline raw spans `` `\hfill`{=latex}`<w:tab/>`{=openxml} `` — pandoc only
-      keeps the one matching the current writer, giving a right-aligned date
-      on both outputs from a single line.
-   2. `.latex-only` / `.docx-only` Divs, stripped per-format by
-      templates/format-select.lua — used once, for the name/contact header,
-      which needs genuinely different markup per format. #}
-::: {.latex-only}
-```{=latex}
-\resumeheader{ {{- personal.name -}} }{ {{- personal.phone -}} }{ {{- personal.email -}} }{ {{- personal.linkedin.display -}} }{ {{- personal.location -}} }
-```
+{# Generated Pandoc-flavored Markdown, ATS-safe: single-column layout, no
+   tables, no side-by-side columns. Sizing for the name and entry-header
+   lines comes from custom-style Divs -- for the PDF this is applied by
+   templates/format-select.lua (a LaTeX size command); for the docx it maps
+   to the matching named style in templates/reference.docx. Everything else
+   is plain pandoc markdown, identical for both outputs.
+
+   Date placement is standardized: the date always sits on its own line
+   right below the title (never crammed onto the same line), using a
+   markdown hard line-break (trailing "\" + newline) so title and date stay
+   inside one EntryHeader-styled paragraph regardless of title length. #}
+::: {custom-style="ResumeName"}
+**{{ personal.name }}**
 :::
 
-::: {.docx-only custom-style="ResumeName"}
-{{ personal.name }}
-:::
-
-::: {.docx-only custom-style="ContactBlock"}
-Mobile: {{ personal.phone }}\
-Email: {{ personal.email }}\
-LinkedIn: {{ personal.linkedin.display }}\
-Location: {{ personal.location }}
-:::
+{{ personal.phone }} | {{ personal.email }} | {{ personal.linkedin.display }} | {{ personal.location }}
 
 {% for section in sections -%}
 {% if section == 'experience' and experience %}
 # WORK EXPERIENCE
 
 {% for job in experience %}
+{% set date_line = ("\\\n" + job.dates) if job.dates else "" %}
 ::: {custom-style="EntryHeader"}
-**{{ job.role }}, {{ job.company }}**{% if job.location %} | {{ job.location }}{% endif %} `\hfill`{=latex}`<w:tab/>`{=openxml} {{ job.dates }}
+**{{ job.role }}, {{ job.company }}**{% if job.location %} | {{ job.location }}{% endif %}{{ date_line }}
 :::
 
 {% for bullet in job.bullets %}
@@ -41,8 +34,9 @@ Location: {{ personal.location }}
 # PROJECTS
 
 {% for proj in projects %}
+{% set date_line = ("\\\n" + proj.dates) if proj.dates else "" %}
 ::: {custom-style="EntryHeader"}
-**{{ loop.index }}. {{ proj.title }}**{% if proj.role %} — {{ proj.role }}{% endif %}{% if proj.sponsor %} ({{ proj.sponsor }}){% endif %} `\hfill`{=latex}`<w:tab/>`{=openxml} {{ proj.dates or "" }}
+**{{ loop.index }}. {{ proj.title }}**{% if proj.role %} — {{ proj.role }}{% endif %}{% if proj.sponsor %} ({{ proj.sponsor }}){% endif %}{{ date_line }}
 :::
 
 {% for bullet in proj.bullets %}
@@ -50,12 +44,20 @@ Location: {{ personal.location }}
 {% endfor %}
 
 {% endfor %}
+{% elif section == 'skills' and skills %}
+# SKILLS / COMPETENCIES
+
+{% for domain in skills %}
+**{{ domain.domain }}:** {{ domain.entries | join(', ') }}
+
+{% endfor %}
 {% elif section == 'education' and education %}
 # EDUCATION
 
 {% for edu in education %}
+{% set date_line = ("\\\n" + edu.dates) if edu.dates else "" %}
 ::: {custom-style="EntryHeader"}
-**{{ edu.institution }}** `\hfill`{=latex}`<w:tab/>`{=openxml} {{ edu.dates }}
+**{{ edu.institution }}**{{ date_line }}
 :::
 
 - {{ edu.degree }}
@@ -64,38 +66,28 @@ Location: {{ personal.location }}
 {% endfor %}
 
 {% endfor %}
-{% elif section == 'skills' and skills %}
-# SKILLS / COMPETENCIES
-
-{% for domain in skills %}
-**{{ domain.domain }}**
-
-{% for item in domain.entries %}
-1. {{ item }}
-{% endfor %}
-
-{% endfor %}
 {% elif section == 'awards' and awards %}
 # AWARDS / ACHIEVEMENTS / CERTIFICATES
 
-| Award / Certificate | Date |
-|---|---:|
-{% for award in awards -%}
+{% for award in awards %}
 {% if award.entries %}
 {% for item in award.entries %}
-| {{ item }} | |
+- {{ item }}
 {% endfor %}
-{%- else %}
-| {{ award.name }}{% if award.note %} ({{ award.note }}){% endif %} | {{ award.date or "" }} |
-{% endif -%}
+{% else %}
+{% set note_part = (' (' + award.note + ')') if award.note else '' %}
+{% set date_part = (' — ' + award.date) if award.date else '' %}
+- {{ award.name }}{{ note_part }}{{ date_part }}
+{% endif %}
 {% endfor %}
 
 {% elif section == 'volunteering' and volunteering %}
 # VOLUNTEERING & COMMUNITY SERVICE
 
 {% for v in volunteering %}
+{% set date_line = ("\\\n" + v.dates) if v.dates else "" %}
 ::: {custom-style="EntryHeader"}
-**{{ v.name }}**{{ (' `\\hfill`{=latex}`<w:tab/>`{=openxml} ' + v.dates) if v.dates else '' }}
+**{{ v.name }}**{{ date_line }}
 :::
 
 {% for bullet in v.bullets %}
