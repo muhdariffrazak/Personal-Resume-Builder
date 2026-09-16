@@ -1,10 +1,10 @@
 # Volunteering & Community Service.
 - id: roscon-2025
-  name: "ROSCon 2025 Singapore (Intrinsic / Open Robotics)"
-  dates: null
+  name: "ROSCon Singapore 2025 (Open Robotics) — Volunteer"
+  dates: "Oct 2025"
   tags: [robotics-embedded]
   bullets:
-    - text: "Supported event operations, contributing to attendee experience, workshops, and logistics."
+    - text: "Supported event operations, workshops, logistics, and attendee experience at ROSCon Singapore 2025, the annual ROS developer conference."
 
 - id: sg-makers-covid
   name: "SG Makers Against COVID-19"

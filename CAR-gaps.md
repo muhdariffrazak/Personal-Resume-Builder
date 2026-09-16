@@ -114,6 +114,12 @@ in the proposal.
     *Recommended:* "…cutting failed prints by [X]%." Your coach asked for this metric by name.
     → Do you have a real before/after, or should I cut the reliability claim?
 
+### Volunteering
+
+17b. **`roscon-2025`** — ends on "the annual ROS developer conference"; no outcome.
+    *Recommended:* "…supporting [N] attendees across [N] workshops."
+    → Rough attendee or workshop count, if you know it.
+
 ### Nullspace
 
 17. **`nullspace-curriculum`** — ends on "as an MOE-certified instructor from age 18".
@@ -124,6 +130,10 @@ in the proposal.
 
 ## Note on length
 
-The resume currently fills exactly 2 pages. Adding result clauses to ~15 bullets will push
-it over. When you send the figures I'll re-fit — most likely by trimming the SOLUSTAR and
-teaching bullets first, which is the order your To-Do already specifies.
+The resume fills exactly 2 pages. Fitting the ROSCon entry required dropping **VM Education /
+Playfacto** from this variant — teaching first, per your To-Do's trim order, and its MODI
+curriculum content overlaps the Nullspace entry which already covers Jul–Dec 2020. It is
+still in `data/experience.yaml` and appears in the `full` variant.
+
+Adding result clauses to the ~15 bullets above will push past 2 pages again. When you send
+the figures I'll re-fit, trimming SOLUSTAR and teaching bullets next.

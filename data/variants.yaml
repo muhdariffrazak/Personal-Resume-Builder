@@ -22,14 +22,13 @@
   projects:
     include: [capstone-quiet-quadcopter, trolley-robot]
   experience:
-    include: [klass, sit, sutd, spf-procom, solustar, vm-education, nullspace]
+    include: [klass, sit, sutd, spf-procom, solustar, nullspace]
     bullets:
       klass: [klass-benchmarking, klass-video-analytics, klass-data-generation, klass-hpc, klass-fullstack]
       sit: all
       sutd: all
       spf-procom: all
       solustar: [solustar-pcb, solustar-firmware]
-      vm-education: [vm-curriculum-design]
       nullspace: [nullspace-curriculum]
   education: all
   skills:
@@ -37,7 +36,7 @@
   awards:
     include: [moe-instructor-cert]
   volunteering:
-    include: [sg-makers-covid]
+    include: [roscon-2025, sg-makers-covid]
 
 - id: ai-ml-focused
   label: "AI / ML Focused"
