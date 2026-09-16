@@ -1,0 +1,25 @@
+# Education entries. `tags` drive which variants surface an entry via skills/domain
+# filtering; education is normally shown in full regardless (see variants.yaml).
+- id: digipen-sit-beng
+  institution: "DigiPen Institute of Technology & Singapore Institute of Technology"
+  degree: "B.Eng. Mechatronics Systems"
+  dates: "Aug 2023 – May 2027"
+  tags: [robotics-embedded, hardware-mechatronics]
+  highlights:
+    - "Relevant Coursework: Mechanics, Control Systems, Robotics, Embedded Systems, Machine Learning, Systems and Software Engineering"
+
+- id: np-specialist-diploma
+  institution: "Ngee Ann Polytechnic"
+  degree: "Specialist Diploma in Robotics Engineering (SGInnovate PowerX)"
+  dates: "Sep 2022 – Sep 2023"
+  tags: [robotics-embedded, ai-ml]
+  highlights:
+    - "Relevant Coursework: Autonomous Robot Navigation, Machine Learning/Deep Learning for Robotics, Computer Vision"
+
+- id: sp-diploma
+  institution: "Singapore Polytechnic"
+  degree: "Diploma in Mechatronics and Robotics"
+  dates: "Apr 2017 – Sep 2020"
+  tags: [hardware-mechatronics]
+  highlights:
+    - "Internship grade of B+; coursework in Microcontroller Applications, PLCs, and Robotics Integration"

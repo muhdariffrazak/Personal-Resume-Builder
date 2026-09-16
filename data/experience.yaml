@@ -1,0 +1,108 @@
+# Professional experience. Each bullet has its own id + tags so variants.yaml can
+# cherry-pick individual bullets (mirrors how Checklist.md tailors bullet-by-bullet).
+# Bullets referenced from data/projects.yaml via `ref: "<experience_id>:<bullet_id>"`
+# are the authoritative text — projects.yaml does not duplicate the wording.
+- id: klass
+  company: "KLASS Engineering and Solutions"
+  role: "Machine Learning & Fullstack Engineer (Intern)"
+  location: null
+  dates: "Sep 2025 – Aug 2026"
+  tags: [ai-ml, computer-vision, software-fullstack, infra-cloud]
+  bullets:
+    - id: klass-benchmarking
+      text: "Reproduced and benchmarked state-of-the-art vision and audio AI models (NSG-VD, D3, ReStraV, SpeechForensics) to evaluate real-time transparency and explainability in threat detection against proprietary pipelines."
+      tags: [ai-ml, computer-vision]
+    - id: klass-video-analytics
+      text: "Integrated advanced optical flow (RAFT), segmentation (SAM 2), and point-tracking algorithms (CoTracker) to analyze physical motion derivatives in video sequences for mission-critical data."
+      tags: [ai-ml, computer-vision]
+    - id: klass-data-generation
+      text: "Engineered a comprehensive data generation pipeline linking video extension models (Wan2.2), voice cloning (Chatterbox), and lip-synchronization (LatentSync) to curate a balanced 1,200-video dataset for benchmarking."
+      tags: [ai-ml]
+    - id: klass-hpc-fullstack
+      text: "Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, and deployed fullstack architectures (React, Zustand, FastAPI, WebSockets) for multi-model AI endpoints."
+      tags: [infra-cloud, software-fullstack]
+    - id: klass-evaluation-workflows
+      text: "Designed scalable dataset curation workflows with custom validation splits and lightweight sanity-check protocols before full-scale benchmarking."
+      tags: [ai-ml]
+
+- id: sit
+  company: "Singapore Institute of Technology (SIT)"
+  role: "Student Research Engineer"
+  location: null
+  dates: "Aug 2024 – May 2025"
+  tags: [hardware-mechatronics, robotics-embedded]
+  bullets:
+    - id: sit-hardware-design
+      text: "Designed and implemented an experimental temperature chamber to simulate human body heat signatures and extreme physical environments for environmental robotics testing."
+      tags: [hardware-mechatronics]
+    - id: sit-iot-regulation
+      text: "Engineered a closed-loop, thermistor-based control system to regulate precise environmental variables, ensuring high-fidelity data collection."
+      tags: [hardware-mechatronics, infra-cloud]
+    - id: sit-validation-protocols
+      text: "Established repeatable testing and data collection protocols for faculty-led embodied AI and robotics hardware projects."
+      tags: [robotics-embedded]
+
+- id: sutd
+  company: "Singapore University of Technology & Design (SUTD) - ROAR Lab"
+  role: "Volunteer / Full Time Research Assistant"
+  location: null
+  dates: "Aug 2022 – May 2024"
+  tags: [robotics-embedded, ai-ml]
+  bullets:
+    - id: sutd-perception
+      text: "Developed perception software and processed 3D LiDAR data for autonomous mobile robots, designing architectures integrating Embedded C++, ROS, and sensor fusion."
+      tags: [robotics-embedded]
+    - id: sutd-safety-lstm
+      text: "Built a specialized predictive safety model to detect a stair-climbing robot's fall risk, deploying Long Short-Term Memory networks (LSTMs) to improve physical safety metrics by 50%."
+      tags: [ai-ml, robotics-embedded]
+    - id: sutd-lighting-system
+      text: "Led the design and development of an intelligent lighting control system for an autonomous vehicle, integrating it seamlessly with the main navigation system via RTOS and APIs."
+      tags: [robotics-embedded, leadership]
+
+- id: nullspace
+  company: "Nullspace Group"
+  role: "Part Time/Full Time Technology Instructor"
+  location: null
+  dates: "Nov 2016 – Present"
+  tags: [teaching]
+  bullets:
+    - id: nullspace-curriculum
+      text: "Instructed students aged 5-17 in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers."
+      tags: [teaching]
+    - id: nullspace-cert
+      text: "Achieved MOE (Ministry of Education) Instructor Certification at age 18 (Valid Oct 2018 – Oct 2026)."
+      tags: [teaching]
+    - id: nullspace-enrichment
+      text: "Selected to conduct the Computer Enrichment Program (CEP) at GEP schools in Singapore, completing over 1000+ teaching hours."
+      tags: [teaching]
+
+- id: solustar
+  company: "SOLUSTAR"
+  role: "Robotics Engineer Intern"
+  location: null
+  dates: "May 2022 - Aug 2022"
+  tags: [hardware-mechatronics]
+  bullets:
+    - id: solustar-pcb
+      text: "Designed and debugged PCB boards and circuitry for a disinfectant robot."
+      tags: [hardware-mechatronics]
+    - id: solustar-firmware
+      text: "Performed maintenance and developed custom software (Marlin) on 3D printers, improving reliability by 50% and reducing failure rates."
+      tags: [hardware-mechatronics]
+    - id: solustar-troubleshooting
+      text: "Troubleshot Linux software issues for the VAL2 robot."
+      tags: [hardware-mechatronics]
+
+- id: vm-education
+  company: "VM Education/Playfacto"
+  role: "Robotics Instructor & Curriculum Developer"
+  location: null
+  dates: "Jul 2020 - Dec 2020"
+  tags: [teaching]
+  bullets:
+    - id: vm-curriculum-design
+      text: "Pioneered and designed the new coding curriculum for the MODI (Luxrobo) platform in Singapore, publishing 5 projects of varying difficulties."
+      tags: [teaching]
+    - id: vm-instructor-training
+      text: "Facilitated the training of future MODI instructors, providing solutions to potential difficulties."
+      tags: [teaching, leadership]

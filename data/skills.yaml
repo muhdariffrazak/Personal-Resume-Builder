@@ -1,0 +1,75 @@
+# Skill domains, unchanged from the original database's table. `tag` links each
+# domain to the tag taxonomy used for filtering experience/projects in variants.yaml.
+- domain: "AI, Vision & Audio Analytics"
+  tag: ai-ml
+  entries:
+    - "Deep Learning"
+    - "Computer Vision"
+    - "Deepfake Detection"
+    - "Generative AI"
+    - "OpenCV"
+    - "Optical Flow (RAFT)"
+    - "Segmentation (SAM 2)"
+    - "Point-Tracking (CoTracker)"
+
+- domain: "Machine Learning Frameworks"
+  tag: ai-ml
+  entries:
+    - "PyTorch"
+    - "TensorFlow"
+    - "Keras"
+    - "Hugging Face Transformers"
+    - "CNNs"
+    - "DNNs"
+    - "LSTMs"
+    - "YOLO"
+    - "Vision Transformers"
+    - "Reinforcement Learning"
+    - "Model Benchmarking"
+    - "Zero-shot Learning"
+
+- domain: "Robotics & Autonomous Systems"
+  tag: robotics-embedded
+  entries:
+    - "Embodied AI"
+    - "ROS"
+    - "SLAM (3D LiDAR)"
+    - "Visual-Inertial Odometry (VIO)"
+    - "Sensor Fusion"
+    - "RTOS"
+    - "PID Control"
+    - "UAV Aeroacoustics"
+    - "PX4 Autopilot"
+    - "ArduPilot"
+    - "Pixhawk"
+
+- domain: "Software & Fullstack"
+  tag: software-fullstack
+  entries:
+    - "Python (NumPy, Pandas)"
+    - "C++17"
+    - "C#"
+    - "Java"
+    - "Embedded C"
+    - "TypeScript"
+    - "React"
+    - "Zustand"
+    - "FastAPI"
+    - "OpenAPI"
+    - "WebSockets"
+    - "Git"
+    - "Linux/Ubuntu"
+    - "WSL"
+
+- domain: "Infrastructure & Cloud Tech"
+  tag: infra-cloud
+  entries:
+    - "SLURM"
+    - "GPU Computing (CUDA)"
+    - "NVIDIA HPC Clusters (H200 nodes)"
+    - "Docker"
+    - "Dev Containers"
+    - "ONNX Runtime"
+    - "uv"
+    - "IoT Integrations"
+    - "Agile/Scrum Methodologies"

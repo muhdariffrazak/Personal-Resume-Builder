@@ -1,0 +1,54 @@
+\documentclass[10pt]{article}
+
+\usepackage[a4paper,margin=0.85in,top=0.7in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{caladea}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=resumeblue, linkcolor=resumeblue}
+
+% Colors sampled from the coach's Word template (1 - Resume Building Tool_V8.pdf)
+\definecolor{resumeblue}{HTML}{1F4E79}
+\definecolor{resumegray}{HTML}{808080}
+
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+% Section headings: gray, bold, with a rule beneath (matches template's style)
+\titleformat{\section}
+  {\color{resumegray}\bfseries\large}
+  {}{0em}{}
+  [{\color{resumegray}\titlerule}]
+\titlespacing{\section}{0pt}{12pt}{6pt}
+
+% Header: big bold blue name (left) + blue right-aligned contact block
+\newcommand{\resumeheader}[5]{%
+  \noindent
+  \begin{minipage}[t]{0.55\textwidth}
+    {\color{resumeblue}\fontsize{28}{32}\selectfont\bfseries #1}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.42\textwidth}
+    \raggedleft
+    \color{resumeblue}\bfseries
+    Mobile: #2\\
+    Email: #3\\
+    LinkedIn: #4\\
+    #5
+  \end{minipage}
+  \par\vspace{4pt}
+}
+
+% Tight bullets matching the template's compact spacing
+\setlist[itemize]{topsep=2pt, partopsep=0pt, itemsep=1pt, parsep=0pt, leftmargin=1.2em}
+\providecommand{\tightlist}{\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+$body$
+\end{document}

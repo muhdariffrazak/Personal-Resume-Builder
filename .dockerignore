@@ -1,0 +1,7 @@
+.git
+archive
+dist
+build
+*.pdf
+*.docx
+*.doc

@@ -1,0 +1,14 @@
+# Volunteering & Community Service.
+- id: roscon-2025
+  name: "ROSCon 2025 Singapore (Intrinsic / Open Robotics)"
+  dates: null
+  tags: [robotics-embedded]
+  bullets:
+    - text: "Supported event operations, contributing to attendee experience, workshops, and logistics."
+
+- id: sg-makers-covid
+  name: "SG Makers Against COVID-19"
+  dates: null
+  tags: [hardware-mechatronics, leadership]
+  bullets:
+    - text: "Initiated a pandemic response project to 3D-print ear savers for SingHealth and the local community, distributing over 10,000 units (Featured on Channel News Asia)."

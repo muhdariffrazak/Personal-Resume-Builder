@@ -1,0 +1,62 @@
+# Named resume variants. `sections` sets the section order. For each section,
+# a value of "all" includes every entry; "none" omits the section entirely;
+# {include: [...]} lists entry ids (experience/projects/education/awards/volunteering)
+# or tags (skills). `bullets: {entry_id: "all" | [bullet_id, ...]}` optionally
+# narrows which bullets show for a specific included entry (default: all its bullets).
+
+- id: full
+  label: "Full / Master Resume"
+  description: "Everything, default ordering. The master reference other variants are cut down from."
+  sections: [experience, projects, education, skills, awards, volunteering]
+  experience: all
+  projects: all
+  education: all
+  skills: all
+  awards: all
+  volunteering: all
+
+- id: mha-drone-example
+  label: "MHA Embodied AI Lead — Drone-Tailored (example)"
+  description: "Recreates the tailored resume built manually in Checklist.md: capstone/projects first, then SUTD, then KLASS, rest condensed."
+  sections: [projects, experience, education, skills, awards]
+  projects:
+    include: [capstone-quiet-quadcopter, uav-navigation, aeroacoustic-stealth]
+  experience:
+    include: [sutd, klass, sit]
+    bullets:
+      sutd: all
+      klass: all
+      sit: [sit-validation-protocols]
+  education: all
+  skills:
+    include: [robotics-embedded, ai-ml]
+  awards: none
+  volunteering: none
+
+- id: ai-ml-focused
+  label: "AI / ML Focused"
+  description: "Leads with KLASS AI/ML work and AI-forensics projects; ML-tagged skills."
+  sections: [experience, projects, skills, education, awards]
+  experience:
+    include: [klass, sutd, sit]
+  projects:
+    include: [ai-forensics-benchmarking, synthetic-multimodal-dataset-pipeline, multi-model-ai-endpoint-platform, stair-climbing-fall-risk-lstm]
+  skills:
+    include: [ai-ml, software-fullstack, infra-cloud]
+  education: all
+  awards: all
+  volunteering: none
+
+- id: robotics-embedded-focused
+  label: "Robotics / Embedded Focused"
+  description: "Leads with SUTD/SIT/UAV/embedded projects and robotics-tagged skills."
+  sections: [experience, projects, skills, education, awards]
+  experience:
+    include: [sutd, sit, klass]
+  projects:
+    include: [uav-navigation, aeroacoustic-stealth, trolley-robot, custom-3d-printer, av-intelligent-lighting-system, experimental-thermal-chamber]
+  skills:
+    include: [robotics-embedded, hardware-mechatronics]
+  education: all
+  awards: all
+  volunteering: none

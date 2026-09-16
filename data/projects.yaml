@@ -1,0 +1,110 @@
+# Projects: standalone builds AND project-like work pulled out of job bullets.
+# A bullet entry is either:
+#   - text: "..."                          (own wording), or
+#   - ref: "<experience_id>:<bullet_id>"   (reuses the exact wording from experience.yaml)
+# `source` on an extracted project cross-references the job it came from, so
+# scripts/render_docs.py can link projects.md <-> experience.md both ways.
+
+# --- Standalone projects (previously the flat "Specialized Projects Database") ---
+
+- id: capstone-quiet-quadcopter
+  title: "Capstone (MET4004) — Quiet Quadcopter for Indoor Flight"
+  role: "Project Lead"
+  sponsor: "MHA"
+  dates: null
+  tags: [robotics-embedded, hardware-mechatronics, leadership]
+  status: DRAFT
+  todo: |
+    Draft bullets below are transcribed from Checklist.md's action plan and still
+    contain unresolved placeholders ([team size], [result: ...]) — fill these in
+    with real numbers before using in an actual resume submission. Checklist.md
+    also raises an open question that hasn't been resolved: is the 5-inch
+    acoustic-stealth quadcopter (see the `aeroacoustic-stealth` project below) the
+    same build as this capstone, or a separate personal project? Resolve this and
+    update both entries accordingly — do not assume either way.
+  bullets:
+    - text: "Led a [team size]-person team through literature review, design, and bench and flight testing, managing schedule risk and coordinating with [MHA / sponsor] and academic supervisors, [result: e.g. milestones met on schedule]."
+    - text: "Designed a two-stage test campaign (a six-state factorial bench test isolating each noise-reduction mechanism, plus a flight validation stage) meeting FYP requirements while generating data for a conference abstract targeted for early 2027."
+    - text: "Led a PRISMA-ScR scoping review of 33 sources on drone noise reduction to guide design decisions."
+    - text: "Identified that underestimated duct and battery mass cost roughly 3 dB at hover, redirecting design effort toward mass reduction."
+
+- id: uav-navigation
+  title: "Autonomous UAV Navigation in GPS-Denied Environments"
+  dates: null
+  tags: [robotics-embedded, hardware-mechatronics]
+  bullets:
+    - text: "Formulated engineering architectures for indoor UAV navigation utilizing Visual-Inertial Odometry (VIO), spatial AI depth cameras (Luxonis OAK-D Pro), and 1D Time-of-Flight sensors mapped across Raspberry Pi and Pixhawk/ArduPilot controllers."
+
+- id: aeroacoustic-stealth
+  title: "Aeroacoustic Stealth for Unmanned Systems"
+  dates: null
+  tags: [hardware-mechatronics, robotics-embedded]
+  todo: "See open question on capstone-quiet-quadcopter above regarding overlap with this project."
+  bullets:
+    - text: "Investigated noise reduction strategies for UAVs—combining toroidal propellers, biomimetic owl-wing serrated blade designs, low-KV motors, and Field Oriented Control ESCs—to suppress acoustic signatures."
+
+- id: trolley-robot
+  title: "Autonomous Trolley Collection Robot"
+  dates: null
+  tags: [robotics-embedded, hardware-mechatronics]
+  bullets:
+    - text: "Developed an autonomous robot for collecting stray trolleys using an STM32F7 microcontroller with RTOS, implementing tasks for obstacle detection, joystick control, and a custom serial communication protocol."
+
+- id: custom-3d-printer
+  title: "Custom 3D Printer Development"
+  dates: null
+  tags: [hardware-mechatronics]
+  bullets:
+    - text: "Built a custom 3D printer, incorporating off-the-shelf modules and developing custom firmware in C++ (Marlin), increasing reliability and accuracy by 50%."
+
+# --- Projects extracted out of job bullets (cross-referenced, not duplicated) ---
+
+- id: ai-forensics-benchmarking
+  title: "AI-Generated Video & Audio Forensics Benchmarking"
+  dates: "Sep 2025 – Aug 2026"
+  tags: [ai-ml, computer-vision]
+  source: {experience_id: klass}
+  bullets:
+    - ref: "klass:klass-benchmarking"
+    - ref: "klass:klass-video-analytics"
+
+- id: synthetic-multimodal-dataset-pipeline
+  title: "Synthetic Multimodal Deepfake Dataset Pipeline"
+  dates: "Sep 2025 – Aug 2026"
+  tags: [ai-ml]
+  source: {experience_id: klass}
+  bullets:
+    - ref: "klass:klass-data-generation"
+
+- id: multi-model-ai-endpoint-platform
+  title: "Multi-Model AI Endpoint Platform"
+  dates: "Sep 2025 – Aug 2026"
+  tags: [software-fullstack, infra-cloud]
+  source: {experience_id: klass}
+  bullets:
+    - ref: "klass:klass-hpc-fullstack"
+
+- id: stair-climbing-fall-risk-lstm
+  title: "Stair-Climbing Robot Fall-Risk Prediction (LSTM)"
+  dates: "Aug 2022 – May 2024"
+  tags: [ai-ml, robotics-embedded]
+  source: {experience_id: sutd}
+  bullets:
+    - ref: "sutd:sutd-safety-lstm"
+
+- id: av-intelligent-lighting-system
+  title: "Autonomous Vehicle Intelligent Lighting System"
+  dates: "Aug 2022 – May 2024"
+  tags: [robotics-embedded, leadership]
+  source: {experience_id: sutd}
+  bullets:
+    - ref: "sutd:sutd-lighting-system"
+
+- id: experimental-thermal-chamber
+  title: "Experimental Thermal Chamber for Embodied AI Testing"
+  dates: "Aug 2024 – May 2025"
+  tags: [hardware-mechatronics]
+  source: {experience_id: sit}
+  bullets:
+    - ref: "sit:sit-hardware-design"
+    - ref: "sit:sit-iot-regulation"
