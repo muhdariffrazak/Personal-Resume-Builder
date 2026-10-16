@@ -158,6 +158,21 @@ def build_awards(cfg, awards):
     return [by_id[aid] for aid in ids]
 
 
+def build_summary(cfg, summaries):
+    """
+    `summary:` in a variant is a single id (or absent/"none"), not a selector --
+    a resume has at most one opening paragraph, so there is nothing to include
+    a list of.
+    """
+    if cfg is None or cfg == "none":
+        return None
+    by_id = {s["id"]: s for s in summaries}
+    if cfg not in by_id:
+        available = ", ".join(by_id) or "(none defined)"
+        raise KeyError(f"Unknown summary id {cfg!r}. Available: {available}")
+    return by_id[cfg]["text"]
+
+
 def build_volunteering(cfg, volunteering):
     ids, _ = resolve_ids(cfg, volunteering)
     if ids is None:
@@ -188,6 +203,7 @@ def main():
     skills = load_yaml("skills")
     awards = load_yaml("awards")
     volunteering = load_yaml("volunteering")
+    summaries = load_yaml("summary")
     variants = load_yaml("variants")
 
     variant = next((v for v in variants if v["id"] == args.variant), None)
@@ -199,6 +215,7 @@ def main():
 
     ctx = {
         "personal": personal,
+        "summary": build_summary(variant.get("summary"), summaries),
         "sections": variant["sections"],
         "experience": build_experience(variant.get("experience"), experience),
         "projects": build_projects(variant.get("projects"), projects, experience_by_id),
@@ -220,9 +237,10 @@ def main():
     md_path = variant_build_dir / "resume.md"
     md_path.write_text(rendered)
 
+    basename = variant.get("filename", f"resume-{args.variant}")
     DIST.mkdir(parents=True, exist_ok=True)
-    pdf_path = DIST / f"resume-{args.variant}.pdf"
-    docx_path = DIST / f"resume-{args.variant}.docx"
+    pdf_path = DIST / f"{basename}.pdf"
+    docx_path = DIST / f"{basename}.docx"
 
     lua_filter = str(TEMPLATES / "format-select.lua")
     latex_template = str(TEMPLATES / "resume.latex")

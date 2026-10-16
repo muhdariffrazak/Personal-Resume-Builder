@@ -40,7 +40,7 @@ be installed — pandoc, LaTeX, and the fonts all live in the build image.
 
 ```
 make build VARIANT=full                      # -> dist/resume-full.pdf, dist/resume-full.docx
-make build VARIANT=mha-drone
+make build VARIANT=mha-drone                 # -> dist/Muhammad_Ariff_Resume.pdf/docx (filename override, see below)
 make build-all                               # builds every variant in data/variants.yaml
 ```
 
@@ -52,19 +52,28 @@ image (a few minutes); after that it's cached.
 Defined in `data/variants.yaml`:
 
 - `full` — everything, the master reference
-- `mha-drone` — the tailored submission for the MHA Embodied AI lead: capstone first
-  under Projects, then reverse-chronological experience including National Service
+- `mha-drone` — the tailored submission for the MHA Embodied AI lead:
+  reverse-chronological experience including National Service, then Projects.
+  Builds to the fixed filename `dist/Muhammad_Ariff_Resume.{pdf,docx}` (via
+  `filename:` in `variants.yaml`) instead of `dist/resume-mha-drone.*`, since
+  this is the copy that actually gets sent out
 - `ai-ml-focused` — leads with AI/ML work
 - `robotics-embedded-focused` — leads with robotics/embedded work
+
+All variants use the same section order (experience → education → projects →
+skills → awards → volunteering, where present); variants differ in which
+entries/bullets are included, not the order.
 
 Add a new variant by adding an entry to `variants.yaml` — no code changes
 needed. Each section accepts `all`, `none`, or `{include: [ids or tags]}`;
 `experience` additionally accepts a `bullets: {job_id: [bullet_ids]}` override
-to show only specific bullets for a job.
+to show only specific bullets for a job. An optional `filename:` key overrides
+the `dist/` output basename (default: `resume-<variant-id>`).
 
 ## The editable `.docx`
 
-`dist/resume-<variant>.docx` is generated from the same data as the PDF, styled via
+`dist/resume-<variant>.docx` (or the variant's `filename:` override, e.g.
+`Muhammad_Ariff_Resume.docx` for `mha-drone`) is generated from the same data as the PDF, styled via
 `templates/reference.docx`. It's meant to be hand-edited directly for last-mile
 polish before sending a resume out. Re-running `make build` will regenerate
 and overwrite it — that's expected; make small edits to the YAML instead if

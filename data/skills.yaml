@@ -61,6 +61,33 @@
     - "Experimental Design"
     - "Test & Validation"
 
+# Sourced from HighImpactKeywords.md (a Mechanical Engineering fresh-grad
+# keyword list). Deliberately given its own tag so it can be excluded from the
+# mha-drone send-out, which targets a drone/embodied-AI specialist and reads
+# weaker with generic ME terms in it -- see variants.yaml's skills selectors.
+# Every entry is either backed by an existing bullet or was confirmed directly.
+# Dropped as unevidenced per RULES.md §3: MATLAB, Excel for Data Analysis,
+# Predictive Maintenance, Digital Twin, Smart Manufacturing. Dropped as buzzword
+# padding per RULES.md §2: "Use of AI-assisted Tools (ChatGPT, Copilot)".
+- domain: "Engineering Data & Analysis"
+  tag: engineering-data
+  entries:
+    - "Applied Machine Learning"
+    - "Predictive Modeling"
+    - "Regression Analysis"
+    - "Classification Models"
+    - "Scikit-learn"
+    - "Data Preprocessing"
+    - "Model Evaluation & Validation"
+    - "Time Series Analysis"
+    - "Sensor Data Analysis"
+    - "Fault Detection"
+    - "Data Visualization"
+    - "Data-driven Engineering Optimization"
+    - "Industrial Automation (PLCs)"
+    - "Engineering Data Analysis & Interpretation"
+    - "Data-driven Decision Making"
+
 - domain: "Software & Fullstack"
   tag: software-fullstack
   entries:

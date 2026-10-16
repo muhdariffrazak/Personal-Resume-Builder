@@ -1,15 +1,14 @@
 # C.A.R. gaps — recommended Results to fill
 
-Audit of every bullet on the `mha-drone` resume against Context → Action → **Result**
-(the pattern your coach's template models: "achieved zero incidents", "100% signup rate",
-"completed on schedule").
+Audit of every bullet in `data/experience.yaml`, `data/projects.yaml`, and
+`data/volunteering.yaml` against Context → Action → **Result** (the pattern your coach's
+template models: "achieved zero incidents", "100% signup rate", "completed on schedule").
+Originally scoped to just the `mha-drone` resume; a later full-repo pass extended it to every
+bullet regardless of which variant shows it.
 
-**Context and Action are solid throughout. Result is the systematic gap** — a consequence of
-cutting every unverified number earlier. Nothing below is invented: each is a *recommendation*
-for the shape of Result that fits the work, with the figure left for you to supply.
-
-Answer inline. Anything you can't back up, say so and I'll cut the bullet's result clause
-rather than soften it into something vague.
+**Nothing here is invented.** Every Result below is either a real figure/outcome you supplied,
+or a bullet intentionally cut back to Action because nothing verifiable backed a Result. See
+`RULES.md` §3 (numbers policy) for why an invented placeholder is never an option.
 
 ---
 
@@ -21,10 +20,22 @@ rather than soften it into something vague.
 | `capstone` test campaign | satisfies FYP + produces publishable data for early-2027 abstract |
 | `klass-benchmarking` | 90.03 AUROC on the NSG-VD replication |
 | `klass-av-sync` | ~0.3 operating threshold selected via ROC |
+| `klass-hpc` | sanity-check protocol caught pipeline errors before 5-hour training/generation runs |
 | `sutd-lighting-system` | platform passed T1 autonomous testing at CETRAN |
+| `sutd-safety-lstm` | showed fall risk could be predicted from the LSTM model |
 | `spf-protective-security` | across 22 months of full-time service |
-| `vm-curriculum-design` | 5 published projects |
+| `spf-armoury` | zero discrepancies |
+| `solustar-pcb` | boards brought to a working prototype |
+| `solustar-troubleshooting` | got the VAL2 robot running again |
+| `vm-curriculum-design` | 5 published projects, became the standard MODI curriculum, plus instructor training folded in |
 | `nullspace-enrichment` | 1,000+ teaching hours |
+| `nullspace-curriculum` | positive feedback from students and schools |
+| `roscon-2025` | ~1,000 participants from 52 countries, 3 workshops |
+| `trolley-robot` (perception bullet) | completed the final demo task |
+| `trolley-robot` (firmware bullet) | reliable motor control via the custom serial link |
+| `custom-3d-printer` | improved first-layer adhesion/print quality, reduced failed prints |
+| `sit-hardware-design` (merged with the old `sit-system-architecture`) | completed chamber handed over to the research team |
+| `sit-temperature-control` | holds ±2 °C of a 37 °C setpoint |
 
 ---
 
@@ -37,103 +48,68 @@ a derated 3.3:1 thrust-to-weight ratio at 1,200 g AUW, and benchmarking against 
 six-state factorial test, 3 dB mass finding and conference abstract were cut — none appear
 in the proposal.
 
----
-
-## Still need an answer from you
-
-3. **`sutd-perception`** (3D LiDAR perception software) — you answered "Other" on which platform
-   this was for. **Which platform was it?** If it fed something with a known milestone, the
-   bullet gets a verified result for free, the way the Panthera bullet did.
-
-4. **`spf-armoury`** — you chose "add armoury accountability" but I still need the figure.
-   *Recommended:* "…maintaining a zero-discrepancy record across [N] arms audits/inspections."
-   Does zero-discrepancy hold, and roughly how many audits? (No weapon types or quantities —
-   accountability record only.)
+A later pass added that MHA is the drone's **end user** (KLASS remains the funding sponsor),
+that the project proposal has been approved, and that the drone's purpose is to **reduce
+acoustic detectability** — all now stated in the `capstone` bullets.
 
 ---
 
-## Recommended Results — supply the figure
+## Still open — no verifiable Result available yet
 
-### Projects
+- **4 of the 5 `capstone-quiet-quadcopter` bullets** (propulsion stack, avionics/power
+  architecture, acoustic validation plan, psychoacoustic post-processing) end on design
+  intent/purpose, not a confirmed outcome. Confirmed as expected: the project is still in
+  progress (Aug 2026 – Apr 2027) and these stages haven't produced test data yet. Revisit once
+  bench/flight test results exist.
+- **Exact MOE certification title** — `data/awards.yaml` still uses the generic title ("MOE
+  (Ministry of Education) Instructor Certification"); confirm against the certificate if you
+  want the precise title (tracked in `To-Do.md` item 1).
 
-5. **`capstone` team leadership** — ends on "coordinating deliverables with MHA and academic supervisors".
-   *Recommended:* "…keeping the project on schedule through [milestone / N of N FYP milestones to date]."
-   → Are you on schedule, and which milestones have you cleared?
+---
 
-6. **`uav-gps-denied-navigation`** — ends on the sensor/controller architecture, no outcome at all.
-   *Recommended:* "…achieving [stable position hold / X cm drift over N minutes / sustained indoor flight without GPS]."
-   → Did it fly? Bench-tested only? What did it demonstrate?
+## Cut / merged / no longer applicable
 
-7. **`trolley-robot`** — ends on the serial protocol.
-   *Recommended:* "…achieving a [X]% autonomous retrieval rate across [N] trials."
-   → Retrieval success rate, or the module grade / demo outcome if that's the real result.
-
-### KLASS
-
-8. **`klass-video-analytics`** — ends on "for mission-critical data" (purpose, not result).
-   *Recommended:* "…improving detection of [motion-inconsistency artifacts] by [X]%" **or**
-   "…with the motion-derivative features adopted into the team's evaluation pipeline."
-   → Did these features measurably help, or get adopted?
-
-9. **`klass-data-generation`** — has the 1,200-video dataset as its deliverable.
-   *Recommended:* "…giving the four detectors under evaluation a consistent basis for comparison."
-   → Confirm the 1,200-video set was actually used to evaluate those four detectors.
-
-10. **`klass-fullstack`** — ends on "for an internal AI chatbot platform".
-    *Recommended:* "…serving [N] models to [N] staff users."
-    → How many staff used it, how many models behind the endpoints?
-
-### SIT
-
-11. **`sit-hardware-design`** — ends on "for faculty-led embodied AI and robotics hardware testing".
-    *Recommended:* "…spanning [X–Y]°C to cover body-heat and extreme-environment cases."
-    → What temperature range did the chamber actually achieve?
-
-12. **`sit-iot-regulation`** — ends on "enabling high-fidelity data collection" (vague).
-    *Recommended:* "…holding setpoint within ±[X]°C." Your coach asked for exactly this.
-    → What tolerance did you hold?
-
-13. **`sit-validation-protocols`** — ends on "for faculty-led embodied AI and robotics hardware projects".
-    *Recommended:* "…adopted across [N] separate faculty projects."
-    → How many projects used your protocols?
-
-### SUTD
-
-14. **`sutd-safety-lstm`** — ends on "over sensor time-series data". This is the bullet your coach
-    flagged: the old "+50% safety metrics" had no named metric.
-    *Recommended:* "…predicting fall risk at [X]% [accuracy / precision / recall] on [held-out data]."
-    → What did the model actually score, and on what metric?
-
-### SOLUSTAR
-
-15. **`solustar-pcb`** — "Designed and debugged PCBs and circuitry for a disinfectant robot." Pure action.
-    *Recommended:* "…bringing [N] boards to working prototype" **or** "…for a robot that shipped to [customer/trial]."
-    → What happened to the boards?
-
-16. **`solustar-firmware`** — ends on "to improve print reliability" (unquantified).
-    *Recommended:* "…cutting failed prints by [X]%." Your coach asked for this metric by name.
-    → Do you have a real before/after, or should I cut the reliability claim?
-
-### Volunteering
-
-17b. **`roscon-2025`** — ends on "the annual ROS developer conference"; no outcome.
-    *Recommended:* "…supporting [N] attendees across [N] workshops."
-    → Rough attendee or workshop count, if you know it.
-
-### Nullspace
-
-17. **`nullspace-curriculum`** — ends on "as an MOE-certified instructor from age 18".
-    *Recommended:* "…teaching [N]+ students across [N] years."
-    → Rough total student count?
+- **`sutd-perception`** — replaced by `sutd-perception-support` (wiring/integration work,
+  verifiable directly) rather than the old "designed architectures" claim.
+- **`capstone` team leadership** bullet ("…coordinating deliverables with MHA and academic
+  supervisors") — removed; no equivalent bullet in the current set.
+- **`sit-validation-protocols`** — cut entirely rather than given a project count.
+- **`sit-system-architecture`** — merged into `sit-hardware-design` rather than kept as a
+  separate bullet; the merged bullet's Result is "handing the completed chamber over to the
+  research team."
+- **`vm-instructor-training`** — merged into `vm-curriculum-design` rather than kept separate;
+  the merged bullet's Result is the curriculum becoming VM Education/Playfacto's standard.
+- **`nullspace-cert`** — removed as a job bullet (was purely restating the achievement already
+  in the Awards section); `data/awards.yaml`'s `moe-instructor-cert` entry now sources from
+  the `nullspace` job generally rather than a specific now-deleted bullet.
+- **`uav-gps-denied-navigation`** — already removed from `data/projects.yaml` (see README
+  "Capstone source of truth": descoped from the capstone, not a separate project).
 
 ---
 
 ## Note on length
 
-The resume fills exactly 2 pages. Fitting the ROSCon entry required dropping **VM Education /
-Playfacto** from this variant — teaching first, per your To-Do's trim order, and its MODI
-curriculum content overlaps the Nullspace entry which already covers Jul–Dec 2020. It is
-still in `data/experience.yaml` and appears in the `full` variant.
+`mha-drone` (built as `dist/Muhammad_Ariff_Resume.{pdf,docx}` — see `data/variants.yaml`'s
+`filename:` override) fills exactly 2 pages (verified by rebuild). Section order is
+experience → education → projects → skills → awards → volunteering across all variants.
+Three rounds of trimming have kept it at 2 pages as content grew:
 
-Adding result clauses to the ~15 bullets above will push past 2 pages again. When you send
-the figures I'll re-fit, trimming SOLUSTAR and teaching bullets next.
+1. Reordering sections (previously `mha-drone` led with projects) pushed it to 3 pages;
+   compensated by cutting `solustar-firmware` from this variant's SOLUSTAR selection.
+2. Switching Experience/Project headers to 3 lines (name / role+location-or-sponsor / dates,
+   up from 2) pushed it to 3 pages again; compensated by dropping `sg-makers-covid` from
+   volunteering (keeping ROSCon 2025) and dropping `sit-system-architecture` from SIT's
+   selection (since merged away in step 3 below, this is now moot — SIT's one remaining extra
+   bullet no longer exists as a separate id).
+3. The full-repo C.A.R. pass enriched most bullets with real Context/Result detail, adding
+   length, and pushed it to 3 pages a third time; compensated by dropping the **entire
+   Nullspace Group entry** from `mha-drone` (SOLUSTAR kept instead — more relevant to a
+   drone/embodied-AI reviewer than teaching; teaching is still fully present in `full`).
+
+`data/experience.yaml` and `data/projects.yaml` are unaffected by any of these trims — only
+`data/variants.yaml`'s `mha-drone` selection narrowed. SOLUSTAR and SIT are both down to their
+leanest bullet sets for this variant. If future edits push past 2 pages again, the next trim
+candidates are: the ROSCon volunteering entry, or narrowing KLASS from 5 bullets to 4
+(`klass-hpc` is the least drone-specific).
+
+`full` is not expected to fit 2 pages and is currently 4.

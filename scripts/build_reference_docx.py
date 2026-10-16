@@ -33,12 +33,29 @@ ET.register_namespace("w", W_NS)
 BLUE = "1F4E79"
 GRAY = "808080"
 
-# Typographic scale (half-points = pt * 2), matching templates/resume.latex:
-# body 9pt -> entry title 12pt -> section heading 15pt -> name 18pt.
-BODY_SIZE = 18
-ENTRY_HEADER_SIZE = 24
-SECTION_HEADING_SIZE = 30
-NAME_SIZE = 36
+# Typographic scale (half-points = pt * 2), matching templates/resume.latex --
+# including its uniform scale offset, currently 0.5pt down from the original
+# 9/12/15/18. Half-points are why the offset is restricted to multiples of
+# 0.5pt: anything finer cannot be expressed here, and the docx would silently
+# drift from the PDF.
+#   body 8.5pt -> entry title 11.5pt -> section heading 14.5pt -> name 17.5pt
+BODY_SIZE = 17
+ENTRY_HEADER_SIZE = 23
+SECTION_HEADING_SIZE = 29
+NAME_SIZE = 35
+
+# Page geometry, in twips (1440 = 1 inch), mirroring the \usepackage{geometry}
+# call in templates/resume.latex: A4, 0.85in margins, 0.7in top. Pandoc's stock
+# reference.docx ships a bare <w:sectPr/> with no page size and no margins at
+# all, so Word falls back to its own application defaults -- frequently US
+# Letter at 1in margins. That silently costs ~0.4in of width and ~0.5in of
+# height versus the PDF, which is enough to push a tuned 2-page resume to 3.
+TWIPS_PER_INCH = 1440
+PAGE_W = 11906  # A4 width  (210mm)
+PAGE_H = 16838  # A4 height (297mm)
+MARGIN_SIDE = round(0.85 * TWIPS_PER_INCH)
+MARGIN_TOP = round(0.70 * TWIPS_PER_INCH)
+MARGIN_BOTTOM = round(0.85 * TWIPS_PER_INCH)
 
 STYLE_CHILD_ORDER = [
     "name", "aliases", "basedOn", "next", "link", "autoRedefine", "hidden",
@@ -152,10 +169,101 @@ def style_bottom_border(style_el):
     bottom.set(w("color"), GRAY)
 
 
-def style_space_before(style_el, twips):
+def style_spacing(style_el, before=None, after=None):
+    """
+    Set explicit paragraph spacing, in twips (20 = 1pt). Pandoc's stock styles
+    carry print-document spacing that is wildly looser than the LaTeX build --
+    Heading1 alone reserves 24pt before, against \\titlespacing's 10pt -- so
+    every style the resume actually uses gets pinned to its PDF counterpart
+    here. Without this the two outputs disagree by roughly a third of a page.
+    """
     ppr = get_pPr(style_el)
     spacing = get_or_create(ppr, "spacing", PPR_CHILD_ORDER)
-    spacing.set(w("before"), twips)
+    if before is not None:
+        spacing.set(w("before"), str(before))
+    if after is not None:
+        spacing.set(w("after"), str(after))
+
+
+def style_keep_with_next(style_el):
+    """
+    Word's "Keep with next": the paragraph cannot be the last thing on a page.
+    On EntryHeader this binds a header to the first bullet beneath it; on
+    Heading1 it binds a section heading to the first entry beneath it. This is
+    the docx-side counterpart of the \\needspace{} that
+    templates/format-select.lua emits for the PDF build -- the two outputs
+    paginate independently, so both need saying.
+    """
+    get_or_create(get_pPr(style_el), "keepNext", PPR_CHILD_ORDER)
+
+
+def style_keep_lines(style_el):
+    """
+    Word's "Keep lines together": the paragraph's own lines never straddle a
+    page break. Entry headers are a single paragraph of 2-3 hard-broken lines
+    (institution / role / dates), so without this Word may split the name away
+    from the dates.
+    """
+    get_or_create(get_pPr(style_el), "keepLines", PPR_CHILD_ORDER)
+
+
+def set_page_geometry(doc_root):
+    """
+    Give the document's section an explicit A4 page size and margins matching
+    templates/resume.latex. Without this the docx inherits Word's own defaults
+    and paginates differently from the PDF built from the same Markdown.
+    """
+    body = doc_root.find(w("body"))
+    sect = body.find(w("sectPr"))
+    if sect is None:
+        sect = ET.SubElement(body, w("sectPr"))
+
+    for tag in ("pgSz", "pgMar"):
+        existing = sect.find(w(tag))
+        if existing is not None:
+            sect.remove(existing)
+
+    pg_sz = ET.SubElement(sect, w("pgSz"))
+    pg_sz.set(w("w"), str(PAGE_W))
+    pg_sz.set(w("h"), str(PAGE_H))
+
+    pg_mar = ET.SubElement(sect, w("pgMar"))
+    pg_mar.set(w("top"), str(MARGIN_TOP))
+    pg_mar.set(w("bottom"), str(MARGIN_BOTTOM))
+    pg_mar.set(w("left"), str(MARGIN_SIDE))
+    pg_mar.set(w("right"), str(MARGIN_SIDE))
+    # \pagestyle{empty} in the LaTeX build -- no running head or foot to reserve.
+    pg_mar.set(w("header"), "0")
+    pg_mar.set(w("footer"), "0")
+    pg_mar.set(w("gutter"), "0")
+
+
+def clear_default_paragraph_spacing(styles_root):
+    """
+    Pandoc's stock reference.docx puts <w:spacing w:after="200"/> in
+    docDefaults, i.e. 10pt of dead space after EVERY paragraph -- every bullet
+    and every header line. The LaTeX build uses \\parskip 0 with 1pt between
+    list items, so this one default is the single largest source of drift
+    between the two outputs. Zero it and let the EntryHeader style's explicit
+    6pt "before" provide the only deliberate gap, matching the PDF's
+    \\AfterEndEnvironment{itemize}{\\vspace{6pt}}.
+    """
+    defaults = styles_root.find(w("docDefaults"))
+    if defaults is None:
+        return
+    ppr_default = defaults.find(w("pPrDefault"))
+    if ppr_default is None:
+        return
+    ppr = ppr_default.find(w("pPr"))
+    if ppr is None:
+        return
+    spacing = ppr.find(w("spacing"))
+    if spacing is None:
+        spacing = insert_in_order(ppr, ET.Element(w("spacing")), PPR_CHILD_ORDER)
+    spacing.set(w("after"), "0")
+    spacing.set(w("before"), "0")
+    spacing.set(w("line"), "240")  # single spacing
+    spacing.set(w("lineRule"), "auto")
 
 
 def find_style(root, style_id):
@@ -191,9 +299,16 @@ def main():
         with zipfile.ZipFile(base_docx) as zf:
             zf.extractall(extract_dir)
 
+        document_path = extract_dir / "word" / "document.xml"
+        doc_tree = ET.parse(document_path)
+        set_page_geometry(doc_tree.getroot())
+        doc_tree.write(document_path, xml_declaration=True, encoding="UTF-8")
+
         styles_path = extract_dir / "word" / "styles.xml"
         tree = ET.parse(styles_path)
         root = tree.getroot()
+
+        clear_default_paragraph_spacing(root)
 
         normal = find_style(root, "Normal")
         if normal is not None:
@@ -211,15 +326,40 @@ def main():
         if heading1 is not None:
             style_run_props(heading1, color=GRAY, bold=True, caps=True, size=SECTION_HEADING_SIZE)
             style_bottom_border(heading1)
+            style_keep_with_next(heading1)
         else:
             print("warning: 'Heading1' style not found in pandoc's default reference.docx")
 
         resume_name = new_paragraph_style(root, "ResumeName", "Resume Name")
         style_run_props(resume_name, color=BLUE, bold=True, size=NAME_SIZE)
 
+        # Pin the spacing of every style the resume actually uses to its LaTeX
+        # counterpart (twips: 20 = 1pt). Pandoc's defaults are tuned for prose
+        # documents and are far looser than templates/resume.latex.
+        #   Heading1 -> \titlespacing{\section}{0pt}{10pt}{6pt}
+        #   BodyText -> \parindent 0, \parskip 0 (skills lines, the summary)
+        #   Compact  -> \setlist itemsep=1pt (every bullet)
+        for style_id, before, after in (
+            ("Heading1", 200, 120),
+            ("BodyText", 0, 0),
+            ("Compact", 0, 20),
+        ):
+            style = find_style(root, style_id)
+            if style is not None:
+                style_spacing(style, before=before, after=after)
+            else:
+                print(f"warning: '{style_id}' style not found in pandoc's default reference.docx")
+
         entry_header = new_paragraph_style(root, "EntryHeader", "Entry Header")
-        style_space_before(entry_header, "120")  # 6pt gap before each new entry
-        style_run_props(entry_header, bold=True, size=ENTRY_HEADER_SIZE)
+        style_spacing(entry_header, before=120)  # 6pt gap before each new entry
+        style_keep_with_next(entry_header)
+        style_keep_lines(entry_header)
+        # NOT bold at style level. The header is one paragraph of 2-3 hard-broken
+        # lines and only the first (company/title) is bold -- RULES.md §1 -- which
+        # the template already expresses by wrapping just that line in **...**.
+        # Bolding the style bolded the role and date lines too, so the docx came
+        # out heavier than the PDF built from the same Markdown.
+        style_run_props(entry_header, size=ENTRY_HEADER_SIZE)
 
         tree.write(styles_path, xml_declaration=True, encoding="UTF-8")
 

@@ -19,7 +19,8 @@ Priority if short on time: Capstone → SUTD → KLASS → National Service → 
 
 ### 3. Capstone under Projects (30 min)
 - [x] Title: Capstone (MET4004), Quiet Quadcopter for Indoor Flight, MHA | Project Lead
-- [x] Led a [team size]-person team through literature review, design, and bench and flight testing, managing schedule risk and coordinating with [MHA / sponsor] and academic supervisors, [result: e.g. milestones met on schedule]
+- [x] Led a [team size]-person team through literature review, design, and bench and flight testing, managing schedule risk and coordinating with [MHA / sponsor] and academic supervisors, [result: e.g. milestones met on schedule] <!-- this specific bullet was later cut from data/projects.yaml; capstone now states MHA as end user (KLASS is the funding sponsor) and that the project proposal is approved — see CAR-gaps.md -->
+- [x] MHA correctly framed as the drone's end user, KLASS as the funding sponsor, in the capstone bullets
 - [x] Designed a two-stage test campaign (a six-state factorial bench test isolating each noise-reduction mechanism, plus a flight validation stage) meeting FYP requirements while generating data for a conference abstract targeted for early 2027
 - [x] Led a PRISMA-ScR scoping review of 33 sources on drone noise reduction to guide design decisions
 - [x] Identified that underestimated duct and battery mass cost roughly 3 dB at hover, redirecting design effort toward mass reduction
@@ -28,8 +29,8 @@ Priority if short on time: Capstone → SUTD → KLASS → National Service → 
 
 ### 4. SUTD: Research Assistant (30 min)
 - [x] Led design of an intelligent lighting control system for an autonomous vehicle, integrating it with the navigation system via RTOS and APIs, [result]
-- [x] Developed perception software processing 3D LiDAR data for autonomous mobile robots using embedded C++, ROS and sensor fusion, [result: e.g. detection accuracy, latency]
-- [x] Built an LSTM-based fall-risk prediction model for a stair-climbing robot, improving [specific metric] by 50%
+- [x] Wired and integrated the 3D LiDAR on Panthera, verifying sensor output through depth-map visualization <!-- rewritten from the "developed perception software / designed architectures" claim to wiring/integration you can verify directly; see CAR-gaps.md -->
+- [ ] Built an LSTM-based fall-risk prediction model for a stair-climbing robot, improving [specific metric] by 50% <!-- still no metric; excluded from the mha-drone variant's bullet selection, so low priority — see CAR-gaps.md -->
 
 ### 5. KLASS: ML / Fullstack Engineer Intern (45 min)
 - [x] Built React frontend components and FastAPI backend services, with WebSockets for real-time responses, for an internal AI chatbot platform, [result: e.g. used by X staff]
@@ -40,9 +41,10 @@ Priority if short on time: Capstone → SUTD → KLASS → National Service → 
 - [x] Delete anything you didn't personally do
 
 ### 6. SIT: Student Research Engineer (20 min)
-- [x] Designed and built an experimental temperature chamber simulating human body heat signatures and extreme environments for faculty-led embodied AI and robotics projects, [result: e.g. used by N projects]
-- [x] Engineered a closed-loop, thermistor-based IoT control system, holding chamber temperature within [±X °C] of setpoint
-- [x] Established repeatable data collection and testing protocols, [result: e.g. consistent baselines across N test runs]
+- [x] Designed and built a temperature-controlled enclosure around a compression testing machine for faculty research on how foods behave during chewing, supporting work toward a publication <!-- rewritten: chamber's actual purpose is food-chewing research, not embodied AI/extreme-environment testing — see CAR-gaps.md -->
+- [x] Defined the chamber's electrical system architecture and scoped/selected components
+- [x] Engineered closed-loop temperature control with a thermistor and standalone controller, holding the chamber within ±2 °C of a 37 °C setpoint
+- [x] ~~Established repeatable data collection and testing protocols~~ <!-- cut entirely rather than given a project count — see CAR-gaps.md -->
 
 ### 7. National Service: SPF, Protective Security Command (20 min)
 - [x] Entry: Singapore Police Force, Protective Security Command | Trooper & [armoury role title] | [dates]
@@ -101,7 +103,7 @@ Priority if short on time: Capstone → SUTD → KLASS → National Service → 
 - [ ] Be ready to explain your capstone in 2 minutes: problem, approach, current results, next steps
 - [ ] Know your design choices and why: noise-reduction mechanisms, motor/prop selection, the 3 dB mass finding
 - [ ] Prepare 2–3 questions about his team's embodied AI work
-- [ ] Refresh SUTD details: LiDAR pipeline, sensor fusion approach, ROS setup
+- [ ] Refresh SUTD details: LiDAR wiring/integration and depth-map verification on Panthera (the resume bullet now covers integration, not pipeline architecture — see CAR-gaps.md), plus the lighting system's RTOS/rosserial setup
 
 ### 16. Keep improving
 - [ ] Watch GovTech recruiter video

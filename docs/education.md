@@ -15,4 +15,4 @@
 ## Singapore Polytechnic
 *Diploma in Mechatronics and Robotics | Apr 2017 – Sep 2020*
 
-- Internship grade of B+; coursework in Microcontroller Applications, PLCs, and Robotics Integration
+- Relevant Coursework: Microcontroller Applications, PLCs, and Robotics Integration

@@ -2,10 +2,10 @@
 # a fact was originally transcribed from, where applicable.
 - id: moe-instructor-cert
   name: "MOE (Ministry of Education) Instructor Certification"
-  date: "Valid Oct 2018 – Oct 2026"
+  date: "Valid Oct 2018 – Oct 2026 (renewing)"
   note: "Achieved at age 18"
   tags: [teaching]
-  source: {experience_id: nullspace, bullet_id: nullspace-cert}
+  source: {experience_id: nullspace}
 
 - id: additional-certifications
   name: "Additional Certifications"

@@ -1,0 +1,23 @@
+# Optional opening paragraph, rendered directly under the contact line with NO
+# section heading (see RULES.md §1 "Summary"). A variant opts in with
+# `summary: <id>` in data/variants.yaml; a variant with no `summary:` key
+# renders none, which is why most variants currently have no opening paragraph.
+#
+# Same content rules as any bullet (RULES.md §2/§3): no first person, no
+# "passionate"/buzzword padding, and every claim traceable to a real bullet.
+# Each clause below is checkable: the 22 months is `spf-protective-security`,
+# the detector benchmarking is `klass-benchmarking`, the capstone is
+# `capstone-quiet-quadcopter`.
+- id: mha-public-safety
+  # Written for the MHA Embodied AI lead. Deliberately omits the teaching
+  # history from the previous LinkedIn-style draft: the Nullspace entry is cut
+  # from the mha-drone variant, so a summary citing "almost a decade teaching"
+  # would point at something not on that page.
+  text: >-
+    Systems Engineer with a foundation in robotics, embedded systems, and machine
+    learning. Twenty-two months in the Singapore Police Force's Protective Security
+    Command gave a first-hand view of how Home Team operations run, and the work
+    since has stayed close to those problems — benchmarking AI-generated media
+    detectors as a public-safety threat, and now leading a quiet-drone capstone with
+    MHA as its end user. Drawn to engineering where reliability is the point, and to
+    contributing that to public safety directly.

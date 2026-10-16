@@ -7,6 +7,7 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{etoolbox}
+\usepackage{needspace}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true, urlcolor=resumeblue, linkcolor=resumeblue}
 
@@ -14,16 +15,31 @@
 \definecolor{resumeblue}{HTML}{1F4E79}
 \definecolor{resumegray}{HTML}{808080}
 
-% Typographic scale: each level 3pt above the one it sits under.
-%   body 9pt -> entry title 12pt -> section heading 15pt -> name 18pt
-\newcommand{\bodysize}{\fontsize{9}{11}\selectfont}
-\newcommand{\entryheadersize}{\fontsize{12}{14}\selectfont}
-\newcommand{\sectionheadsize}{\fontsize{15}{17}\selectfont}
-\newcommand{\namesize}{\fontsize{18}{20}\selectfont}
+% Typographic scale: each level 3pt above the one it sits under, leading always
+% font + 2pt. The whole scale is shifted down by a uniform SCALE OFFSET so the
+% relative hierarchy is untouched -- see RULES.md §1 "Page length" for why a
+% font drop (rather than a content trim) was chosen here, and keep these four
+% in sync with scripts/build_reference_docx.py and the *_LINE_PT constants in
+% templates/format-select.lua, which both hardcode the same numbers.
+%   offset 0.0pt (original): body  9   -> entry 12   -> section 15   -> name 18
+%   offset 0.5pt (current):  body  8.5 -> entry 11.5 -> section 14.5 -> name 17.5
+\newcommand{\bodysize}{\fontsize{8.5}{10.5}\selectfont}
+\newcommand{\entryheadersize}{\fontsize{11.5}{13.5}\selectfont}
+\newcommand{\sectionheadsize}{\fontsize{14.5}{16.5}\selectfont}
+\newcommand{\namesize}{\fontsize{17.5}{19.5}\selectfont}
 
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
 \AtBeginDocument{\bodysize}
+
+% Page-break discipline. An entry header must never be stranded at the foot of
+% a page without at least its first bullet -- that is enforced per-entry by the
+% \needspace{} that templates/format-select.lua emits ahead of each
+% EntryHeader Div (it sizes the reservation from the header's own line count).
+% These two penalties cover the other half: never split a paragraph so that a
+% single line of it lands alone on either side of a break.
+\widowpenalty=10000
+\clubpenalty=10000
 
 % Section headings: gray, bold, with a rule beneath (matches template's style)
 \titleformat{\section}

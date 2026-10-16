@@ -1,0 +1,17 @@
+# Awards / Achievements / Certificates. `source` cross-references the job bullet
+# a fact was originally transcribed from, where applicable.
+- id: moe-instructor-cert
+  name: "MOE (Ministry of Education) Instructor Certification"
+  date: "Valid Oct 2018 – Oct 2026 (renewing)"
+  note: "Achieved at age 18"
+  tags: [teaching]
+  source: {experience_id: nullspace}
+
+- id: additional-certifications
+  name: "Additional Certifications"
+  date: null
+  tags: []
+  entries:
+    - "Google Crash Course on Python"
+    - "Google The Bits and Bytes of Computer Networking"
+    - "Coursera Machine Learning"

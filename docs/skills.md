@@ -55,6 +55,23 @@
 - Experimental Design
 - Test & Validation
 
+## Engineering Data & Analysis _(tag: engineering-data)_
+- Applied Machine Learning
+- Predictive Modeling
+- Regression Analysis
+- Classification Models
+- Scikit-learn
+- Data Preprocessing
+- Model Evaluation & Validation
+- Time Series Analysis
+- Sensor Data Analysis
+- Fault Detection
+- Data Visualization
+- Data-driven Engineering Optimization
+- Industrial Automation (PLCs)
+- Engineering Data Analysis & Interpretation
+- Data-driven Decision Making
+
 ## Software & Fullstack _(tag: software-fullstack)_
 - Python (NumPy, Pandas)
 - C++17

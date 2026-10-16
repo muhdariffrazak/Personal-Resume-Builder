@@ -5,24 +5,33 @@
    to the matching named style in templates/reference.docx. Everything else
    is plain pandoc markdown, identical for both outputs.
 
-   Date placement is standardized: the date always sits on its own line
-   right below the title (never crammed onto the same line), using a
-   markdown hard line-break (trailing "\" + newline) so title and date stay
-   inside one EntryHeader-styled paragraph regardless of title length. #}
+   Entry headers (Experience, Projects) are standardized to 3 lines: name
+   (Company / Project title, bold) / role (+ location or sponsor in
+   parens) / dates -- each forced onto its own line via a markdown hard
+   line-break (trailing "\" + newline) so all 3 stay inside one
+   EntryHeader-styled paragraph regardless of content length. A line is
+   omitted if its field is empty (e.g. no dates). Education and
+   Volunteering keep a 2-line header (name / dates); Education's degree
+   stays a bullet rather than a header line. #}
 ::: {custom-style="ResumeName"}
 **{{ personal.name }}**
 :::
 
 {{ personal.phone }} | {{ personal.email }} | {{ personal.linkedin.display }} | {{ personal.location }}
 
+{% if summary %}
+{{ summary }}
+
+{% endif %}
 {% for section in sections -%}
 {% if section == 'experience' and experience %}
 # WORK EXPERIENCE
 
 {% for job in experience %}
+{% set role_line = ("\\\n" + job.role) if job.role else "" %}
 {% set date_line = ("\\\n" + job.dates) if job.dates else "" %}
 ::: {custom-style="EntryHeader"}
-**{{ job.role }}, {{ job.company }}**{% if job.location %} | {{ job.location }}{% endif %}{{ date_line }}
+**{{ job.company }}**{% if job.location %} | {{ job.location }}{% endif %}{{ role_line }}{{ date_line }}
 :::
 
 {% for bullet in job.bullets %}
@@ -34,9 +43,12 @@
 # PROJECTS
 
 {% for proj in projects %}
+{% set role_text = proj.role %}
+{% if proj.sponsor %}{% set role_text = (role_text + " (" + proj.sponsor + ")") if role_text else proj.sponsor %}{% endif %}
+{% set role_line = ("\\\n" + role_text) if role_text else "" %}
 {% set date_line = ("\\\n" + proj.dates) if proj.dates else "" %}
 ::: {custom-style="EntryHeader"}
-**{{ loop.index }}. {{ proj.title }}**{% if proj.role %} — {{ proj.role }}{% endif %}{% if proj.sponsor %} ({{ proj.sponsor }}){% endif %}{{ date_line }}
+**{{ loop.index }}. {{ proj.title }}**{{ role_line }}{{ date_line }}
 :::
 
 {% for bullet in proj.bullets %}

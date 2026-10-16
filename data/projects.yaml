@@ -9,30 +9,32 @@
 
 - id: capstone-quiet-quadcopter
   title: "Capstone (MET4004) — Acoustic Noise Reduction for Drones"
-  role: "Project Lead — Software & Electronics"
-  sponsor: "KLASS"
+  role: "Project Lead, Software & Electronics"
+  sponsor: "Sponsored by KLASS"
   dates: "Aug 2026 – Apr 2027"
   tags: [robotics-embedded, hardware-mechatronics, leadership, uav]
   bullets:
-    - text: "Leading a 3-person team to deliver a proof-of-concept indoor drone for industry sponsor KLASS, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope."
+    - text: "Leading a 3-person team to deliver a proof-of-concept quiet indoor drone for end user MHA to reduce acoustic detectability, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope, with the project proposal approved."
     - text: "Owning the software and electronics workstream, selecting a low-noise propulsion stack of 5-inch injection-molded toroidal propellers, custom ducts with acoustic lining and serrated trailing edges, 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning to shift tonal whine into less perceptible bands."
-    - text: "Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight for stable station-keeping in GPS-denied indoor flight."
-    - text: "Designed the acoustic validation campaign to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, enabling direct benchmarking against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements."
-    - text: "Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards, quantifying perceived annoyance beyond raw sound-pressure level."
+    - text: "Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight to preserve control headroom for manually piloted indoor flight."
+    - text: "Designed the acoustic validation plan to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, to benchmark directly against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements."
+    - text: "Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards to quantify perceived annoyance beyond raw sound-pressure level."
 
 - id: trolley-robot
-  title: "Autonomous Trolley Collection Robot"
+  title: "Autonomous Airport Trolley Return Robot (SIT–DigiPen Coursework)"
+  role: "Firmware & Perception"
   dates: null
   tags: [robotics-embedded, hardware-mechatronics]
   bullets:
-    - text: "Developed an autonomous robot for collecting stray trolleys on an STM32F7 microcontroller running an RTOS, implementing concurrent tasks for obstacle detection and joystick control over a custom serial communication protocol."
+    - text: "Built LiDAR-based perception in C++ and ROS for a robot that autonomously returns airport trolleys, developing and integrating obstacle detection, SLAM mapping, and localization with IMU and wheel-odometry sensor fusion on an onboard computer, completing the final demo task."
+    - text: "Developed RTOS firmware on an STM32F7 microcontroller with concurrent tasks for obstacle detection and joystick control, and a custom serial protocol linking it to ROS for reliable motor control."
 
 - id: custom-3d-printer
   title: "Custom 3D Printer Development"
-  dates: null
+  dates: "2019"
   tags: [hardware-mechatronics]
   bullets:
-    - text: "Built a custom 3D printer from off-the-shelf modules, developing custom firmware in C++ (Marlin) and tuning it for print reliability and dimensional accuracy."
+    - text: "Built a custom 3D printer from off-the-shelf modules as a personal project, extending Marlin firmware in C++ with auto bed levelling and filament runout detection, improving first-layer adhesion and print quality and reducing failed prints."
 
 # --- Projects extracted out of job bullets (cross-referenced, not duplicated) ---
 
@@ -80,10 +82,10 @@
     - ref: "sutd:sutd-lighting-system"
 
 - id: experimental-thermal-chamber
-  title: "Experimental Thermal Chamber for Embodied AI Testing"
+  title: "Body-Temperature Test Chamber for Food Chewing Research"
   dates: "Aug 2024 – May 2025"
   tags: [hardware-mechatronics]
   source: {experience_id: sit}
   bullets:
     - ref: "sit:sit-hardware-design"
-    - ref: "sit:sit-iot-regulation"
+    - ref: "sit:sit-temperature-control"

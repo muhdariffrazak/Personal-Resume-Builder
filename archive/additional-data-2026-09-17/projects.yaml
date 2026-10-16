@@ -1,0 +1,91 @@
+# Projects: standalone builds AND project-like work pulled out of job bullets.
+# A bullet entry is either:
+#   - text: "..."                          (own wording), or
+#   - ref: "<experience_id>:<bullet_id>"   (reuses the exact wording from experience.yaml)
+# `source` on an extracted project cross-references the job it came from, so
+# scripts/render_docs.py can link projects.md <-> experience.md both ways.
+
+# --- Standalone projects (previously the flat "Specialized Projects Database") ---
+
+- id: capstone-quiet-quadcopter
+  title: "Capstone (MET4004) — Acoustic Noise Reduction for Drones"
+  role: "Project Lead — Software & Electronics"
+  sponsor: "Sponsored by KLASS"
+  dates: "Aug 2026 – Apr 2027"
+  tags: [robotics-embedded, hardware-mechatronics, leadership, uav]
+  bullets:
+    - text: "Leading a 3-person team to deliver a proof-of-concept quiet indoor drone for end user MHA, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope, with the project proposal approved."
+    - text: "Owning the software and electronics workstream, selecting a low-noise propulsion stack of 5-inch injection-molded toroidal propellers, custom ducts with acoustic lining and serrated trailing edges, 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning to shift tonal whine into less perceptible bands."
+    - text: "Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight to preserve control headroom for manually piloted indoor flight."
+    - text: "Designed the acoustic validation plan to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, to benchmark directly against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements."
+    - text: "Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards to quantify perceived annoyance beyond raw sound-pressure level."
+
+- id: trolley-robot
+  title: "Autonomous Trolley Collection Robot (SIT–DigiPen Coursework)"
+  role: "Firmware & Perception"
+  dates: null
+  tags: [robotics-embedded, hardware-mechatronics]
+  bullets:
+    - text: "Built LiDAR-based perception in C++ and ROS on an onboard computer, developing and integrating obstacle detection, SLAM mapping, and localization with IMU and wheel-odometry sensor fusion, validated in on-robot trials and demos."
+    - text: "Developed firmware on an STM32F7 microcontroller running an RTOS, implementing concurrent tasks for obstacle detection and joystick control over a custom serial communication protocol."
+
+- id: custom-3d-printer
+  title: "Custom 3D Printer Development"
+  dates: null
+  tags: [hardware-mechatronics]
+  bullets:
+    - text: "Built a custom 3D printer from off-the-shelf modules, developing custom firmware in C++ (Marlin) and tuning it for print reliability and dimensional accuracy."
+
+# --- Projects extracted out of job bullets (cross-referenced, not duplicated) ---
+
+- id: ai-forensics-benchmarking
+  title: "AI-Generated Video & Audio Forensics Benchmarking"
+  dates: "Sep 2025 – Aug 2026"
+  tags: [ai-ml, computer-vision]
+  source: {experience_id: klass}
+  bullets:
+    - ref: "klass:klass-benchmarking"
+    - ref: "klass:klass-video-analytics"
+    - ref: "klass:klass-av-sync"
+
+- id: synthetic-multimodal-dataset-pipeline
+  title: "Synthetic Multimodal Deepfake Dataset Pipeline"
+  dates: "Sep 2025 – Aug 2026"
+  tags: [ai-ml]
+  source: {experience_id: klass}
+  bullets:
+    - ref: "klass:klass-data-generation"
+
+- id: multi-model-ai-endpoint-platform
+  title: "Multi-Model AI Endpoint Platform"
+  dates: "Sep 2025 – Aug 2026"
+  tags: [software-fullstack, infra-cloud]
+  source: {experience_id: klass}
+  bullets:
+    - ref: "klass:klass-fullstack"
+    - ref: "klass:klass-hpc"
+
+- id: stair-climbing-fall-risk-lstm
+  title: "Stair-Climbing Robot Fall-Risk Prediction (LSTM)"
+  dates: "Aug 2022 – May 2024"
+  tags: [ai-ml, robotics-embedded]
+  source: {experience_id: sutd}
+  bullets:
+    - ref: "sutd:sutd-safety-lstm"
+
+- id: av-intelligent-lighting-system
+  title: "Panthera Autonomous Vehicle — Intelligent Lighting System"
+  dates: "Aug 2022 – May 2024"
+  tags: [robotics-embedded, leadership]
+  source: {experience_id: sutd}
+  bullets:
+    - ref: "sutd:sutd-lighting-system"
+
+- id: experimental-thermal-chamber
+  title: "Body-Temperature Test Chamber for Food Chewing Research"
+  dates: "Aug 2024 – May 2025"
+  tags: [hardware-mechatronics]
+  source: {experience_id: sit}
+  bullets:
+    - ref: "sit:sit-hardware-design"
+    - ref: "sit:sit-temperature-control"

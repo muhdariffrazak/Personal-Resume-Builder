@@ -14,22 +14,22 @@
   tags: [ai-ml, computer-vision, software-fullstack, infra-cloud]
   bullets:
     - id: klass-benchmarking
-      text: "Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC, achieving 90.03 AUROC on the NSG-VD replication."
+      text: "Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC to assess detection capability against AI-generated media as a public-safety threat, achieving 90.03 AUROC on the NSG-VD replication."
       tags: [ai-ml, computer-vision]
     - id: klass-video-analytics
-      text: "Integrated optical flow (RAFT), segmentation (SAM 2), and point-tracking (CoTracker) algorithms to analyze physical motion derivatives in video sequences for mission-critical data."
+      text: "Ran ablation studies integrating optical flow (RAFT), segmentation (SAM 2), and point tracking (CoTracker) to test whether physical-motion signals in video sequences can distinguish AI-generated content, finding mixed evidence of a usable signal."
       tags: [ai-ml, computer-vision]
     - id: klass-data-generation
-      text: "Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-synchronization (LatentSync) models to curate a balanced 1,200-video benchmark dataset."
+      text: "Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-sync (LatentSync) models to curate a balanced 1,200-video real/fake dataset, used to compare all four detectors consistently and to test models at small scale before committing larger compute."
       tags: [ai-ml]
     - id: klass-av-sync
       text: "Evaluated audio-visual synchronization as a deepfake detection signal, selecting a ~0.3 operating threshold through ROC analysis."
       tags: [ai-ml, computer-vision]
     - id: klass-hpc
-      text: "Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits before committing cluster time to full-scale benchmarking runs."
+      text: "Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits that caught pipeline errors before committing to training and synthetic-deepfake generation runs of up to 5 hours each."
       tags: [infra-cloud, ai-ml]
     - id: klass-fullstack
-      text: "Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for an internal AI chatbot platform."
+      text: "Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for a company-wide internal AI chatbot platform that gave staff a secure alternative to public AI tools, with search across internal documents."
       tags: [software-fullstack]
 
 - id: sit
@@ -40,30 +40,27 @@
   tags: [hardware-mechatronics, robotics-embedded]
   bullets:
     - id: sit-hardware-design
-      text: "Designed and built an experimental temperature chamber simulating human body heat signatures and extreme physical environments for faculty-led embodied AI and robotics hardware testing."
+      text: "Designed and built a temperature-controlled enclosure around a compression testing machine for faculty research on how foods behave during chewing, defining the electrical architecture and selecting components before handing the completed chamber over to the research team."
       tags: [hardware-mechatronics]
-    - id: sit-iot-regulation
-      text: "Engineered a closed-loop, thermistor-based IoT control system to hold chamber temperature at setpoint, enabling high-fidelity data collection."
-      tags: [hardware-mechatronics, infra-cloud]
-    - id: sit-validation-protocols
-      text: "Established repeatable testing and data collection protocols for faculty-led embodied AI and robotics hardware projects."
-      tags: [robotics-embedded]
+    - id: sit-temperature-control
+      text: "Engineered closed-loop temperature control with a thermistor and standalone temperature controller, holding the chamber within ±2 °C of a 37 °C body-temperature setpoint for consistent test conditions."
+      tags: [hardware-mechatronics]
 
 - id: sutd
   company: "SUTD – ROAR Lab"
-  role: "Research Assistant (Full Time / Volunteer)"
+  role: "Research Assistant"
   location: null
-  dates: "Aug 2022 – May 2024"
+  dates: "Aug 2022 – May 2024 (Volunteer until Nov 2022, Full Time thereafter)"
   tags: [robotics-embedded, ai-ml]
   bullets:
-    - id: sutd-perception
-      text: "Developed perception software processing 3D LiDAR data for autonomous mobile robots, designing architectures integrating Embedded C++, ROS, and sensor fusion."
-      tags: [robotics-embedded]
     - id: sutd-lighting-system
-      text: "Led the design of the full intelligent lighting control system for Panthera, an autonomous vehicle developed under National Robotics Programme funding, implementing it as a rosserial node on an Arduino that subscribed to cmd_vel, IMU, and vehicle-state topics under an RTOS to drive turn, warning, and hazard signaling; the platform passed T1 autonomous testing at CETRAN."
+      text: "Led the design of Panthera's intelligent lighting control system to signal the autonomous vehicle's intent to pedestrians and meet testing safety requirements, running a rosserial node on an Arduino under an RTOS that mapped cmd_vel, IMU, and vehicle-state topics to turn, warning, and hazard signals; the platform passed T1 autonomous testing at CETRAN."
       tags: [robotics-embedded, leadership]
+    - id: sutd-perception-support
+      text: "Wired and integrated the 3D LiDAR used for Panthera's obstacle detection, mapping, and localization, verifying sensor output through depth-map visualization, and supported the vehicle through its T1 autonomous field testing."
+      tags: [robotics-embedded, hardware-mechatronics]
     - id: sutd-safety-lstm
-      text: "Built a predictive safety model to detect a stair-climbing robot's fall risk, deploying Long Short-Term Memory networks (LSTMs) over sensor time-series data."
+      text: "Explored predictive safety for a stair-climbing robot by training and evaluating Long Short-Term Memory (LSTM) networks on its sensor time-series data, showing that fall risk could be predicted."
       tags: [ai-ml, robotics-embedded]
 
 - id: spf-procom
@@ -74,27 +71,27 @@
   tags: [operations, leadership]
   bullets:
     - id: spf-protective-security
-      text: "Performed protective security duties as part of a deployed team, operating under strict standard operating procedures to protect strategic locations and major national events across 22 months of full-time service."
+      text: "Performed protective security duties within a deployed team at strategic locations and major national events, operating under strict standard operating procedures across 22 months of full-time service."
       tags: [operations]
     - id: spf-armoury
-      text: "Served as unit Armourer alongside trooper duties, managing the issuance, return, and accountability of arms and equipment, and maintaining audit-ready records against regulated inventory procedures."
+      text: "Served as unit Armourer alongside trooper duties, managing the issuance, return, and accountability of arms and equipment with zero discrepancies, and maintaining audit-ready records under regulated inventory procedures."
       tags: [operations, leadership]
 
 - id: solustar
   company: "SOLUSTAR"
-  role: "Robotics Engineer Intern"
+  role: "Robotics Engineer Intern (Unpaid, Part Time)"
   location: null
   dates: "May 2022 – Aug 2022"
   tags: [hardware-mechatronics]
   bullets:
     - id: solustar-pcb
-      text: "Designed and debugged PCBs and circuitry for a disinfectant robot."
+      text: "Designed and debugged PCBs and circuitry for a disinfectant robot, bringing the boards into a working prototype."
       tags: [hardware-mechatronics]
     - id: solustar-firmware
-      text: "Performed maintenance on 3D printers and developed custom Marlin firmware in C++ to improve print reliability."
+      text: "Restored non-functional 3D printers to working order through hardware maintenance and custom Marlin firmware development in C++."
       tags: [hardware-mechatronics]
     - id: solustar-troubleshooting
-      text: "Troubleshot Linux software issues for the VAL2 robot."
+      text: "Troubleshot Linux software issues on the VAL2 robot, getting it running again."
       tags: [hardware-mechatronics]
 
 - id: vm-education
@@ -105,25 +102,19 @@
   tags: [teaching]
   bullets:
     - id: vm-curriculum-design
-      text: "Pioneered and designed the new coding curriculum for the MODI (Luxrobo) platform in Singapore, publishing 5 projects of varying difficulty."
+      text: "Pioneered the new coding curriculum for the MODI (Luxrobo) platform in Singapore, publishing 5 projects of varying difficulty that became the standard MODI curriculum across VM Education / Playfacto, and trained incoming instructors with documented solutions to common teaching difficulties."
       tags: [teaching]
-    - id: vm-instructor-training
-      text: "Facilitated training for incoming MODI instructors, documenting solutions to common teaching difficulties."
-      tags: [teaching, leadership]
 
 - id: nullspace
   company: "Nullspace Group"
   role: "Technology Instructor (Part Time / Full Time)"
   location: null
-  dates: "Nov 2016 – Present"
+  dates: "Nov 2016 – Present (paused during National Service, Jan 2021 – Nov 2022)"
   tags: [teaching]
   bullets:
     - id: nullspace-curriculum
-      text: "Instruct students aged 5–17 in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers, as an MOE-certified instructor from age 18."
+      text: "Instruct students aged 5–17 across multiple schools in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers as an MOE-certified instructor since age 18, receiving positive feedback from students and schools."
       tags: [teaching]
     - id: nullspace-enrichment
       text: "Selected to conduct the Computer Enrichment Program (CEP) at GEP schools in Singapore, completing over 1,000 teaching hours."
-      tags: [teaching]
-    - id: nullspace-cert
-      text: "Achieved MOE (Ministry of Education) Instructor Certification at age 18 (Valid Oct 2018 – Oct 2026)."
       tags: [teaching]

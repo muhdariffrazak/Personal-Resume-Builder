@@ -1,0 +1,419 @@
+diff --git a/data/awards.yaml b/data/awards.yaml
+index a61ea62..0167aa4 100644
+--- a/data/awards.yaml
++++ b/data/awards.yaml
+@@ -2,10 +2,10 @@
+ # a fact was originally transcribed from, where applicable.
+ - id: moe-instructor-cert
+   name: "MOE (Ministry of Education) Instructor Certification"
+-  date: "Valid Oct 2018 – Oct 2026"
++  date: "Valid Oct 2018 – Oct 2026 (renewing)"
+   note: "Achieved at age 18"
+   tags: [teaching]
+-  source: {experience_id: nullspace, bullet_id: nullspace-cert}
++  source: {experience_id: nullspace}
+ 
+ - id: additional-certifications
+   name: "Additional Certifications"
+diff --git a/data/experience.yaml b/data/experience.yaml
+index 9b945ce..c8e83d9 100644
+--- a/data/experience.yaml
++++ b/data/experience.yaml
+@@ -14,22 +14,22 @@
+   tags: [ai-ml, computer-vision, software-fullstack, infra-cloud]
+   bullets:
+     - id: klass-benchmarking
+-      text: "Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC, achieving 90.03 AUROC on the NSG-VD replication."
++      text: "Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC to assess detection capability against AI-generated media as a public-safety threat, achieving 90.03 AUROC on the NSG-VD replication."
+       tags: [ai-ml, computer-vision]
+     - id: klass-video-analytics
+-      text: "Integrated optical flow (RAFT), segmentation (SAM 2), and point-tracking (CoTracker) algorithms to analyze physical motion derivatives in video sequences for mission-critical data."
++      text: "Ran ablation studies integrating optical flow (RAFT), segmentation (SAM 2), and point tracking (CoTracker) to test whether physical-motion signals in video sequences can distinguish AI-generated content, finding mixed evidence of a usable signal."
+       tags: [ai-ml, computer-vision]
+     - id: klass-data-generation
+-      text: "Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-synchronization (LatentSync) models to curate a balanced 1,200-video benchmark dataset."
++      text: "Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-sync (LatentSync) models to curate a balanced 1,200-video real/fake dataset, used to compare all four detectors consistently and to test models at small scale before committing larger compute."
+       tags: [ai-ml]
+     - id: klass-av-sync
+       text: "Evaluated audio-visual synchronization as a deepfake detection signal, selecting a ~0.3 operating threshold through ROC analysis."
+       tags: [ai-ml, computer-vision]
+     - id: klass-hpc
+-      text: "Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits before committing cluster time to full-scale benchmarking runs."
++      text: "Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits that caught pipeline errors before committing to training and synthetic-deepfake generation runs of up to 5 hours each."
+       tags: [infra-cloud, ai-ml]
+     - id: klass-fullstack
+-      text: "Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for an internal AI chatbot platform."
++      text: "Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for a company-wide internal AI chatbot platform that gave staff a secure alternative to public AI tools, with search across internal documents."
+       tags: [software-fullstack]
+ 
+ - id: sit
+@@ -40,30 +40,27 @@
+   tags: [hardware-mechatronics, robotics-embedded]
+   bullets:
+     - id: sit-hardware-design
+-      text: "Designed and built an experimental temperature chamber simulating human body heat signatures and extreme physical environments for faculty-led embodied AI and robotics hardware testing."
++      text: "Designed and built a temperature-controlled enclosure around a compression testing machine for faculty research on how foods behave during chewing, defining the electrical architecture and selecting components before handing the completed chamber over to the research team."
++      tags: [hardware-mechatronics]
++    - id: sit-temperature-control
++      text: "Engineered closed-loop temperature control with a thermistor and standalone temperature controller, holding the chamber within ±2 °C of a 37 °C body-temperature setpoint for consistent test conditions."
+       tags: [hardware-mechatronics]
+-    - id: sit-iot-regulation
+-      text: "Engineered a closed-loop, thermistor-based IoT control system to hold chamber temperature at setpoint, enabling high-fidelity data collection."
+-      tags: [hardware-mechatronics, infra-cloud]
+-    - id: sit-validation-protocols
+-      text: "Established repeatable testing and data collection protocols for faculty-led embodied AI and robotics hardware projects."
+-      tags: [robotics-embedded]
+ 
+ - id: sutd
+   company: "SUTD – ROAR Lab"
+-  role: "Research Assistant (Full Time / Volunteer)"
++  role: "Research Assistant"
+   location: null
+-  dates: "Aug 2022 – May 2024"
++  dates: "Aug 2022 – May 2024 (Volunteer until Nov 2022, Full Time thereafter)"
+   tags: [robotics-embedded, ai-ml]
+   bullets:
+-    - id: sutd-perception
+-      text: "Developed perception software processing 3D LiDAR data for autonomous mobile robots, designing architectures integrating Embedded C++, ROS, and sensor fusion."
+-      tags: [robotics-embedded]
+     - id: sutd-lighting-system
+-      text: "Led the design of the full intelligent lighting control system for Panthera, an autonomous vehicle developed under National Robotics Programme funding, implementing it as a rosserial node on an Arduino that subscribed to cmd_vel, IMU, and vehicle-state topics under an RTOS to drive turn, warning, and hazard signaling; the platform passed T1 autonomous testing at CETRAN."
++      text: "Led the design of Panthera's intelligent lighting control system to signal the autonomous vehicle's intent to pedestrians and meet testing safety requirements, running a rosserial node on an Arduino under an RTOS that mapped cmd_vel, IMU, and vehicle-state topics to turn, warning, and hazard signals; the platform passed T1 autonomous testing at CETRAN."
+       tags: [robotics-embedded, leadership]
++    - id: sutd-perception-support
++      text: "Wired and integrated the 3D LiDAR used for Panthera's obstacle detection, mapping, and localization, verifying sensor output through depth-map visualization, and supported the vehicle through its T1 autonomous field testing."
++      tags: [robotics-embedded, hardware-mechatronics]
+     - id: sutd-safety-lstm
+-      text: "Built a predictive safety model to detect a stair-climbing robot's fall risk, deploying Long Short-Term Memory networks (LSTMs) over sensor time-series data."
++      text: "Explored predictive safety for a stair-climbing robot by training and evaluating Long Short-Term Memory (LSTM) networks on its sensor time-series data, showing that fall risk could be predicted."
+       tags: [ai-ml, robotics-embedded]
+ 
+ - id: spf-procom
+@@ -74,27 +71,27 @@
+   tags: [operations, leadership]
+   bullets:
+     - id: spf-protective-security
+-      text: "Performed protective security duties as part of a deployed team, operating under strict standard operating procedures to protect strategic locations and major national events across 22 months of full-time service."
++      text: "Performed protective security duties within a deployed team at strategic locations and major national events, operating under strict standard operating procedures."
+       tags: [operations]
+     - id: spf-armoury
+-      text: "Served as unit Armourer alongside trooper duties, managing the issuance, return, and accountability of arms and equipment, and maintaining audit-ready records against regulated inventory procedures."
++      text: "Served as unit Armourer alongside trooper duties, managing the issuance, return, and accountability of arms and equipment with zero discrepancies, and maintaining audit-ready records under regulated inventory procedures."
+       tags: [operations, leadership]
+ 
+ - id: solustar
+   company: "SOLUSTAR"
+-  role: "Robotics Engineer Intern"
++  role: "Robotics Engineer Intern (Unpaid, Part Time)"
+   location: null
+   dates: "May 2022 – Aug 2022"
+   tags: [hardware-mechatronics]
+   bullets:
+     - id: solustar-pcb
+-      text: "Designed and debugged PCBs and circuitry for a disinfectant robot."
++      text: "Designed and debugged PCBs and circuitry for a disinfectant robot, bringing the boards into a working prototype."
+       tags: [hardware-mechatronics]
+     - id: solustar-firmware
+-      text: "Performed maintenance on 3D printers and developed custom Marlin firmware in C++ to improve print reliability."
++      text: "Restored non-functional 3D printers to working order through hardware maintenance and custom Marlin firmware development in C++."
+       tags: [hardware-mechatronics]
+     - id: solustar-troubleshooting
+-      text: "Troubleshot Linux software issues for the VAL2 robot."
++      text: "Troubleshot Linux software issues on the VAL2 robot, getting it running again."
+       tags: [hardware-mechatronics]
+ 
+ - id: vm-education
+@@ -105,25 +102,19 @@
+   tags: [teaching]
+   bullets:
+     - id: vm-curriculum-design
+-      text: "Pioneered and designed the new coding curriculum for the MODI (Luxrobo) platform in Singapore, publishing 5 projects of varying difficulty."
++      text: "Pioneered the new coding curriculum for the MODI (Luxrobo) platform in Singapore, publishing 5 projects of varying difficulty that became the standard MODI curriculum across VM Education / Playfacto, and trained incoming instructors with documented solutions to common teaching difficulties."
+       tags: [teaching]
+-    - id: vm-instructor-training
+-      text: "Facilitated training for incoming MODI instructors, documenting solutions to common teaching difficulties."
+-      tags: [teaching, leadership]
+ 
+ - id: nullspace
+   company: "Nullspace Group"
+   role: "Technology Instructor (Part Time / Full Time)"
+   location: null
+-  dates: "Nov 2016 – Present"
++  dates: "Nov 2016 – Present (paused during National Service, Jan 2021 – Nov 2022)"
+   tags: [teaching]
+   bullets:
+     - id: nullspace-curriculum
+-      text: "Instruct students aged 5–17 in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers, as an MOE-certified instructor from age 18."
++      text: "Instruct students aged 5–17 across multiple schools in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers as an MOE-certified instructor since age 18, receiving positive feedback from students and schools."
+       tags: [teaching]
+     - id: nullspace-enrichment
+       text: "Selected to conduct the Computer Enrichment Program (CEP) at GEP schools in Singapore, completing over 1,000 teaching hours."
+       tags: [teaching]
+-    - id: nullspace-cert
+-      text: "Achieved MOE (Ministry of Education) Instructor Certification at age 18 (Valid Oct 2018 – Oct 2026)."
+-      tags: [teaching]
+diff --git a/data/projects.yaml b/data/projects.yaml
+index a8962db..ae23a76 100644
+--- a/data/projects.yaml
++++ b/data/projects.yaml
+@@ -10,29 +10,31 @@
+ - id: capstone-quiet-quadcopter
+   title: "Capstone (MET4004) — Acoustic Noise Reduction for Drones"
+   role: "Project Lead — Software & Electronics"
+-  sponsor: "KLASS"
++  sponsor: "Sponsored by KLASS"
+   dates: "Aug 2026 – Apr 2027"
+   tags: [robotics-embedded, hardware-mechatronics, leadership, uav]
+   bullets:
+-    - text: "Leading a 3-person team to deliver a proof-of-concept indoor drone for industry sponsor KLASS, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope."
++    - text: "Leading a 3-person team to deliver a proof-of-concept quiet indoor drone for end user MHA to reduce acoustic detectability, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope, with the project proposal approved."
+     - text: "Owning the software and electronics workstream, selecting a low-noise propulsion stack of 5-inch injection-molded toroidal propellers, custom ducts with acoustic lining and serrated trailing edges, 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning to shift tonal whine into less perceptible bands."
+-    - text: "Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight for stable station-keeping in GPS-denied indoor flight."
+-    - text: "Designed the acoustic validation campaign to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, enabling direct benchmarking against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements."
+-    - text: "Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards, quantifying perceived annoyance beyond raw sound-pressure level."
++    - text: "Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight to preserve control headroom for manually piloted indoor flight."
++    - text: "Designed the acoustic validation plan to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, to benchmark directly against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements."
++    - text: "Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards to quantify perceived annoyance beyond raw sound-pressure level."
+ 
+ - id: trolley-robot
+-  title: "Autonomous Trolley Collection Robot"
++  title: "Autonomous Airport Trolley Return Robot (SIT–DigiPen Coursework)"
++  role: "Firmware & Perception"
+   dates: null
+   tags: [robotics-embedded, hardware-mechatronics]
+   bullets:
+-    - text: "Developed an autonomous robot for collecting stray trolleys on an STM32F7 microcontroller running an RTOS, implementing concurrent tasks for obstacle detection and joystick control over a custom serial communication protocol."
++    - text: "Built LiDAR-based perception in C++ and ROS for a robot that autonomously returns airport trolleys, developing and integrating obstacle detection, SLAM mapping, and localization with IMU and wheel-odometry sensor fusion on an onboard computer, completing the final demo task."
++    - text: "Developed RTOS firmware on an STM32F7 microcontroller with concurrent tasks for obstacle detection and joystick control, and a custom serial protocol linking it to ROS for reliable motor control."
+ 
+ - id: custom-3d-printer
+   title: "Custom 3D Printer Development"
+-  dates: null
++  dates: "2019"
+   tags: [hardware-mechatronics]
+   bullets:
+-    - text: "Built a custom 3D printer from off-the-shelf modules, developing custom firmware in C++ (Marlin) and tuning it for print reliability and dimensional accuracy."
++    - text: "Built a custom 3D printer from off-the-shelf modules as a personal project, extending Marlin firmware in C++ with auto bed levelling and filament runout detection, improving first-layer adhesion and print quality and reducing failed prints."
+ 
+ # --- Projects extracted out of job bullets (cross-referenced, not duplicated) ---
+ 
+@@ -80,10 +82,10 @@
+     - ref: "sutd:sutd-lighting-system"
+ 
+ - id: experimental-thermal-chamber
+-  title: "Experimental Thermal Chamber for Embodied AI Testing"
++  title: "Body-Temperature Test Chamber for Food Chewing Research"
+   dates: "Aug 2024 – May 2025"
+   tags: [hardware-mechatronics]
+   source: {experience_id: sit}
+   bullets:
+     - ref: "sit:sit-hardware-design"
+-    - ref: "sit:sit-iot-regulation"
++    - ref: "sit:sit-temperature-control"
+diff --git a/data/variants.yaml b/data/variants.yaml
+index d146305..f8b7034 100644
+--- a/data/variants.yaml
++++ b/data/variants.yaml
+@@ -22,13 +22,12 @@
+   projects:
+     include: [capstone-quiet-quadcopter, trolley-robot]
+   experience:
+-    include: [klass, sit, sutd, spf-procom, solustar, nullspace]
++    include: [klass, sit, sutd, spf-procom, nullspace]
+     bullets:
+       klass: [klass-benchmarking, klass-video-analytics, klass-data-generation, klass-hpc, klass-fullstack]
+       sit: all
+-      sutd: all
++      sutd: [sutd-lighting-system, sutd-perception-support]
+       spf-procom: all
+-      solustar: [solustar-pcb, solustar-firmware]
+       nullspace: [nullspace-curriculum]
+   education: all
+   skills:
+diff --git a/data/volunteering.yaml b/data/volunteering.yaml
+index 931ba85..8af35ba 100644
+--- a/data/volunteering.yaml
++++ b/data/volunteering.yaml
+@@ -4,7 +4,7 @@
+   dates: "Oct 2025"
+   tags: [robotics-embedded]
+   bullets:
+-    - text: "Supported event operations, workshops, logistics, and attendee experience at ROSCon Singapore 2025, the annual ROS developer conference."
++    - text: "Supported event operations, logistics, and attendee experience at ROSCon Singapore 2025, the annual ROS developer conference with ~1,000 participants from 52 countries, including helping run 3 workshops."
+ 
+ - id: sg-makers-covid
+   name: "SG Makers Against COVID-19"
+diff --git a/docs/experience.md b/docs/experience.md
+index 8123835..1aff5dc 100644
+--- a/docs/experience.md
++++ b/docs/experience.md
+@@ -5,55 +5,52 @@
+ ## Machine Learning & Fullstack Engineer (Intern), KLASS Engineering and Solutions
+ *Sep 2025 – Aug 2026*
+ 
+-- **[klass-benchmarking]** Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC, achieving 90.03 AUROC on the NSG-VD replication. _(tags: ai-ml, computer-vision)_
+-- **[klass-video-analytics]** Integrated optical flow (RAFT), segmentation (SAM 2), and point-tracking (CoTracker) algorithms to analyze physical motion derivatives in video sequences for mission-critical data. _(tags: ai-ml, computer-vision)_
+-- **[klass-data-generation]** Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-synchronization (LatentSync) models to curate a balanced 1,200-video benchmark dataset. _(tags: ai-ml)_
++- **[klass-benchmarking]** Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC to assess detection capability against AI-generated media as a public-safety threat, achieving 90.03 AUROC on the NSG-VD replication. _(tags: ai-ml, computer-vision)_
++- **[klass-video-analytics]** Ran ablation studies integrating optical flow (RAFT), segmentation (SAM 2), and point tracking (CoTracker) to test whether physical-motion signals in video sequences can distinguish AI-generated content, finding mixed evidence of a usable signal. _(tags: ai-ml, computer-vision)_
++- **[klass-data-generation]** Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-sync (LatentSync) models to curate a balanced 1,200-video real/fake dataset, used to compare all four detectors consistently and to test models at small scale before committing larger compute. _(tags: ai-ml)_
+ - **[klass-av-sync]** Evaluated audio-visual synchronization as a deepfake detection signal, selecting a ~0.3 operating threshold through ROC analysis. _(tags: ai-ml, computer-vision)_
+-- **[klass-hpc]** Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits before committing cluster time to full-scale benchmarking runs. _(tags: infra-cloud, ai-ml)_
+-- **[klass-fullstack]** Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for an internal AI chatbot platform. _(tags: software-fullstack)_
++- **[klass-hpc]** Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits that caught pipeline errors before committing to training and synthetic-deepfake generation runs of up to 5 hours each. _(tags: infra-cloud, ai-ml)_
++- **[klass-fullstack]** Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for a company-wide internal AI chatbot platform that gave staff a secure alternative to public AI tools, with search across internal documents. _(tags: software-fullstack)_
+ 
+ **Related projects:** [AI-Generated Video & Audio Forensics Benchmarking](projects.md#ai-generated-video-audio-forensics-benchmarking), [Synthetic Multimodal Deepfake Dataset Pipeline](projects.md#synthetic-multimodal-deepfake-dataset-pipeline), [Multi-Model AI Endpoint Platform](projects.md#multi-model-ai-endpoint-platform)
+ 
+ ## Student Research Engineer, Singapore Institute of Technology (SIT)
+ *Aug 2024 – May 2025*
+ 
+-- **[sit-hardware-design]** Designed and built an experimental temperature chamber simulating human body heat signatures and extreme physical environments for faculty-led embodied AI and robotics hardware testing. _(tags: hardware-mechatronics)_
+-- **[sit-iot-regulation]** Engineered a closed-loop, thermistor-based IoT control system to hold chamber temperature at setpoint, enabling high-fidelity data collection. _(tags: hardware-mechatronics, infra-cloud)_
+-- **[sit-validation-protocols]** Established repeatable testing and data collection protocols for faculty-led embodied AI and robotics hardware projects. _(tags: robotics-embedded)_
++- **[sit-hardware-design]** Designed and built a temperature-controlled enclosure around a compression testing machine for faculty research on how foods behave during chewing, defining the electrical architecture and selecting components before handing the completed chamber over to the research team. _(tags: hardware-mechatronics)_
++- **[sit-temperature-control]** Engineered closed-loop temperature control with a thermistor and standalone temperature controller, holding the chamber within ±2 °C of a 37 °C body-temperature setpoint for consistent test conditions. _(tags: hardware-mechatronics)_
+ 
+-**Related projects:** [Experimental Thermal Chamber for Embodied AI Testing](projects.md#experimental-thermal-chamber-for-embodied-ai-testing)
++**Related projects:** [Body-Temperature Test Chamber for Food Chewing Research](projects.md#body-temperature-test-chamber-for-food-chewing-research)
+ 
+-## Research Assistant (Full Time / Volunteer), SUTD – ROAR Lab
+-*Aug 2022 – May 2024*
++## Research Assistant, SUTD – ROAR Lab
++*Aug 2022 – May 2024 (Volunteer until Nov 2022, Full Time thereafter)*
+ 
+-- **[sutd-perception]** Developed perception software processing 3D LiDAR data for autonomous mobile robots, designing architectures integrating Embedded C++, ROS, and sensor fusion. _(tags: robotics-embedded)_
+-- **[sutd-lighting-system]** Led the design of the full intelligent lighting control system for Panthera, an autonomous vehicle developed under National Robotics Programme funding, implementing it as a rosserial node on an Arduino that subscribed to cmd_vel, IMU, and vehicle-state topics under an RTOS to drive turn, warning, and hazard signaling; the platform passed T1 autonomous testing at CETRAN. _(tags: robotics-embedded, leadership)_
+-- **[sutd-safety-lstm]** Built a predictive safety model to detect a stair-climbing robot's fall risk, deploying Long Short-Term Memory networks (LSTMs) over sensor time-series data. _(tags: ai-ml, robotics-embedded)_
++- **[sutd-lighting-system]** Led the design of Panthera's intelligent lighting control system to signal the autonomous vehicle's intent to pedestrians and meet testing safety requirements, running a rosserial node on an Arduino under an RTOS that mapped cmd_vel, IMU, and vehicle-state topics to turn, warning, and hazard signals; the platform passed T1 autonomous testing at CETRAN. _(tags: robotics-embedded, leadership)_
++- **[sutd-perception-support]** Wired and integrated the 3D LiDAR used for Panthera's obstacle detection, mapping, and localization, verifying sensor output through depth-map visualization, and supported the vehicle through its T1 autonomous field testing. _(tags: robotics-embedded, hardware-mechatronics)_
++- **[sutd-safety-lstm]** Explored predictive safety for a stair-climbing robot by training and evaluating Long Short-Term Memory (LSTM) networks on its sensor time-series data, showing that fall risk could be predicted. _(tags: ai-ml, robotics-embedded)_
+ 
+ **Related projects:** [Stair-Climbing Robot Fall-Risk Prediction (LSTM)](projects.md#stair-climbing-robot-fall-risk-prediction-lstm), [Panthera Autonomous Vehicle — Intelligent Lighting System](projects.md#panthera-autonomous-vehicle-intelligent-lighting-system)
+ 
+ ## Trooper & Armourer, Singapore Police Force – Protective Security Command
+ *Jan 2021 – Nov 2022 (Full-Time National Service)*
+ 
+-- **[spf-protective-security]** Performed protective security duties as part of a deployed team, operating under strict standard operating procedures to protect strategic locations and major national events across 22 months of full-time service. _(tags: operations)_
+-- **[spf-armoury]** Served as unit Armourer alongside trooper duties, managing the issuance, return, and accountability of arms and equipment, and maintaining audit-ready records against regulated inventory procedures. _(tags: operations, leadership)_
++- **[spf-protective-security]** Performed protective security duties within a deployed team at strategic locations and major national events, operating under strict standard operating procedures. _(tags: operations)_
++- **[spf-armoury]** Served as unit Armourer alongside trooper duties, managing the issuance, return, and accountability of arms and equipment with zero discrepancies, and maintaining audit-ready records under regulated inventory procedures. _(tags: operations, leadership)_
+ 
+-## Robotics Engineer Intern, SOLUSTAR
++## Robotics Engineer Intern (Unpaid, Part Time), SOLUSTAR
+ *May 2022 – Aug 2022*
+ 
+-- **[solustar-pcb]** Designed and debugged PCBs and circuitry for a disinfectant robot. _(tags: hardware-mechatronics)_
+-- **[solustar-firmware]** Performed maintenance on 3D printers and developed custom Marlin firmware in C++ to improve print reliability. _(tags: hardware-mechatronics)_
+-- **[solustar-troubleshooting]** Troubleshot Linux software issues for the VAL2 robot. _(tags: hardware-mechatronics)_
++- **[solustar-pcb]** Designed and debugged PCBs and circuitry for a disinfectant robot, bringing the boards into a working prototype. _(tags: hardware-mechatronics)_
++- **[solustar-firmware]** Restored non-functional 3D printers to working order through hardware maintenance and custom Marlin firmware development in C++. _(tags: hardware-mechatronics)_
++- **[solustar-troubleshooting]** Troubleshot Linux software issues on the VAL2 robot, getting it running again. _(tags: hardware-mechatronics)_
+ 
+ ## Robotics Instructor & Curriculum Developer, VM Education / Playfacto
+ *Jul 2020 – Dec 2020*
+ 
+-- **[vm-curriculum-design]** Pioneered and designed the new coding curriculum for the MODI (Luxrobo) platform in Singapore, publishing 5 projects of varying difficulty. _(tags: teaching)_
+-- **[vm-instructor-training]** Facilitated training for incoming MODI instructors, documenting solutions to common teaching difficulties. _(tags: teaching, leadership)_
++- **[vm-curriculum-design]** Pioneered the new coding curriculum for the MODI (Luxrobo) platform in Singapore, publishing 5 projects of varying difficulty that became the standard MODI curriculum across VM Education / Playfacto, and trained incoming instructors with documented solutions to common teaching difficulties. _(tags: teaching)_
+ 
+ ## Technology Instructor (Part Time / Full Time), Nullspace Group
+-*Nov 2016 – Present*
++*Nov 2016 – Present (paused during National Service, Jan 2021 – Nov 2022)*
+ 
+-- **[nullspace-curriculum]** Instruct students aged 5–17 in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers, as an MOE-certified instructor from age 18. _(tags: teaching)_
++- **[nullspace-curriculum]** Instruct students aged 5–17 across multiple schools in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers as an MOE-certified instructor since age 18, receiving positive feedback from students and schools. _(tags: teaching)_
+ - **[nullspace-enrichment]** Selected to conduct the Computer Enrichment Program (CEP) at GEP schools in Singapore, completing over 1,000 teaching hours. _(tags: teaching)_
+-- **[nullspace-cert]** Achieved MOE (Ministry of Education) Instructor Certification at age 18 (Valid Oct 2018 – Oct 2026). _(tags: teaching)_
+diff --git a/docs/projects.md b/docs/projects.md
+index 79c4591..5a1ac5e 100644
+--- a/docs/projects.md
++++ b/docs/projects.md
+@@ -3,27 +3,30 @@
+ # Projects
+ 
+ ## Capstone (MET4004) — Acoustic Noise Reduction for Drones
+-*Project Lead — Software & Electronics | KLASS | Aug 2026 – Apr 2027*
++*Project Lead — Software & Electronics | Sponsored by KLASS | Aug 2026 – Apr 2027*
+ 
+-- Leading a 3-person team to deliver a proof-of-concept indoor drone for industry sponsor KLASS, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope.
++- Leading a 3-person team to deliver a proof-of-concept quiet indoor drone for end user MHA to reduce acoustic detectability, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope, with the project proposal approved.
+ - Owning the software and electronics workstream, selecting a low-noise propulsion stack of 5-inch injection-molded toroidal propellers, custom ducts with acoustic lining and serrated trailing edges, 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning to shift tonal whine into less perceptible bands.
+-- Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight for stable station-keeping in GPS-denied indoor flight.
+-- Designed the acoustic validation campaign to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, enabling direct benchmarking against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements.
+-- Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards, quantifying perceived annoyance beyond raw sound-pressure level.
++- Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), yielding a derated 3.3:1 thrust-to-weight ratio at 1,200 g all-up weight to preserve control headroom for manually piloted indoor flight.
++- Designed the acoustic validation plan to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference, to benchmark directly against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements.
++- Specified psychoacoustic post-processing in Python (MoSQITo) under both Zwicker (ISO 532-1) and Moore–Glasberg (ISO 532-2) loudness standards to quantify perceived annoyance beyond raw sound-pressure level.
+ 
+-## Autonomous Trolley Collection Robot
++## Autonomous Airport Trolley Return Robot (SIT–DigiPen Coursework)
++*Firmware & Perception*
+ 
+-- Developed an autonomous robot for collecting stray trolleys on an STM32F7 microcontroller running an RTOS, implementing concurrent tasks for obstacle detection and joystick control over a custom serial communication protocol.
++- Built LiDAR-based perception in C++ and ROS for a robot that autonomously returns airport trolleys, developing and integrating obstacle detection, SLAM mapping, and localization with IMU and wheel-odometry sensor fusion on an onboard computer, completing the final demo task.
++- Developed RTOS firmware on an STM32F7 microcontroller with concurrent tasks for obstacle detection and joystick control, and a custom serial protocol linking it to ROS for reliable motor control.
+ 
+ ## Custom 3D Printer Development
++*2019*
+ 
+-- Built a custom 3D printer from off-the-shelf modules, developing custom firmware in C++ (Marlin) and tuning it for print reliability and dimensional accuracy.
++- Built a custom 3D printer from off-the-shelf modules as a personal project, extending Marlin firmware in C++ with auto bed levelling and filament runout detection, improving first-layer adhesion and print quality and reducing failed prints.
+ 
+ ## AI-Generated Video & Audio Forensics Benchmarking
+ *Sep 2025 – Aug 2026*
+ 
+-- Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC, achieving 90.03 AUROC on the NSG-VD replication.
+-- Integrated optical flow (RAFT), segmentation (SAM 2), and point-tracking (CoTracker) algorithms to analyze physical motion derivatives in video sequences for mission-critical data.
++- Reproduced and benchmarked state-of-the-art AI-generated video and audio detectors (NSG-VD, D3, ReStraV, SpeechForensics) on SLURM-based HPC to assess detection capability against AI-generated media as a public-safety threat, achieving 90.03 AUROC on the NSG-VD replication.
++- Ran ablation studies integrating optical flow (RAFT), segmentation (SAM 2), and point tracking (CoTracker) to test whether physical-motion signals in video sequences can distinguish AI-generated content, finding mixed evidence of a usable signal.
+ - Evaluated audio-visual synchronization as a deepfake detection signal, selecting a ~0.3 operating threshold through ROC analysis.
+ 
+ **Source:** pulled from [Machine Learning & Fullstack Engineer (Intern), KLASS Engineering and Solutions](experience.md#machine-learning-fullstack-engineer-intern-klass-engineering-and-solutions)
+@@ -31,36 +34,36 @@
+ ## Synthetic Multimodal Deepfake Dataset Pipeline
+ *Sep 2025 – Aug 2026*
+ 
+-- Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-synchronization (LatentSync) models to curate a balanced 1,200-video benchmark dataset.
++- Engineered a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-sync (LatentSync) models to curate a balanced 1,200-video real/fake dataset, used to compare all four detectors consistently and to test models at small scale before committing larger compute.
+ 
+ **Source:** pulled from [Machine Learning & Fullstack Engineer (Intern), KLASS Engineering and Solutions](experience.md#machine-learning-fullstack-engineer-intern-klass-engineering-and-solutions)
+ 
+ ## Multi-Model AI Endpoint Platform
+ *Sep 2025 – Aug 2026*
+ 
+-- Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for an internal AI chatbot platform.
+-- Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits before committing cluster time to full-scale benchmarking runs.
++- Built React frontend components and FastAPI backend services with WebSockets for real-time streaming responses, deploying multi-model AI endpoints for a company-wide internal AI chatbot platform that gave staff a secure alternative to public AI tools, with search across internal documents.
++- Managed GPU-accelerated experimentation on shared SLURM clusters (NVIDIA H200 nodes) via Docker containers, running sanity-check protocols on custom validation splits that caught pipeline errors before committing to training and synthetic-deepfake generation runs of up to 5 hours each.
+ 
+ **Source:** pulled from [Machine Learning & Fullstack Engineer (Intern), KLASS Engineering and Solutions](experience.md#machine-learning-fullstack-engineer-intern-klass-engineering-and-solutions)
+ 
+ ## Stair-Climbing Robot Fall-Risk Prediction (LSTM)
+ *Aug 2022 – May 2024*
+ 
+-- Built a predictive safety model to detect a stair-climbing robot's fall risk, deploying Long Short-Term Memory networks (LSTMs) over sensor time-series data.
++- Explored predictive safety for a stair-climbing robot by training and evaluating Long Short-Term Memory (LSTM) networks on its sensor time-series data, showing that fall risk could be predicted.
+ 
+-**Source:** pulled from [Research Assistant (Full Time / Volunteer), SUTD – ROAR Lab](experience.md#research-assistant-full-time-volunteer-sutd-roar-lab)
++**Source:** pulled from [Research Assistant, SUTD – ROAR Lab](experience.md#research-assistant-sutd-roar-lab)
+ 
+ ## Panthera Autonomous Vehicle — Intelligent Lighting System
+ *Aug 2022 – May 2024*
+ 
+-- Led the design of the full intelligent lighting control system for Panthera, an autonomous vehicle developed under National Robotics Programme funding, implementing it as a rosserial node on an Arduino that subscribed to cmd_vel, IMU, and vehicle-state topics under an RTOS to drive turn, warning, and hazard signaling; the platform passed T1 autonomous testing at CETRAN.
++- Led the design of Panthera's intelligent lighting control system to signal the autonomous vehicle's intent to pedestrians and meet testing safety requirements, running a rosserial node on an Arduino under an RTOS that mapped cmd_vel, IMU, and vehicle-state topics to turn, warning, and hazard signals; the platform passed T1 autonomous testing at CETRAN.
+ 
+-**Source:** pulled from [Research Assistant (Full Time / Volunteer), SUTD – ROAR Lab](experience.md#research-assistant-full-time-volunteer-sutd-roar-lab)
++**Source:** pulled from [Research Assistant, SUTD – ROAR Lab](experience.md#research-assistant-sutd-roar-lab)
+ 
+-## Experimental Thermal Chamber for Embodied AI Testing
++## Body-Temperature Test Chamber for Food Chewing Research
+ *Aug 2024 – May 2025*
+ 
+-- Designed and built an experimental temperature chamber simulating human body heat signatures and extreme physical environments for faculty-led embodied AI and robotics hardware testing.
+-- Engineered a closed-loop, thermistor-based IoT control system to hold chamber temperature at setpoint, enabling high-fidelity data collection.
++- Designed and built a temperature-controlled enclosure around a compression testing machine for faculty research on how foods behave during chewing, defining the electrical architecture and selecting components before handing the completed chamber over to the research team.
++- Engineered closed-loop temperature control with a thermistor and standalone temperature controller, holding the chamber within ±2 °C of a 37 °C body-temperature setpoint for consistent test conditions.
+ 
+ **Source:** pulled from [Student Research Engineer, Singapore Institute of Technology (SIT)](experience.md#student-research-engineer-singapore-institute-of-technology-sit)

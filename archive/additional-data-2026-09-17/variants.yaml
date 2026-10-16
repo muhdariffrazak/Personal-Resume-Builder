@@ -1,0 +1,67 @@
+# Named resume variants. `sections` sets the section order. For each section,
+# a value of "all" includes every entry; "none" omits the section entirely;
+# {include: [...]} lists entry ids (experience/projects/education/awards/volunteering)
+# or tags (skills). `bullets: {entry_id: "all" | [bullet_id, ...]}` optionally
+# narrows which bullets show for a specific included entry (default: all its bullets).
+
+- id: full
+  label: "Full / Master Resume"
+  description: "Everything, default ordering. The master reference other variants are cut down from."
+  sections: [experience, projects, skills, education, awards, volunteering]
+  experience: all
+  projects: all
+  education: all
+  skills: all
+  awards: all
+  volunteering: all
+
+- id: mha-drone
+  label: "MHA Embodied AI Lead — Drone-Tailored"
+  description: "The real submission built from Checklist.md/To-Do.md: capstone first under Projects, then reverse-chronological experience including National Service. Targets 2 pages."
+  sections: [projects, experience, education, skills, awards, volunteering]
+  projects:
+    include: [capstone-quiet-quadcopter, trolley-robot]
+  experience:
+    include: [klass, sit, sutd, spf-procom, solustar, nullspace]
+    bullets:
+      klass: [klass-benchmarking, klass-video-analytics, klass-data-generation, klass-hpc, klass-fullstack]
+      sit: all
+      sutd: [sutd-lighting-system, sutd-perception-support]
+      spf-procom: all
+      solustar: [solustar-pcb, solustar-firmware]
+      nullspace: [nullspace-curriculum]
+  education: all
+  skills:
+    include: [robotics-embedded, hardware-mechatronics, ai-ml, software-fullstack]
+  awards:
+    include: [moe-instructor-cert]
+  volunteering:
+    include: [roscon-2025, sg-makers-covid]
+
+- id: ai-ml-focused
+  label: "AI / ML Focused"
+  description: "Leads with KLASS AI/ML work and AI-forensics projects; ML-tagged skills."
+  sections: [experience, projects, skills, education, awards]
+  experience:
+    include: [klass, sutd, sit]
+  projects:
+    include: [ai-forensics-benchmarking, synthetic-multimodal-dataset-pipeline, multi-model-ai-endpoint-platform, stair-climbing-fall-risk-lstm]
+  skills:
+    include: [ai-ml, software-fullstack, infra-cloud]
+  education: all
+  awards: all
+  volunteering: none
+
+- id: robotics-embedded-focused
+  label: "Robotics / Embedded Focused"
+  description: "Leads with SUTD/SIT/UAV/embedded projects and robotics-tagged skills."
+  sections: [experience, projects, skills, education, awards]
+  experience:
+    include: [sutd, sit, klass]
+  projects:
+    include: [capstone-quiet-quadcopter, trolley-robot, custom-3d-printer, av-intelligent-lighting-system, experimental-thermal-chamber]
+  skills:
+    include: [robotics-embedded, hardware-mechatronics]
+  education: all
+  awards: all
+  volunteering: none
