@@ -20,7 +20,7 @@
     - id: klass-benchmarking
       text: "Reproduced and benchmarked four state-of-the-art detectors for AI-generated video and audio (NSG-VD, D3, ReStraV, SpeechForensics) on a SLURM-based HPC cluster, treating AI-generated media as a public-safety threat, and reached 90.03 AUROC on the NSG-VD replication."
       # short: one-page wording; absorbs klass-hpc's cluster detail (H200, SLURM, Docker) (that bullet is not selected alongside it).
-      short: "Reproduced and benchmarked four state-of-the-art detectors (NSG-VD, D3, ReStraV, SpeechForensics) for deepfake video and audio, a public-safety threat, on NVIDIA H200 SLURM clusters, reaching 90.03 AUROC on NSG-VD."
+      short: "Treating AI-generated media as a public-safety threat, reproduced and benchmarked four state-of-the-art video and audio deepfake detectors (NSG-VD, D3, ReStraV, SpeechForensics) on H200 SLURM clusters, reaching 90.03 AUROC on NSG-VD."
       tags: [ai-ml, computer-vision]
     - id: klass-video-analytics
       text: "Ran ablation studies integrating optical flow (RAFT), segmentation (SAM 2), and point tracking (CoTracker) to test whether physical-motion signals in video sequences can distinguish AI-generated content, and found mixed evidence of a usable signal."
@@ -124,7 +124,7 @@
     - id: nullspace-curriculum
       text: "Instruct students aged 5–17 across multiple schools in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers as an MOE-certified instructor since age 18, with positive feedback from students and schools."
       # short: one-page wording; absorbs nullspace-enrichment (that bullet is not selected alongside it).
-      short: "Teach programming (C++, Python), robotics and microcontrollers to students aged 5–17 as an MOE-certified instructor; selected to conduct the Computer Enrichment Program (CEP) at GEP schools, completing over 1,000 teaching hours."
+      short: "Teach programming (C++, Python), robotics and microcontrollers to students aged 5 to 17 as an MOE-certified instructor; selected to conduct the Computer Enrichment Program (CEP) at GEP schools, completing over 1,000 teaching hours."
       tags: [teaching]
     - id: nullspace-enrichment
       text: "Selected to conduct the Computer Enrichment Program (CEP) at GEP schools in Singapore, completing over 1,000 teaching hours."
