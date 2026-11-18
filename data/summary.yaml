@@ -1,23 +1,70 @@
 # Optional opening paragraph, rendered directly under the contact line with NO
 # section heading (see RULES.md §1 "Summary"). A variant opts in with
 # `summary: <id>` in data/variants.yaml; a variant with no `summary:` key
-# renders none, which is why most variants currently have no opening paragraph.
+# renders none (currently only `full`).
 #
 # Same content rules as any bullet (RULES.md §2/§3): no first person, no
-# "passionate"/buzzword padding, and every claim traceable to a real bullet.
-# Each clause below is checkable: the 22 months is `spf-protective-security`,
-# the detector benchmarking is `klass-benchmarking`, the capstone is
-# `capstone-quiet-quadcopter`.
-- id: mha-public-safety
-  # Written for the MHA Embodied AI lead. Deliberately omits the teaching
-  # history from the previous LinkedIn-style draft: the Nullspace entry is cut
-  # from the mha-drone variant, so a summary citing "almost a decade teaching"
-  # would point at something not on that page.
+# "passionate"/buzzword padding, and every claim traceable to a real bullet
+# shown on that same variant. Each entry's comment lists the bullets backing it.
+# Kept to about 3-4 printed lines (reviewer feedback, 2026-10-31). All five share the
+# same opening (what drives Ariff: learning new fields, working across layers), backed by
+# trolley-robot (firmware + ROS) and klass-hpc (GPU clusters), then add one strongest
+# piece of role evidence.
+
+- id: home-team
+  # For HTX, MHA and other Home Team agencies. Backed by: trolley-robot (firmware + ROS),
+  # klass-benchmarking (GPU clusters), capstone-quiet-quadcopter (3-person team, MHA end
+  # user), education (GPA 3.510). National Service is left to its own Experience entry.
   text: >-
-    Systems Engineer with a foundation in robotics, embedded systems, and machine
-    learning. Twenty-two months in the Singapore Police Force's Protective Security
-    Command gave a first-hand view of how Home Team operations run, and the work
-    since has stayed close to those problems — benchmarking AI-generated media
-    detectors as a public-safety threat, and now leading a quiet-drone capstone with
-    MHA as its end user. Drawn to engineering where reliability is the point, and to
-    contributing that to public safety directly.
+    Final-year mechatronics student (B.Eng., GPA 3.510, expected May 2027) who likes
+    building things, running the systems behind them, and learning new fields as they come
+    up. Has hands-on work in robotics firmware, ROS and machine learning: built an
+    autonomous trolley-return robot, benchmarked AI-generated media detectors on GPU
+    clusters at KLASS, and now leads a 3-person capstone building a quiet indoor drone for MHA.
+
+- id: defence-rnd
+  # For DSO, DSTA and similar. Backed by: klass-benchmarking (4 detectors, 90.03
+  # AUROC), klass-hpc (H200), klass-data-generation (1,200 videos).
+  text: >-
+    Mechatronics engineer completing a B.Eng. (expected May 2027) who most enjoys
+    learning new fields and working across a system's layers, from microcontroller
+    firmware and ROS to machine learning on GPU clusters. At KLASS, benchmarked four state-of-the-art detectors
+    for AI-generated video and audio on NVIDIA H200 clusters (90.03 AUROC on the NSG-VD
+    replication) and built the 1,200-video dataset used to compare them.
+
+- id: perception-embodied-ai
+  # Backed by: trolley-robot (SLAM + fusion), klass-video-analytics.
+  text: >-
+    Mechatronics engineer completing a B.Eng. (expected May 2027) who most enjoys
+    learning new fields and working across a system's layers, from microcontroller
+    firmware and ROS to machine learning on GPU clusters. Built LiDAR SLAM with IMU and wheel-odometry fusion in
+    ROS for an autonomous trolley-return robot, then spent a year on computer-vision
+    research at KLASS.
+
+- id: applied-ml-cv
+  # Backed by: klass-benchmarking (4 detectors, 90.03 AUROC), klass-data-generation.
+  text: >-
+    Mechatronics engineer completing a B.Eng. (expected May 2027) who most enjoys
+    learning new fields and working across a system's layers, from microcontroller
+    firmware and ROS to machine learning on GPU clusters. Spent a year at KLASS benchmarking four state-of-the-art
+    detectors for AI-generated video and audio, reaching 90.03 AUROC on the NSG-VD
+    replication, and building the 1,200-video dataset used to compare them.
+
+- id: embedded-firmware
+  # Backed by: trolley-robot (STM32F7 RTOS, serial link to ROS), sit-temperature-control.
+  text: >-
+    Mechatronics engineer completing a B.Eng. (expected May 2027) who most enjoys
+    learning new fields and working across a system's layers, from microcontroller
+    firmware and ROS to machine learning on GPU clusters. Wrote RTOS firmware on an STM32F7 with a custom serial
+    link to ROS, and closed-loop temperature control holding ±2 °C of a 37 °C setpoint.
+
+- id: project-leadership
+  # For project engineer roles and graduate leadership programmes. Backed by:
+  # capstone-quiet-quadcopter (3-person team, MHA), sutd-lighting-system (led design,
+  # CETRAN T1), sg-makers-covid (initiated, 10,000+ units), vm-curriculum-design.
+  text: >-
+    Mechatronics engineer completing a B.Eng. (expected May 2027) who most enjoys
+    learning new fields and working across disciplines. Leads a 3-person capstone team
+    building a quiet indoor drone for MHA, led the design of an autonomous vehicle's
+    lighting system through T1 testing at CETRAN, and started a COVID-19 3D-printing
+    effort that delivered over 10,000 ear savers.

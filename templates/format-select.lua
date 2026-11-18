@@ -12,16 +12,16 @@ local SIZE_COMMAND = {
 -- LEADING values from templates/resume.latex (\entryheadersize and \bodysize),
 -- not font sizes. Update these whenever the scale offset there changes, or the
 -- reservations silently stop matching real line heights and headings orphan.
-local HEADER_LINE_PT = 13.5
-local BULLET_LINE_PT = 10.5
+local HEADER_LINE_PT = 12.5
+local BULLET_LINE_PT = 11.5
 local BULLET_LINES_KEPT = 2
 local LIST_TOPSEP_PT = 2
--- \sectionheadsize leading (16.5) + \titlespacing's 6pt after-separation.
-local SECTION_HEAD_PT = 16.5 + 6
+-- \sectionheadsize leading (14) + \titlespacing's 6pt after-separation.
+local SECTION_HEAD_PT = 14 + 6
 
 -- Header lines are separated by markdown hard breaks (see resume.md.j2), so the
 -- rendered line count is one more than the number of LineBreaks. Experience and
--- Projects headers are 3 lines; Education and Volunteering are 2. Measuring it
+-- Projects headers are 2 lines; Education and Volunteering are 1. Measuring it
 -- rather than hardcoding keeps the reservation right when an entry omits a
 -- field (e.g. no dates) and renders shorter.
 local function count_lines(para)
@@ -68,6 +68,26 @@ local function apply_size(div)
       table.insert(block.content, pandoc.RawInline("latex", "}"))
     end
   end
+end
+
+-- Right-aligned dates. The template wraps each entry's dates in a [..]{.date}
+-- span on the name line; this turns it into \hfill (PDF) or a tab that jumps to
+-- the right tab stop on the EntryHeader style (docx, see build_reference_docx.py).
+-- Either way the header stays one plain line of text, which ATS parsers read fine.
+function Span(el)
+  if not el.classes:includes("date") then
+    return nil
+  end
+  local out = pandoc.List()
+  if FORMAT == "latex" then
+    out:insert(pandoc.RawInline("latex", "\\hfill "))
+  elseif FORMAT == "docx" then
+    out:insert(pandoc.RawInline("openxml", "<w:r><w:tab/></w:r>"))
+  else
+    out:insert(pandoc.Space())
+  end
+  out:extend(el.content)
+  return out
 end
 
 function Pandoc(doc)
