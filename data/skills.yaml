@@ -1,119 +1,81 @@
-# Skill domains, unchanged from the original database's table. `tag` links each
-# domain to the tag taxonomy used for filtering experience/projects in variants.yaml.
-- domain: "AI, Vision & Audio Analytics"
-  tag: ai-ml
+# Skill domains. `tag` is what data/variants.yaml selects on (skills: {include: [tags]});
+# domains render in this file's order. Condensed on 2026-10-31 from reviewer feedback
+# (5-7 lines, strongest tools first), then trimmed again the same day to drop items that
+# repeat a bullet (generative models, model benchmarking, H200 clusters, Marlin firmware,
+# quadcopter design, UAV aeroacoustics) or are generic labels (CNNs, Vision Transformers,
+# autonomous mobile robots, Embedded C/C++). Every entry is backed by a bullet or certificate.
+# Dropped then as generic or unevidenced: Embodied AI, Multimodal ML, DNNs, Reinforcement
+# Learning, Zero-shot Learning, VIO, UAV Flight Testing, ArduPilot, IoT items,
+# Experimental Design, Test & Validation, Hardware Prototyping, OpenAPI, Zustand, WSL, uv,
+# Dev Containers, ONNX Runtime, Agile/Scrum, Java, C#, and the overlapping
+# engineering-data phrases. Earlier drops (RULES.md §3): MATLAB, Excel, Predictive
+# Maintenance, Digital Twin, Smart Manufacturing, "AI-assisted tools".
+- domain: "Languages"
+  tag: languages
   entries:
-    - "Deep Learning"
-    - "Computer Vision"
-    - "Multimodal ML"
-    - "Deepfake Detection"
-    - "Generative AI"
-    - "OpenCV"
-    - "Optical Flow (RAFT)"
-    - "Segmentation (SAM 2)"
-    - "Point-Tracking (CoTracker)"
+    - "Python (NumPy, Pandas)"
+    - "C/C++"
+    - "TypeScript"
+  # Condensed (one-page) variants fold the software-infra line in here and select only this
+  # domain of the two; `short_domain` renames the line to match.
+  short_domain: "Languages & Software"
+  short_entries: ["Python", "C/C++", "TypeScript", "Docker", "SLURM", "CUDA", "Linux", "Git", "FastAPI", "React", "WebSockets"]
 
-- domain: "Machine Learning Frameworks"
+- domain: "Machine Learning & Vision"
   tag: ai-ml
   entries:
     - "PyTorch"
-    - "TensorFlow"
-    - "Keras"
+    - "TensorFlow/Keras"
     - "Hugging Face Transformers"
-    - "CNNs"
-    - "DNNs"
+    - "OpenCV"
     - "LSTMs"
     - "YOLO"
-    - "Vision Transformers"
-    - "Reinforcement Learning"
-    - "Model Benchmarking"
-    - "Zero-shot Learning"
+    - "optical flow (RAFT)"
+    - "segmentation (SAM 2)"
+    - "point tracking (CoTracker)"
+  # One-line version for condensed (one-page) variants.
+  short_entries: ["PyTorch", "TensorFlow/Keras", "Hugging Face", "OpenCV", "YOLO", "LSTMs", "RAFT", "SAM 2", "CoTracker"]
 
-- domain: "Robotics, UAV & Autonomous Systems"
+- domain: "Robotics & UAV"
   tag: robotics-embedded
   entries:
-    - "Embodied AI"
     - "ROS"
-    - "SLAM (3D LiDAR)"
-    - "Perception"
-    - "Sensor Fusion"
-    - "Visual-Inertial Odometry (VIO)"
-    - "Autonomous Mobile Robots"
-    - "Quadcopter Design"
-    - "UAV Flight Testing"
-    - "UAV Aeroacoustics"
-    - "Acoustic Noise Reduction"
-    - "PX4 Autopilot"
-    - "ArduPilot"
-    - "Pixhawk"
+    - "LiDAR SLAM"
+    - "sensor fusion (IMU, wheel odometry)"
+    - "PX4/Pixhawk"
+  # Condensed (one-page) variants fold the hardware-mechatronics line in here and select
+  # only this domain of the two.
+  short_domain: "Robotics & Embedded"
+  short_entries: ["ROS", "LiDAR SLAM", "sensor fusion", "PX4/Pixhawk", "RTOS", "STM32", "Arduino", "PID control", "PCB design"]  # SOLIDWORKS: shown via the CSWA certification
 
-- domain: "Embedded, Hardware & Test"
+- domain: "Embedded & Hardware"
   tag: hardware-mechatronics
   entries:
-    - "Embedded C / C++"
     - "RTOS"
-    - "Microcontrollers (STM32, Arduino)"
-    - "PID Control"
-    - "Closed-Loop IoT Control"
-    - "PCB Design"
-    - "Firmware Development"
-    - "Hardware Prototyping"
-    - "Experimental Design"
-    - "Test & Validation"
+    - "STM32"
+    - "Arduino"
+    - "PID/closed-loop control"
+    - "PCB design"
+    - "SOLIDWORKS (CAD)"
 
-# Sourced from HighImpactKeywords.md (a Mechanical Engineering fresh-grad
-# keyword list). Deliberately given its own tag so it can be excluded from the
-# mha-drone send-out, which targets a drone/embodied-AI specialist and reads
-# weaker with generic ME terms in it -- see variants.yaml's skills selectors.
-# Every entry is either backed by an existing bullet or was confirmed directly.
-# Dropped as unevidenced per RULES.md §3: MATLAB, Excel for Data Analysis,
-# Predictive Maintenance, Digital Twin, Smart Manufacturing. Dropped as buzzword
-# padding per RULES.md §2: "Use of AI-assisted Tools (ChatGPT, Copilot)".
-- domain: "Engineering Data & Analysis"
+- domain: "Infrastructure & Software"
+  tag: software-infra
+  entries:
+    - "Docker"
+    - "SLURM"
+    - "CUDA"
+    - "Linux"
+    - "Git"
+    - "FastAPI"
+    - "React"
+    - "WebSockets"
+
+# Generic engineering-data block, sourced from HighImpactKeywords.md. Shown only on
+# applied-ml-cv and embedded-firmware; the agency send-outs read weaker with it.
+- domain: "Data & Analysis"
   tag: engineering-data
   entries:
-    - "Applied Machine Learning"
-    - "Predictive Modeling"
-    - "Regression Analysis"
-    - "Classification Models"
-    - "Scikit-learn"
-    - "Data Preprocessing"
-    - "Model Evaluation & Validation"
-    - "Time Series Analysis"
-    - "Sensor Data Analysis"
-    - "Fault Detection"
-    - "Data Visualization"
-    - "Data-driven Engineering Optimization"
-    - "Industrial Automation (PLCs)"
-    - "Engineering Data Analysis & Interpretation"
-    - "Data-driven Decision Making"
-
-- domain: "Software & Fullstack"
-  tag: software-fullstack
-  entries:
-    - "Python (NumPy, Pandas)"
-    - "C++17"
-    - "C#"
-    - "Java"
-    - "TypeScript"
-    - "React"
-    - "Zustand"
-    - "FastAPI"
-    - "OpenAPI"
-    - "WebSockets"
-    - "Git"
-    - "Linux/Ubuntu"
-    - "WSL"
-
-- domain: "Infrastructure & Cloud Tech"
-  tag: infra-cloud
-  entries:
-    - "SLURM"
-    - "GPU Computing (CUDA)"
-    - "NVIDIA HPC Clusters (H200 nodes)"
-    - "Docker"
-    - "Dev Containers"
-    - "ONNX Runtime"
-    - "uv"
-    - "IoT Integrations"
-    - "Agile/Scrum Methodologies"
+    - "scikit-learn"
+    - "time-series and sensor data analysis"
+    - "data visualization"
+    - "PLCs"

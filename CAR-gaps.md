@@ -3,7 +3,7 @@
 Audit of every bullet in `data/experience.yaml`, `data/projects.yaml`, and
 `data/volunteering.yaml` against Context → Action → **Result** (the pattern your coach's
 template models: "achieved zero incidents", "100% signup rate", "completed on schedule").
-Originally scoped to just the `mha-drone` resume; a later full-repo pass extended it to every
+Originally scoped to just the `mha-drone` resume (since replaced by `home-team`); a later full-repo pass extended it to every
 bullet regardless of which variant shows it.
 
 **Nothing here is invented.** Every Result below is either a real figure/outcome you supplied,
@@ -43,8 +43,9 @@ or a bullet intentionally cut back to Action because nothing verifiable backed a
 
 The capstone section was rewritten entirely from the MET4004 proposal and now carries
 real targets and results: the 78 dBA / 1 m ceiling, 10-minute endurance, 370 mm envelope,
-a derated 3.3:1 thrust-to-weight ratio at 1,200 g AUW, and benchmarking against HKUST's
-90.52 dBA reference. The sponsor was corrected from MHA to KLASS. The PRISMA-ScR review,
+and benchmarking against HKUST's 90.52 dBA reference. (A derated 3.3:1 thrust-to-weight
+figure was later removed from the avionics bullet as too specific, and the psychoacoustics
+bullet was removed.) The sponsor was corrected from MHA to KLASS. The PRISMA-ScR review,
 six-state factorial test, 3 dB mass finding and conference abstract were cut — none appear
 in the proposal.
 
@@ -56,9 +57,10 @@ acoustic detectability** — all now stated in the `capstone` bullets.
 
 ## Still open — no verifiable Result available yet
 
-- **4 of the 5 `capstone-quiet-quadcopter` bullets** (propulsion stack, avionics/power
-  architecture, acoustic validation plan, psychoacoustic post-processing) end on design
-  intent/purpose, not a confirmed outcome. Confirmed as expected: the project is still in
+- **3 of the 4 `capstone-quiet-quadcopter` bullets** (propulsion stack, avionics/power
+  architecture, acoustic validation plan) end on design decisions or plans, not a measured
+  outcome; since 2026-10-31 their tense says which ("Selected", "Specified", "the tests
+  will"). Confirmed as expected: the project is still in
   progress (Aug 2026 – Apr 2027) and these stages haven't produced test data yet. Revisit once
   bench/flight test results exist.
 - **Exact MOE certification title** — `data/awards.yaml` still uses the generic title ("MOE
@@ -69,8 +71,8 @@ acoustic detectability** — all now stated in the `capstone` bullets.
 
 ## Cut / merged / no longer applicable
 
-- **`sutd-perception`** — replaced by `sutd-perception-support` (wiring/integration work,
-  verifiable directly) rather than the old "designed architectures" claim.
+- **`sutd-perception`** — replaced by `sutd-perception-support`, which was itself later
+  removed entirely: the 3D LiDAR wiring/integration work was not Ariff's.
 - **`capstone` team leadership** bullet ("…coordinating deliverables with MHA and academic
   supervisors") — removed; no equivalent bullet in the current set.
 - **`sit-validation-protocols`** — cut entirely rather than given a project count.
@@ -89,27 +91,26 @@ acoustic detectability** — all now stated in the `capstone` bullets.
 
 ## Note on length
 
-`mha-drone` (built as `dist/Muhammad_Ariff_Resume.{pdf,docx}` — see `data/variants.yaml`'s
-`filename:` override) fills exactly 2 pages (verified by rebuild). Section order is
-experience → education → projects → skills → awards → volunteering across all variants.
-Three rounds of trimming have kept it at 2 pages as content grew:
+`home-team` (built as `dist/resume-home-team.{pdf,docx}`) replaced the earlier drone-tailored `mha-drone` variant on 2026-10-31, and
+`defence-rnd` was split off from it the same day for DSO/DSTA. Unlike
+`mha-drone`, it includes the Nullspace entry and the infra/cloud skills block. The three role
+variants (`perception-embodied-ai`, `applied-ml-cv`, `embedded-firmware`) also target 2 pages.
+`embedded-firmware` dropped `sg-makers-covid` to fit.
 
-1. Reordering sections (previously `mha-drone` led with projects) pushed it to 3 pages;
-   compensated by cutting `solustar-firmware` from this variant's SOLUSTAR selection.
-2. Switching Experience/Project headers to 3 lines (name / role+location-or-sponsor / dates,
-   up from 2) pushed it to 3 pages again; compensated by dropping `sg-makers-covid` from
-   volunteering (keeping ROSCon 2025) and dropping `sit-system-architecture` from SIT's
-   selection (since merged away in step 3 below, this is now moot — SIT's one remaining extra
-   bullet no longer exists as a separate id).
-3. The full-repo C.A.R. pass enriched most bullets with real Context/Result detail, adding
-   length, and pushed it to 3 pages a third time; compensated by dropping the **entire
-   Nullspace Group entry** from `mha-drone` (SOLUSTAR kept instead — more relevant to a
-   drone/embodied-AI reviewer than teaching; teaching is still fully present in `full`).
+On 2026-10-31, adding the new certificates and Nullspace pushed four variants to 3 pages.
+The intro-level online courses were split into their own `online-courses` award (only
+`perception-embodied-ai` and `full` still show them), and these cuts restored 2 pages:
+`home-team` dropped the SIT and SOLUSTAR entries, `defence-rnd` dropped SOLUSTAR, and
+`embedded-firmware` dropped `klass-fullstack`. Next trim candidates if anything grows:
+the ROSCon volunteering entry, then `klass-fullstack` on `home-team`.
 
-`data/experience.yaml` and `data/projects.yaml` are unaffected by any of these trims — only
-`data/variants.yaml`'s `mha-drone` selection narrowed. SOLUSTAR and SIT are both down to their
-leanest bullet sets for this variant. If future edits push past 2 pages again, the next trim
-candidates are: the ROSCon volunteering entry, or narrowing KLASS from 5 bullets to 4
-(`klass-hpc` is the least drone-specific).
+Later on 2026-10-31 the layout moved to 10pt Calibri with right-aligned dates (RULES.md §1),
+skills were condensed, intros cut to 3-4 lines and diploma coursework hidden. All five tailored
+variants then fit 2 pages with Education whole on page 1; `defence-rnd` also dropped
+`klass-av-sync` to get there.
+
+`mha-drone`'s history, for context: three earlier rounds of growth each pushed it to 3 pages,
+compensated by cutting `solustar-firmware`, then `sg-makers-covid`, then the whole Nullspace
+entry. Trim order for any variant that overflows is in RULES.md §1 "Page length".
 
 `full` is not expected to fit 2 pages and is currently 4.

@@ -1,8 +1,15 @@
 \documentclass[10pt]{article}
 
-\usepackage[a4paper,margin=0.85in,top=0.7in]{geometry}
+% A variant may set `margin_in:` (data/variants.yaml) -- only the one-page
+% variants do; scripts/build.py passes it here and patches the docx to match.
+\usepackage[a4paper,margin=$if(margin)$$margin$$else$0.7in$endif$]{geometry}
 \usepackage[T1]{fontenc}
-\usepackage{caladea}
+% Carlito: free, metric-compatible with Calibri (which the docx names).
+\usepackage[sfdefault]{carlito}
+% No ligatures: an "ff" ligature turns "Ariff" into one glyph, which ATS
+% parsers and copy-paste read as a different character (breaks name + email).
+\usepackage{microtype}
+\DisableLigatures{encoding = *, family = *}
 \usepackage{xcolor}
 \usepackage{titlesec}
 \usepackage{enumitem}
@@ -15,18 +22,14 @@
 \definecolor{resumeblue}{HTML}{1F4E79}
 \definecolor{resumegray}{HTML}{808080}
 
-% Typographic scale: each level 3pt above the one it sits under, leading always
-% font + 2pt. The whole scale is shifted down by a uniform SCALE OFFSET so the
-% relative hierarchy is untouched -- see RULES.md §1 "Page length" for why a
-% font drop (rather than a content trim) was chosen here, and keep these four
-% in sync with scripts/build_reference_docx.py and the *_LINE_PT constants in
-% templates/format-select.lua, which both hardcode the same numbers.
-%   offset 0.0pt (original): body  9   -> entry 12   -> section 15   -> name 18
-%   offset 0.5pt (current):  body  8.5 -> entry 11.5 -> section 14.5 -> name 17.5
-\newcommand{\bodysize}{\fontsize{8.5}{10.5}\selectfont}
-\newcommand{\entryheadersize}{\fontsize{11.5}{13.5}\selectfont}
-\newcommand{\sectionheadsize}{\fontsize{14.5}{16.5}\selectfont}
-\newcommand{\namesize}{\fontsize{17.5}{19.5}\selectfont}
+% Typographic scale (font / leading, leading ~1.15x), from reviewer feedback:
+% name 18, section 12, entry header 10.5, body 10. Keep these in sync with
+% scripts/build_reference_docx.py (sizes + exact line heights) and the *_LINE_PT
+% constants in templates/format-select.lua, which hardcode the same numbers.
+\newcommand{\bodysize}{\fontsize{10}{11.5}\selectfont}
+\newcommand{\entryheadersize}{\fontsize{10.5}{12.5}\selectfont}
+\newcommand{\sectionheadsize}{\fontsize{12}{14}\selectfont}
+\newcommand{\namesize}{\fontsize{18}{20}\selectfont}
 
 \setlength{\parindent}{0pt}
 \pagestyle{empty}
@@ -55,8 +58,8 @@
 
 % Breathing room BETWEEN entries: space after a bullet/numbered list ends,
 % i.e. before the next job/project/education entry's header starts.
-\AfterEndEnvironment{itemize}{\vspace{6pt}}
-\AfterEndEnvironment{enumerate}{\vspace{6pt}}
+\AfterEndEnvironment{itemize}{\vspace{8pt}}
+\AfterEndEnvironment{enumerate}{\vspace{8pt}}
 
 \begin{document}
 $body$

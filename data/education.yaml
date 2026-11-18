@@ -2,24 +2,28 @@
 # filtering; education is normally shown in full regardless (see variants.yaml).
 - id: digipen-sit-beng
   institution: "DigiPen Institute of Technology & SIT"
-  degree: "B.Eng. Mechatronics Systems"
-  dates: "Aug 2023 – May 2027"
+  degree: "B.Eng. Mechatronics Systems (with Merit), GPA 3.510"
+  dates: "Expected May 2027"
   tags: [robotics-embedded, hardware-mechatronics]
   highlights:
     - "Relevant Coursework: Mechanics, Control Systems, Robotics, Embedded Systems, Machine Learning, Systems and Software Engineering"
+  # Condensed (one-page) variants show the degree line only; the skills section carries the keywords.
+  short_highlights: []
 
 - id: np-specialist-diploma
   institution: "Ngee Ann Polytechnic"
   degree: "Specialist Diploma in Robotics Engineering (SGInnovate PowerX)"
   dates: "Sep 2022 – Sep 2023"
   tags: [robotics-embedded, ai-ml]
-  highlights:
-    - "Relevant Coursework: Autonomous Robot Navigation, Machine Learning/Deep Learning for Robotics, Computer Vision"
+  highlights: []
+  # Cut from the page on 2026-10-31 (reviewer: trim older coursework); kept for reference.
+  coursework_not_shown: "Autonomous Robot Navigation, Machine Learning/Deep Learning for Robotics, Computer Vision"
 
 - id: sp-diploma
   institution: "Singapore Polytechnic"
   degree: "Diploma in Mechatronics and Robotics"
   dates: "Apr 2017 – Sep 2020"
   tags: [hardware-mechatronics]
-  highlights:
-    - "Relevant Coursework: Microcontroller Applications, PLCs, and Robotics Integration"
+  highlights: []
+  # Cut from the page on 2026-10-31 (reviewer: trim older coursework); kept for reference.
+  coursework_not_shown: "Microcontroller Applications, PLCs, and Robotics Integration"

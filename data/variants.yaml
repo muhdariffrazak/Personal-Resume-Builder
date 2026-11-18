@@ -16,57 +16,181 @@
   awards: all
   volunteering: all
 
-- id: mha-drone
-  label: "MHA Embodied AI Lead — Drone-Tailored"
-  description: "The real submission built from Checklist.md/To-Do.md: reverse-chronological experience including National Service, capstone under Projects. Targets 2 pages."
-  filename: "Muhammad_Ariff_Resume"
-  summary: mha-public-safety
+- id: home-team
+  label: "Home Team (HTX, MHA)"
+  description: "The main send-out for Home Team agencies: public-safety framing, NS included, SUSS Home Team module certificates, not drone-specific (trolley robot leads Projects). Replaced the earlier drone-tailored mha-drone variant. SIT, SOLUSTAR and online courses cut to hold 2 pages."
+  summary: home-team
   sections: [experience, education, projects, skills, awards, volunteering]
-  projects:
-    include: [capstone-quiet-quadcopter, trolley-robot]
   experience:
-    include: [klass, sit, sutd, spf-procom, solustar]
+    include: [klass, sutd, spf-procom, nullspace]
     bullets:
       klass: [klass-benchmarking, klass-video-analytics, klass-data-generation, klass-hpc, klass-fullstack]
-      sit: [sit-hardware-design, sit-temperature-control]
-      sutd: [sutd-lighting-system, sutd-perception-support]
+      sutd: [sutd-lighting-system, sutd-safety-lstm]
       spf-procom: all
-      solustar: [solustar-pcb]
+      nullspace: all
+  projects:
+    include: [trolley-robot, capstone-quiet-quadcopter]
   education: all
-  # Deliberately omits `engineering-data`: this is the specialist send-out to a
-  # drone/embodied-AI lead, and the generic Mechanical-Engineering keyword block
-  # dilutes it. The other three variants include it. See data/skills.yaml.
+  # Omits `engineering-data`: the generic Mechanical-Engineering keyword block
+  # dilutes a send-out to technical agencies. See data/skills.yaml.
   skills:
-    include: [robotics-embedded, hardware-mechatronics, ai-ml, software-fullstack]
+    include: [languages, ai-ml, robotics-embedded, hardware-mechatronics, software-infra]
   awards:
-    include: [moe-instructor-cert]
+    include: [suss-home-team-modules, moe-instructor-cert, additional-certifications]
   volunteering:
     include: [roscon-2025]
 
-- id: ai-ml-focused
-  label: "AI / ML Focused"
-  description: "Leads with KLASS AI/ML work and AI-forensics projects; ML-tagged skills."
-  sections: [experience, education, projects, skills, awards]
+- id: home-team-1page
+  label: "Home Team (HTX, MHA), one page"
+  description: "One-page cut of home-team for applications that ask for a single page. `condensed: true` swaps in each bullet's `short:` wording; several of those fold a sibling bullet in (klass-hpc, spf-armoury, nullspace-enrichment, trolley-firmware, capstone-avionics), so only the absorbing bullet is selected. Cut versus home-team: the summary (restated Education/Skills), klass-video-analytics (mixed result), sutd-safety-lstm, capstone-validation (planned, not done), degree coursework, the separate MOE certificate line (the Nullspace bullet states it), and Volunteering (RULES.md trim order). Certifications fold into Skills; 0.6in margins, body stays 10pt."
+  condensed: true
+  # 0.6in instead of the 0.7in default: body type stays at 10pt (RULES.md §1 typography).
+  margin_in: 0.6
+  # No summary: on one page it only restated Education and Skills, and the line is better
+  # spent on evidence. To restore one, add `summary: <id>` pointing at data/summary.yaml.
+  # Certifications render as the last line of Skills (saves a section heading), so
+  # `awards` below is a selection only and is not listed in `sections`.
+  certifications_in_skills: true
+  headings:
+    skills: "SKILLS & CERTIFICATIONS"
+  sections: [experience, education, projects, skills]
   experience:
-    include: [klass, sutd, sit]
+    include: [klass, sutd, spf-procom, nullspace]
+    bullets:
+      klass: [klass-benchmarking, klass-data-generation, klass-fullstack]
+      sutd: [sutd-lighting-system]
+      spf-procom: [spf-protective-security]
+      nullspace: [nullspace-curriculum]
   projects:
-    include: [ai-forensics-benchmarking, synthetic-multimodal-dataset-pipeline, multi-model-ai-endpoint-platform, stair-climbing-fall-risk-lstm]
-  skills:
-    include: [ai-ml, engineering-data, software-fullstack, infra-cloud]
+    include: [trolley-robot, capstone-quiet-quadcopter]
+    bullets:
+      trolley-robot: [trolley-perception]
+      capstone-quiet-quadcopter: [capstone-lead, capstone-propulsion]
   education: all
-  awards: all
-  volunteering: none
+  skills:
+    # software-infra and hardware-mechatronics are folded into the condensed `languages` and
+    # `robotics-embedded` lines (see data/skills.yaml).
+    include: [languages, ai-ml, robotics-embedded]
+  awards:
+    # moe-instructor-cert omitted: the Nullspace bullet already states "MOE-certified instructor".
+    include: [suss-home-team-modules, additional-certifications]
 
-- id: robotics-embedded-focused
-  label: "Robotics / Embedded Focused"
-  description: "Leads with SUTD/SIT/UAV/embedded projects and robotics-tagged skills."
-  sections: [experience, education, projects, skills, awards]
+- id: defence-rnd
+  label: "Defence R&D (DSO, DSTA and similar)"
+  description: "Research and ML-leaning send-out for defence R&D agencies: KLASS research first, no SUSS Home Team certificates. SOLUSTAR, online courses and klass-av-sync cut to hold 2 pages with Education on one page."
+  summary: defence-rnd
+  sections: [experience, education, projects, skills, awards, volunteering]
   experience:
-    include: [sutd, sit, klass]
+    include: [klass, sit, sutd, spf-procom, nullspace]
+    bullets:
+      klass: [klass-benchmarking, klass-video-analytics, klass-data-generation, klass-hpc]
+      sit: [sit-temperature-control]
+      sutd: [sutd-lighting-system, sutd-safety-lstm]
+      spf-procom: [spf-protective-security]
+      nullspace: all
   projects:
-    include: [capstone-quiet-quadcopter, trolley-robot, custom-3d-printer, av-intelligent-lighting-system, experimental-thermal-chamber]
-  skills:
-    include: [robotics-embedded, hardware-mechatronics, engineering-data]
+    include: [trolley-robot, capstone-quiet-quadcopter]
   education: all
-  awards: all
-  volunteering: none
+  skills:
+    include: [languages, ai-ml, robotics-embedded, hardware-mechatronics, software-infra]
+  awards:
+    include: [moe-instructor-cert, additional-certifications]
+  volunteering:
+    include: [roscon-2025]
+
+# --- Role-family variants: one per target role type, each with its own summary.
+# Experience stays reverse-chronological; selection and bullets are tuned per role.
+
+- id: perception-embodied-ai
+  label: "Robotics Perception / Embodied AI Engineer"
+  description: "Perception, SLAM and sensor fusion first, backed by KLASS computer-vision work."
+  summary: perception-embodied-ai
+  sections: [experience, education, projects, skills, awards, volunteering]
+  experience:
+    include: [klass, sit, sutd, spf-procom, nullspace]
+    bullets:
+      klass: [klass-video-analytics, klass-benchmarking, klass-data-generation, klass-hpc]
+      sit: [sit-temperature-control]
+      sutd: [sutd-lighting-system, sutd-safety-lstm]
+      spf-procom: [spf-protective-security]
+      nullspace: all
+  projects:
+    include: [trolley-robot, capstone-quiet-quadcopter]
+  education: all
+  skills:
+    include: [languages, ai-ml, robotics-embedded, hardware-mechatronics, software-infra]
+  awards:
+    include: [moe-instructor-cert, additional-certifications, online-courses]
+  volunteering:
+    include: [roscon-2025]
+
+- id: applied-ml-cv
+  label: "Applied ML / Computer Vision Engineer"
+  description: "All six KLASS bullets lead; LSTM and perception work as supporting ML evidence. Online courses cut to hold 2 pages. Section-order exception: Skills before Projects, so ML reviewers see the tools first (reviewer feedback); KLASS trimmed to 5 bullets (klass-av-sync dropped)."
+  summary: applied-ml-cv
+  sections: [experience, education, skills, projects, awards, volunteering]
+  experience:
+    include: [klass, sit, sutd, spf-procom, nullspace]
+    bullets:
+      klass: [klass-benchmarking, klass-video-analytics, klass-data-generation, klass-hpc, klass-fullstack]
+      sit: [sit-temperature-control]
+      sutd: [sutd-safety-lstm]
+      spf-procom: [spf-protective-security]
+      nullspace: all
+  projects:
+    include: [trolley-robot, capstone-quiet-quadcopter]
+  education: all
+  skills:
+    include: [languages, ai-ml, software-infra, engineering-data]
+  awards:
+    include: [moe-instructor-cert, additional-certifications]
+  volunteering:
+    include: [roscon-2025]
+
+- id: embedded-firmware
+  label: "Embedded / Firmware Engineer"
+  description: "RTOS, microcontroller, PCB and control work first; ML kept to the one KLASS HPC bullet. Online courses and sg-makers-covid cut to hold 2 pages."
+  summary: embedded-firmware
+  sections: [experience, education, projects, skills, awards, volunteering]
+  experience:
+    include: [klass, sit, sutd, spf-procom, solustar, nullspace]
+    bullets:
+      klass: [klass-hpc]
+      sit: [sit-hardware-design, sit-temperature-control]
+      sutd: [sutd-lighting-system]
+      spf-procom: [spf-armoury]
+      solustar: all
+      nullspace: all
+  projects:
+    include: [trolley-robot, custom-3d-printer, capstone-quiet-quadcopter]
+  education: all
+  skills:
+    include: [languages, robotics-embedded, hardware-mechatronics, software-infra, engineering-data]
+  awards:
+    include: [moe-instructor-cert, additional-certifications]
+  volunteering:
+    include: [roscon-2025]
+
+- id: project-leadership
+  label: "Project Engineer / Graduate Leadership Programmes"
+  description: "Leadership and delivery first: capstone lead, Panthera design lead, curriculum and instructor training, SG Makers. Technical depth kept via KLASS; no ML skills line. klass-hpc and the first Nullspace bullet cut to keep Education on one page."
+  summary: project-leadership
+  sections: [experience, education, projects, skills, awards, volunteering]
+  experience:
+    include: [klass, sit, sutd, spf-procom, vm-education, nullspace]
+    bullets:
+      klass: [klass-benchmarking, klass-data-generation, klass-fullstack]
+      sit: [sit-hardware-design]
+      sutd: [sutd-lighting-system]
+      spf-procom: all
+      vm-education: all
+      nullspace: [nullspace-enrichment]
+  projects:
+    include: [capstone-quiet-quadcopter, trolley-robot]
+  education: all
+  skills:
+    include: [languages, robotics-embedded, hardware-mechatronics, software-infra]
+  awards:
+    include: [moe-instructor-cert, additional-certifications]
+  volunteering:
+    include: [sg-makers-covid, roscon-2025]

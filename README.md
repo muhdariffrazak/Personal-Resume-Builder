@@ -40,7 +40,7 @@ be installed — pandoc, LaTeX, and the fonts all live in the build image.
 
 ```
 make build VARIANT=full                      # -> dist/resume-full.pdf, dist/resume-full.docx
-make build VARIANT=mha-drone                 # -> dist/Muhammad_Ariff_Resume.pdf/docx (filename override, see below)
+make build VARIANT=home-team         # -> dist/resume-home-team.pdf/docx
 make build-all                               # builds every variant in data/variants.yaml
 ```
 
@@ -52,13 +52,24 @@ image (a few minutes); after that it's cached.
 Defined in `data/variants.yaml`:
 
 - `full` — everything, the master reference
-- `mha-drone` — the tailored submission for the MHA Embodied AI lead:
-  reverse-chronological experience including National Service, then Projects.
-  Builds to the fixed filename `dist/Muhammad_Ariff_Resume.{pdf,docx}` (via
-  `filename:` in `variants.yaml`) instead of `dist/resume-mha-drone.*`, since
-  this is the copy that actually gets sent out
-- `ai-ml-focused` — leads with AI/ML work
-- `robotics-embedded-focused` — leads with robotics/embedded work
+- `home-team` — the main send-out for HTX, MHA and other Home Team agencies:
+  public-safety framing, National Service, and the SUSS Home Team module
+  certificates
+- `home-team-1page` — the same Home Team send-out cut to **one A4 page**, for
+  applications that ask for a single page. Uses each bullet's condensed `short:`
+  wording (see "One-page variants" below)
+- `project-leadership` — project engineer roles and graduate leadership
+  programmes: leadership and delivery first (capstone lead, Panthera design
+  lead, curriculum and instructor training, SG Makers)
+- `defence-rnd` — defence R&D agencies (DSO, DSTA): research/ML-leaning intro,
+  no SUSS Home Team certificates
+- `perception-embodied-ai` — robotics perception / embodied AI engineer roles
+- `applied-ml-cv` — applied ML / computer vision engineer roles
+- `embedded-firmware` — embedded / firmware engineer roles
+
+The three role versions each have their own opening summary in
+`data/summary.yaml`, sharing one personal opening line and then giving
+role-specific evidence.
 
 All variants use the same section order (experience → education → projects →
 skills → awards → volunteering, where present); variants differ in which
@@ -72,8 +83,8 @@ the `dist/` output basename (default: `resume-<variant-id>`).
 
 ## The editable `.docx`
 
-`dist/resume-<variant>.docx` (or the variant's `filename:` override, e.g.
-`Muhammad_Ariff_Resume.docx` for `mha-drone`) is generated from the same data as the PDF, styled via
+`dist/resume-<variant>.docx` (or the variant's `filename:` override, if it sets one)
+is generated from the same data as the PDF, styled via
 `templates/reference.docx`. It's meant to be hand-edited directly for last-mile
 polish before sending a resume out. Re-running `make build` will regenerate
 and overwrite it — that's expected; make small edits to the YAML instead if
@@ -97,20 +108,39 @@ and no tables anywhere in the document. This was a deliberate tradeoff — the
 original coach-provided template (`archive/1 - Resume Building Tool_V8.pdf`)
 used two-column layouts (name/contact side by side, date right-aligned via a
 table), which can get extracted in the wrong order or mangled by some ATS
-(Applicant Tracking System) parsers. ATS-compatibility was prioritized over
-matching that template's exact visual layout. Section headings (gray, bold,
-ruled) and the typographic scale (9pt body / 12pt entry titles / 15pt section
-headings / 18pt name) still echo the original template's hierarchy.
+(Applicant Tracking System) parsers. Dates are still right-aligned here, but
+with `\hfill` (PDF) and a right tab stop (docx) on a single line of text, so
+there is no table. Section headings are gray, bold and ruled. Typography is
+Calibri at 10pt body / 10.5pt entry headers / 12pt section headings / 18pt
+name, with 0.7in margins (see RULES.md §1 "Page length").
 
-The PDF substitutes free metric-compatible fonts (Caladea/Carlito) for Word's
-Cambria/Calibri; the `.docx` references the real font names, so it renders
-with actual Cambria/Calibri when opened in Microsoft Word.
+The PDF uses Carlito, a free font metric-compatible with Calibri; the `.docx`
+names Calibri, so it renders with real Calibri when opened in Microsoft Word.
 
 ## Page limit
 
-`mha-drone`, `ai-ml-focused`, and `robotics-embedded-focused` are
-meant to fit 2 pages (all currently do; `mha-drone` is tuned to fill both). `full` is the
+`home-team`, `defence-rnd`, `perception-embodied-ai`, `applied-ml-cv`, `embedded-firmware`, and `project-leadership` are
+meant to fit 2 pages. `home-team-1page` must fit 1 page. `full` is the
 comprehensive master reference and is not expected to fit 2 pages.
+
+### One-page variants
+
+A variant opts into one-page mode with a few keys in `data/variants.yaml`; none of
+them changes the other variants' output:
+
+- `condensed: true` — each bullet uses its optional `short:` wording (same fact,
+  fewer words) instead of `text:`; bullets with no `short:` print as normal. The
+  same switch picks `short_highlights` (education), `short_domain`/`short_entries`
+  (skills) and `short` (awards). Some `short:` texts fold in a sibling bullet
+  (a comment above each says which), so the variant selects only the absorbing one.
+  It also sets docx bullet indents to the PDF's 12pt instead of pandoc's 0.5in.
+- `margin_in: 0.6` — page margins in inches (default 0.7), applied to the PDF and
+  patched into the docx so both paginate the same. Body type stays at 10pt.
+- `certifications_in_skills: true` — the selected `awards` print as one
+  "Certifications:" line at the end of Skills instead of as their own section.
+- `headings: {skills: ..., awards: ...}` — override a section heading.
+- `projects: {bullets: {project_id: [bullet_ids]}}` — narrow a project's bullets,
+  like `experience` already allows.
 
 ## C.A.R (Context-Action-Result) bullets and the numbers policy
 

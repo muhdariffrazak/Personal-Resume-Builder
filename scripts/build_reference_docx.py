@@ -33,19 +33,26 @@ ET.register_namespace("w", W_NS)
 BLUE = "1F4E79"
 GRAY = "808080"
 
-# Typographic scale (half-points = pt * 2), matching templates/resume.latex --
-# including its uniform scale offset, currently 0.5pt down from the original
-# 9/12/15/18. Half-points are why the offset is restricted to multiples of
-# 0.5pt: anything finer cannot be expressed here, and the docx would silently
-# drift from the PDF.
-#   body 8.5pt -> entry title 11.5pt -> section heading 14.5pt -> name 17.5pt
-BODY_SIZE = 17
-ENTRY_HEADER_SIZE = 23
-SECTION_HEADING_SIZE = 29
-NAME_SIZE = 35
+# Typographic scale (half-points = pt * 2), matching templates/resume.latex:
+#   body 10pt -> entry header 10.5pt -> section heading 12pt -> name 18pt
+BODY_SIZE = 20
+ENTRY_HEADER_SIZE = 21
+SECTION_HEADING_SIZE = 24
+NAME_SIZE = 36
+
+# Exact line heights in twips (20 = 1pt), mirroring the LaTeX leading. Word's
+# "single" spacing is a multiple of the font's own line gap (~1.22x for
+# Calibri), so an exact value is the only way to make both outputs agree.
+BODY_LINE = 230          # 11.5pt  (\bodysize)
+ENTRY_HEADER_LINE = 250  # 12.5pt  (\entryheadersize)
+SECTION_HEADING_LINE = 280  # 14pt (\sectionheadsize)
+NAME_LINE = 400          # 20pt    (\namesize)
+
+# Calibri in Word; the PDF uses Carlito, which has identical metrics.
+FONT = "Calibri"
 
 # Page geometry, in twips (1440 = 1 inch), mirroring the \usepackage{geometry}
-# call in templates/resume.latex: A4, 0.85in margins, 0.7in top. Pandoc's stock
+# call in templates/resume.latex: A4, 0.7in margins all round. Pandoc's stock
 # reference.docx ships a bare <w:sectPr/> with no page size and no margins at
 # all, so Word falls back to its own application defaults -- frequently US
 # Letter at 1in margins. That silently costs ~0.4in of width and ~0.5in of
@@ -53,9 +60,11 @@ NAME_SIZE = 35
 TWIPS_PER_INCH = 1440
 PAGE_W = 11906  # A4 width  (210mm)
 PAGE_H = 16838  # A4 height (297mm)
-MARGIN_SIDE = round(0.85 * TWIPS_PER_INCH)
+MARGIN_SIDE = round(0.70 * TWIPS_PER_INCH)
 MARGIN_TOP = round(0.70 * TWIPS_PER_INCH)
-MARGIN_BOTTOM = round(0.85 * TWIPS_PER_INCH)
+MARGIN_BOTTOM = round(0.70 * TWIPS_PER_INCH)
+# Right edge of the text block: where entry-header dates are right-aligned.
+TEXT_WIDTH = PAGE_W - 2 * MARGIN_SIDE
 
 STYLE_CHILD_ORDER = [
     "name", "aliases", "basedOn", "next", "link", "autoRedefine", "hidden",
@@ -147,8 +156,43 @@ def set_size(rpr, half_points):
     el.set(w("val"), str(half_points))
 
 
+def set_font(rpr):
+    """Name the font explicitly and drop theme-font attributes, which Word
+    would otherwise prefer over the explicit names."""
+    existing = rpr.find(w("rFonts"))
+    if existing is not None:
+        rpr.remove(existing)
+    el = insert_in_order(rpr, ET.Element(w("rFonts")), RPR_CHILD_ORDER)
+    for attr in ("ascii", "hAnsi", "eastAsia", "cs"):
+        el.set(w(attr), FONT)
+
+
+def set_default_font(styles_root):
+    defaults = styles_root.find(w("docDefaults"))
+    rpr_default = defaults.find(w("rPrDefault")) if defaults is not None else None
+    rpr = rpr_default.find(w("rPr")) if rpr_default is not None else None
+    if rpr is not None:
+        set_font(rpr)
+
+
+def style_line(style_el, twips):
+    """Exact line height, so the docx matches the LaTeX leading."""
+    spacing = get_or_create(get_pPr(style_el), "spacing", PPR_CHILD_ORDER)
+    spacing.set(w("line"), str(twips))
+    spacing.set(w("lineRule"), "exact")
+
+
+def style_right_tab(style_el, pos):
+    ppr = get_pPr(style_el)
+    tabs = get_or_create(ppr, "tabs", PPR_CHILD_ORDER)
+    tab = ET.SubElement(tabs, w("tab"))
+    tab.set(w("val"), "right")
+    tab.set(w("pos"), str(pos))
+
+
 def style_run_props(style_el, *, color=None, bold=False, caps=False, size=None):
     rpr = get_rPr(style_el)
+    set_font(rpr)
     if color is not None:
         set_color(rpr, color)
     if bold:
@@ -200,9 +244,9 @@ def style_keep_with_next(style_el):
 def style_keep_lines(style_el):
     """
     Word's "Keep lines together": the paragraph's own lines never straddle a
-    page break. Entry headers are a single paragraph of 2-3 hard-broken lines
-    (institution / role / dates), so without this Word may split the name away
-    from the dates.
+    page break. Entry headers are a single paragraph of 1-2 hard-broken lines
+    (name + right-aligned dates / role), so without this Word may split the name away
+    from the role.
     """
     get_or_create(get_pPr(style_el), "keepLines", PPR_CHILD_ORDER)
 
@@ -245,8 +289,8 @@ def clear_default_paragraph_spacing(styles_root):
     and every header line. The LaTeX build uses \\parskip 0 with 1pt between
     list items, so this one default is the single largest source of drift
     between the two outputs. Zero it and let the EntryHeader style's explicit
-    6pt "before" provide the only deliberate gap, matching the PDF's
-    \\AfterEndEnvironment{itemize}{\\vspace{6pt}}.
+    8pt "before" provide the only deliberate gap, matching the PDF's
+    \\AfterEndEnvironment{itemize}{\\vspace{8pt}}.
     """
     defaults = styles_root.find(w("docDefaults"))
     if defaults is None:
@@ -309,10 +353,12 @@ def main():
         root = tree.getroot()
 
         clear_default_paragraph_spacing(root)
+        set_default_font(root)
 
         normal = find_style(root, "Normal")
         if normal is not None:
             style_run_props(normal, size=BODY_SIZE)
+            style_line(normal, BODY_LINE)
         else:
             print("warning: 'Normal' style not found in pandoc's default reference.docx")
 
@@ -332,6 +378,7 @@ def main():
 
         resume_name = new_paragraph_style(root, "ResumeName", "Resume Name")
         style_run_props(resume_name, color=BLUE, bold=True, size=NAME_SIZE)
+        style_line(resume_name, NAME_LINE)
 
         # Pin the spacing of every style the resume actually uses to its LaTeX
         # counterpart (twips: 20 = 1pt). Pandoc's defaults are tuned for prose
@@ -347,15 +394,18 @@ def main():
             style = find_style(root, style_id)
             if style is not None:
                 style_spacing(style, before=before, after=after)
+                style_line(style, SECTION_HEADING_LINE if style_id == "Heading1" else BODY_LINE)
             else:
                 print(f"warning: '{style_id}' style not found in pandoc's default reference.docx")
 
         entry_header = new_paragraph_style(root, "EntryHeader", "Entry Header")
-        style_spacing(entry_header, before=120)  # 6pt gap before each new entry
+        style_spacing(entry_header, before=160)  # 8pt gap before each new entry
+        style_line(entry_header, ENTRY_HEADER_LINE)
+        style_right_tab(entry_header, TEXT_WIDTH)  # dates right-aligned
         style_keep_with_next(entry_header)
         style_keep_lines(entry_header)
-        # NOT bold at style level. The header is one paragraph of 2-3 hard-broken
-        # lines and only the first (company/title) is bold -- RULES.md §1 -- which
+        # NOT bold at style level. The header is one paragraph of 1-2 hard-broken
+        # lines and only the name is bold -- RULES.md §1 -- which
         # the template already expresses by wrapping just that line in **...**.
         # Bolding the style bolded the role and date lines too, so the docx came
         # out heavier than the PDF built from the same Markdown.
