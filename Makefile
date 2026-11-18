@@ -1,6 +1,6 @@
 IMAGE := resume-builder
 VARIANT ?= full
-VARIANTS := full home-team defence-rnd perception-embodied-ai applied-ml-cv embedded-firmware project-leadership
+VARIANTS := full home-team home-team-1page defence-rnd perception-embodied-ai applied-ml-cv embedded-firmware project-leadership
 DOCKER_RUN := docker run --rm -v $(CURDIR):/work -w /work --user $(shell id -u):$(shell id -g) $(IMAGE)
 
 .PHONY: build-image build build-all docs reference-docx shell

@@ -40,6 +40,41 @@
   volunteering:
     include: [roscon-2025]
 
+- id: home-team-1page
+  label: "Home Team (HTX, MHA), one page"
+  description: "One-page cut of home-team for applications that ask for a single page. `condensed: true` swaps in each bullet's `short:` wording; several of those fold a sibling bullet in (klass-hpc, spf-armoury, nullspace-enrichment, trolley-firmware, capstone-avionics), so only the absorbing bullet is selected. Cut versus home-team: the summary (restated Education/Skills), klass-video-analytics (mixed result), sutd-safety-lstm, capstone-validation (planned, not done), degree coursework, the separate MOE certificate line (the Nullspace bullet states it), and Volunteering (RULES.md trim order). Certifications fold into Skills; 0.6in margins, body stays 10pt."
+  condensed: true
+  # 0.6in instead of the 0.7in default: body type stays at 10pt (RULES.md §1 typography).
+  margin_in: 0.6
+  # No summary: on one page it only restated Education and Skills, and the line is better
+  # spent on evidence. To restore one, add `summary: <id>` pointing at data/summary.yaml.
+  # Certifications render as the last line of Skills (saves a section heading), so
+  # `awards` below is a selection only and is not listed in `sections`.
+  certifications_in_skills: true
+  headings:
+    skills: "SKILLS & CERTIFICATIONS"
+  sections: [experience, education, projects, skills]
+  experience:
+    include: [klass, sutd, spf-procom, nullspace]
+    bullets:
+      klass: [klass-benchmarking, klass-data-generation, klass-fullstack]
+      sutd: [sutd-lighting-system]
+      spf-procom: [spf-protective-security]
+      nullspace: [nullspace-curriculum]
+  projects:
+    include: [trolley-robot, capstone-quiet-quadcopter]
+    bullets:
+      trolley-robot: [trolley-perception]
+      capstone-quiet-quadcopter: [capstone-lead, capstone-propulsion]
+  education: all
+  skills:
+    # software-infra and hardware-mechatronics are folded into the condensed `languages` and
+    # `robotics-embedded` lines (see data/skills.yaml).
+    include: [languages, ai-ml, robotics-embedded]
+  awards:
+    # moe-instructor-cert omitted: the Nullspace bullet already states "MOE-certified instructor".
+    include: [suss-home-team-modules, additional-certifications]
+
 - id: defence-rnd
   label: "Defence R&D (DSO, DSTA and similar)"
   description: "Research and ML-leaning send-out for defence R&D agencies: KLASS research first, no SUSS Home Team certificates. SOLUSTAR, online courses and klass-av-sync cut to hold 2 pages with Education on one page."

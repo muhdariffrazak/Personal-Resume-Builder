@@ -5,6 +5,8 @@
   date: "certified since Oct 2018; current registration Nov 2026 – Nov 2028"
   tags: [teaching]
   source: {experience_id: nullspace}
+  # `short:` is the one-line form used by condensed (one-page) variants.
+  short: "MOE Instructor Certification (certified since Oct 2018; current registration Nov 2026 – Nov 2028)"
 
 - id: additional-certifications
   name: "Additional Certifications"
@@ -13,6 +15,7 @@
   entries:
     - "Unmanned Aircraft Basic Training Certificate, Sep 2026"
     - "Certified SOLIDWORKS Associate (CSWA), Jan 2025"
+  short: "Unmanned Aircraft Basic Training Certificate (Sep 2026); Certified SOLIDWORKS Associate (CSWA, Jan 2025)"
 
 - id: online-courses
   name: "Online Courses"
@@ -32,3 +35,4 @@
   entries:
     - "Operating As One Home Team (SUSS module certificate)"
     - "Home Team Ethos, Values and Ethics (SUSS module certificate)"
+  short: "SUSS Home Team module certificates (Operating As One Home Team; Home Team Ethos, Values and Ethics)"

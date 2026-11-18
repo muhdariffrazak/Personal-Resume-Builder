@@ -1,6 +1,8 @@
 \documentclass[10pt]{article}
 
-\usepackage[a4paper,margin=0.7in]{geometry}
+% A variant may set `margin_in:` (data/variants.yaml) -- only the one-page
+% variants do; scripts/build.py passes it here and patches the docx to match.
+\usepackage[a4paper,margin=$if(margin)$$margin$$else$0.7in$endif$]{geometry}
 \usepackage[T1]{fontenc}
 % Carlito: free, metric-compatible with Calibri (which the docx names).
 \usepackage[sfdefault]{carlito}

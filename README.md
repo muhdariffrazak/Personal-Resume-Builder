@@ -55,6 +55,9 @@ Defined in `data/variants.yaml`:
 - `home-team` — the main send-out for HTX, MHA and other Home Team agencies:
   public-safety framing, National Service, and the SUSS Home Team module
   certificates
+- `home-team-1page` — the same Home Team send-out cut to **one A4 page**, for
+  applications that ask for a single page. Uses each bullet's condensed `short:`
+  wording (see "One-page variants" below)
 - `project-leadership` — project engineer roles and graduate leadership
   programmes: leadership and delivery first (capstone lead, Panthera design
   lead, curriculum and instructor training, SG Makers)
@@ -117,8 +120,27 @@ names Calibri, so it renders with real Calibri when opened in Microsoft Word.
 ## Page limit
 
 `home-team`, `defence-rnd`, `perception-embodied-ai`, `applied-ml-cv`, `embedded-firmware`, and `project-leadership` are
-meant to fit 2 pages. `full` is the
+meant to fit 2 pages. `home-team-1page` must fit 1 page. `full` is the
 comprehensive master reference and is not expected to fit 2 pages.
+
+### One-page variants
+
+A variant opts into one-page mode with a few keys in `data/variants.yaml`; none of
+them changes the other variants' output:
+
+- `condensed: true` — each bullet uses its optional `short:` wording (same fact,
+  fewer words) instead of `text:`; bullets with no `short:` print as normal. The
+  same switch picks `short_highlights` (education), `short_domain`/`short_entries`
+  (skills) and `short` (awards). Some `short:` texts fold in a sibling bullet
+  (a comment above each says which), so the variant selects only the absorbing one.
+  It also sets docx bullet indents to the PDF's 12pt instead of pandoc's 0.5in.
+- `margin_in: 0.6` — page margins in inches (default 0.7), applied to the PDF and
+  patched into the docx so both paginate the same. Body type stays at 10pt.
+- `certifications_in_skills: true` — the selected `awards` print as one
+  "Certifications:" line at the end of Skills instead of as their own section.
+- `headings: {skills: ..., awards: ...}` — override a section heading.
+- `projects: {bullets: {project_id: [bullet_ids]}}` — narrow a project's bullets,
+  like `experience` already allows.
 
 ## C.A.R (Context-Action-Result) bullets and the numbers policy
 

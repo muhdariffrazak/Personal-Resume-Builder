@@ -7,6 +7,8 @@
   tags: [robotics-embedded, hardware-mechatronics]
   highlights:
     - "Relevant Coursework: Mechanics, Control Systems, Robotics, Embedded Systems, Machine Learning, Systems and Software Engineering"
+  # Condensed (one-page) variants show the degree line only; the skills section carries the keywords.
+  short_highlights: []
 
 - id: np-specialist-diploma
   institution: "Ngee Ann Polytechnic"

@@ -18,8 +18,10 @@ Work Experience → Education → Projects → Skills / Competencies → Awards 
 
 Variants differ in **which entries and bullets** appear per section (via `data/variants.yaml`
 selectors), never in section order. If a variant ever needs a different order, that's a
-deliberate exception — call it out in the variant's `description` field. Current exception:
-`applied-ml-cv` puts Skills before Projects, so ML reviewers see the tools first.
+deliberate exception — call it out in the variant's `description` field. Current exceptions:
+`applied-ml-cv` puts Skills before Projects, so ML reviewers see the tools first; and
+`home-team-1page` omits Volunteering and prints its certifications as the last line of
+Skills ("SKILLS & CERTIFICATIONS") rather than as a separate Awards section.
 
 ### Summary
 An optional opening paragraph, rendered directly under the contact line with **no section
@@ -59,7 +61,13 @@ belong in the role.
 - `full` is the master reference and is **not** expected to fit any page limit.
 - Every tailored variant (currently `home-team`, `defence-rnd`, `perception-embodied-ai`,
   `applied-ml-cv`, `embedded-firmware`, `project-leadership`) targets **exactly 2 pages**. Check with `pdfinfo dist/<file>.pdf | grep Pages` after every
-  rebuild. A variant that used to fit and no longer does is fixed by a content trim, not by
+  rebuild.
+- `home-team-1page` targets **exactly 1 page**, in both the PDF and the docx (check the docx
+  with the LibreOffice step under "Before sending"). It keeps body 10pt and the type scale
+  below; its only layout difference is 0.6in margins (`margin_in`). Keep at least one line of
+  slack at the page foot, since Word and LibreOffice wrap slightly differently. Fit it by
+  tightening `short:` wording or selecting fewer bullets, never by going below 10pt. A
+  `short:` must restate the same fact as its `text:` and must not add claims or numbers. A variant that used to fit and no longer does is fixed by a content trim, not by
   shrinking the type or the margins.
 - **Typography.** Calibri (Carlito in the PDF, same metrics), set on 2026-10-31 from reviewer
   feedback: body 10pt, entry header 10.5pt, section heading 12pt, name 18pt, leading about

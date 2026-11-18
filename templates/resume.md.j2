@@ -56,12 +56,16 @@
 
 {% endfor %}
 {% elif section == 'skills' and skills %}
-# SKILLS / COMPETENCIES
+# {{ headings.get('skills', 'SKILLS / COMPETENCIES') }}
 
 {% for domain in skills %}
 **{{ domain.domain }}:** {{ domain.entries | join(', ') }}
 
 {% endfor %}
+{% if certifications_line %}
+**Certifications:** {{ certifications_line }}
+
+{% endif %}
 {% elif section == 'education' and education %}
 # EDUCATION
 
@@ -78,7 +82,7 @@
 
 {% endfor %}
 {% elif section == 'awards' and awards %}
-# AWARDS / ACHIEVEMENTS / CERTIFICATES
+# {{ headings.get('awards', 'AWARDS / ACHIEVEMENTS / CERTIFICATES') }}
 
 {% for award in awards %}
 {% if award.entries %}

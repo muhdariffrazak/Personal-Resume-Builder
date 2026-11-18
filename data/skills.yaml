@@ -16,6 +16,10 @@
     - "Python (NumPy, Pandas)"
     - "C/C++"
     - "TypeScript"
+  # Condensed (one-page) variants fold the software-infra line in here and select only this
+  # domain of the two; `short_domain` renames the line to match.
+  short_domain: "Languages & Software"
+  short_entries: ["Python", "C/C++", "TypeScript", "Docker", "SLURM", "CUDA", "Linux", "Git", "FastAPI", "React", "WebSockets"]
 
 - domain: "Machine Learning & Vision"
   tag: ai-ml
@@ -29,6 +33,8 @@
     - "optical flow (RAFT)"
     - "segmentation (SAM 2)"
     - "point tracking (CoTracker)"
+  # One-line version for condensed (one-page) variants.
+  short_entries: ["PyTorch", "TensorFlow/Keras", "Hugging Face", "OpenCV", "YOLO", "LSTMs", "RAFT", "SAM 2", "CoTracker"]
 
 - domain: "Robotics & UAV"
   tag: robotics-embedded
@@ -37,6 +43,10 @@
     - "LiDAR SLAM"
     - "sensor fusion (IMU, wheel odometry)"
     - "PX4/Pixhawk"
+  # Condensed (one-page) variants fold the hardware-mechatronics line in here and select
+  # only this domain of the two.
+  short_domain: "Robotics & Embedded"
+  short_entries: ["ROS", "LiDAR SLAM", "sensor fusion", "PX4/Pixhawk", "RTOS", "STM32", "Arduino", "PID control", "PCB design"]  # SOLIDWORKS: shown via the CSWA certification
 
 - domain: "Embedded & Hardware"
   tag: hardware-mechatronics

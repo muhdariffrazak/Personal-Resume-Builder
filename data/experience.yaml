@@ -3,6 +3,10 @@
 # Bullets referenced from data/projects.yaml via `ref: "<experience_id>:<bullet_id>"`
 # are the authoritative text — projects.yaml does not duplicate the wording.
 #
+# `short:` (optional) is a tighter wording of the same fact, used only by `condensed: true`
+# variants (the one-page resumes). Where a `short:` also folds in a sibling bullet, a comment
+# above it names that bullet; the variant then selects only the one that absorbs it.
+#
 # Numbers policy: only figures traceable to a verified source appear here. Where a
 # bullet previously carried an invented placeholder metric (`___`) or an unverified
 # "+50%", the claim was removed rather than guessed at. See README "Open items".
@@ -15,12 +19,15 @@
   bullets:
     - id: klass-benchmarking
       text: "Reproduced and benchmarked four state-of-the-art detectors for AI-generated video and audio (NSG-VD, D3, ReStraV, SpeechForensics) on a SLURM-based HPC cluster, treating AI-generated media as a public-safety threat, and reached 90.03 AUROC on the NSG-VD replication."
+      # short: one-page wording; absorbs klass-hpc's cluster detail (H200, SLURM, Docker) (that bullet is not selected alongside it).
+      short: "Reproduced and benchmarked four state-of-the-art detectors (NSG-VD, D3, ReStraV, SpeechForensics) for deepfake video and audio, a public-safety threat, on NVIDIA H200 SLURM clusters, reaching 90.03 AUROC on NSG-VD."
       tags: [ai-ml, computer-vision]
     - id: klass-video-analytics
       text: "Ran ablation studies integrating optical flow (RAFT), segmentation (SAM 2), and point tracking (CoTracker) to test whether physical-motion signals in video sequences can distinguish AI-generated content, and found mixed evidence of a usable signal."
       tags: [ai-ml, computer-vision]
     - id: klass-data-generation
       text: "Built a data generation pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox), and lip-sync (LatentSync) models to produce a balanced 1,200-video real/fake dataset, used to compare all four detectors on equal terms and to test models at small scale before committing larger compute."
+      short: "Built a pipeline chaining video extension (Wan2.2), voice cloning (Chatterbox) and lip-sync (LatentSync) models to produce a balanced 1,200-video real/fake dataset, used to compare all four detectors on equal terms."
       tags: [ai-ml]
     - id: klass-av-sync
       text: "Evaluated audio-visual synchronization as a deepfake detection signal and selected a ~0.3 operating threshold through ROC analysis."
@@ -30,6 +37,7 @@
       tags: [infra-cloud, ai-ml]
     - id: klass-fullstack
       text: "Built React frontend components and FastAPI backend services, with WebSockets for real-time streaming responses, for a company-wide internal AI chatbot that serves multiple models and searches internal documents, giving staff a secure alternative to public AI tools."
+      short: "Built React frontend and FastAPI backend services, with WebSocket streaming, for a company-wide internal AI chatbot serving multiple models and internal-document search, giving staff a secure alternative to public AI tools."
       tags: [software-fullstack]
 
 - id: sit
@@ -55,9 +63,11 @@
   bullets:
     - id: sutd-lighting-system
       text: "Led the design of the lighting control system that signals the Panthera autonomous vehicle's intent to pedestrians, as required for safety testing, with a rosserial node on an Arduino under an RTOS mapping cmd_vel, IMU, and vehicle-state topics to turn, warning, and hazard signals; the vehicle passed T1 autonomous testing at CETRAN."
+      short: "Led design of the Panthera autonomous vehicle's intent lighting for pedestrians: an RTOS Arduino rosserial node mapping cmd_vel, IMU and vehicle-state topics to turn and hazard signals; the vehicle passed CETRAN T1 testing."
       tags: [robotics-embedded, leadership]
     - id: sutd-safety-lstm
       text: "Trained and evaluated Long Short-Term Memory (LSTM) networks on a stair-climbing robot's sensor time-series data, showing that its fall risk could be predicted."
+      short: "Trained LSTM networks on a stair-climbing robot's sensor time-series data, showing that its fall risk could be predicted."
       tags: [ai-ml, robotics-embedded]
 
 - id: spf-procom
@@ -69,6 +79,8 @@
   bullets:
     - id: spf-protective-security
       text: "Performed protective security duties in a deployed team at strategic locations and major national events, under strict standard operating procedures, over 22 months of full-time service."
+      # short: one-page wording; absorbs spf-armoury (that bullet is not selected alongside it).
+      short: "Performed protective security duties at strategic locations and major national events under strict SOPs; as unit Armourer, accounted for the issue and return of arms and equipment with zero discrepancies."
       tags: [operations]
     - id: spf-armoury
       text: "Served as unit Armourer alongside trooper duties, handling the issue, return, and accountability of arms and equipment with zero discrepancies and keeping audit-ready records under regulated inventory procedures."
@@ -111,6 +123,8 @@
   bullets:
     - id: nullspace-curriculum
       text: "Instruct students aged 5–17 across multiple schools in STEM-focused courses covering computational thinking, programming (C++, Python), robotics, and microcontrollers as an MOE-certified instructor since age 18, with positive feedback from students and schools."
+      # short: one-page wording; absorbs nullspace-enrichment (that bullet is not selected alongside it).
+      short: "Teach programming (C++, Python), robotics and microcontrollers to students aged 5–17 as an MOE-certified instructor; selected to conduct the Computer Enrichment Program (CEP) at GEP schools, completing over 1,000 teaching hours."
       tags: [teaching]
     - id: nullspace-enrichment
       text: "Selected to conduct the Computer Enrichment Program (CEP) at GEP schools in Singapore, completing over 1,000 teaching hours."

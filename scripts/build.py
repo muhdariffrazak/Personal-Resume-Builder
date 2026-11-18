@@ -54,20 +54,111 @@ def dedupe_docx_styles(docx_path):
             zf.writestr(name, data)
 
 
+def apply_docx_margin(docx_path, margin_in):
+    """
+    Mirror a variant's `margin_in:` override in the docx: rewrite the section's
+    page margins, and move the EntryHeader right tab stop (the right-aligned
+    dates) out to the new text width. Plain string substitution, not an XML
+    round-trip, so Word's namespace prefixes (mc:Ignorable etc.) survive intact.
+    """
+    import re
+
+    twips = round(margin_in * 1440)
+    with zipfile.ZipFile(docx_path) as zf:
+        entries = {name: zf.read(name) for name in zf.namelist()}
+
+    doc = entries["word/document.xml"].decode("utf-8")
+    page_w = re.search(r'<w:pgSz\b[^>]*\bw:w="(\d+)"', doc)
+    if page_w is None:
+        raise RuntimeError("docx has no <w:pgSz w:w=...>; was templates/reference.docx regenerated?")
+    old_mar = re.search(r'<w:pgMar\b[^>]*\bw:left="(\d+)"', doc)
+    old_text_width = int(page_w.group(1)) - 2 * int(old_mar.group(1))
+    new_text_width = int(page_w.group(1)) - 2 * twips
+
+    def set_margins(m):
+        tag = m.group(0)
+        for side in ("top", "bottom", "left", "right"):
+            tag = re.sub(rf'\bw:{side}="\d+"', f'w:{side}="{twips}"', tag)
+        return tag
+
+    doc, n = re.subn(r"<w:pgMar\b[^>]*/>", set_margins, doc)
+    if n != 1:
+        raise RuntimeError(f"expected one <w:pgMar>, found {n}")
+    entries["word/document.xml"] = doc.encode("utf-8")
+
+    styles = entries["word/styles.xml"].decode("utf-8")
+    styles, n = re.subn(
+        rf'(<w:tab\b[^>]*\bw:pos=")({old_text_width})(")',
+        rf"\g<1>{new_text_width}\g<3>",
+        styles,
+    )
+    if n == 0:
+        raise RuntimeError(f"no right tab stop at the old text width ({old_text_width} twips)")
+    entries["word/styles.xml"] = styles.encode("utf-8")
+
+    with zipfile.ZipFile(docx_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for name, data in entries.items():
+            zf.writestr(name, data)
+
+
+def match_docx_list_indent(docx_path, indent_twips=240):
+    """
+    Pandoc writes its own word/numbering.xml (it is not taken from the reference
+    doc) with top-level bullets indented 720 twips (0.5in). The PDF indents
+    bullets by 1.2em (~12pt = 240 twips), so docx bullet text runs ~24pt
+    narrower and wraps more often -- enough to push a one-page variant onto a
+    second page. Set level-0 bullets to the PDF's indent. Applied to condensed
+    variants only, so the existing 2-page docx files are unchanged.
+    """
+    import re
+
+    with zipfile.ZipFile(docx_path) as zf:
+        entries = {name: zf.read(name) for name in zf.namelist()}
+    if "word/numbering.xml" not in entries:
+        return
+    numbering = entries["word/numbering.xml"].decode("utf-8")
+
+    def fix_level0(m):
+        return re.sub(
+            r'<w:ind w:left="\d+" w:hanging="\d+"\s*/>',
+            f'<w:ind w:left="{indent_twips}" w:hanging="{indent_twips}" />',
+            m.group(0),
+        )
+
+    numbering = re.sub(r'<w:lvl w:ilvl="0">.*?</w:lvl>', fix_level0, numbering, flags=re.S)
+    entries["word/numbering.xml"] = numbering.encode("utf-8")
+
+    with zipfile.ZipFile(docx_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for name, data in entries.items():
+            zf.writestr(name, data)
+
+
 def load_yaml(name):
     with open(DATA / f"{name}.yaml") as f:
         return yaml.safe_load(f)
 
 
-def resolve_bullet_text(bullet, experience_by_id):
+def pick_text(item, condensed):
+    """
+    A bullet's wording. Condensed variants (`condensed: true` in variants.yaml,
+    used for one-page resumes) take the bullet's optional `short:` wording and
+    fall back to `text:` when it has none. `short:` restates the same fact more
+    tightly -- it is not a separate fact, so it lives beside `text:` on the same id.
+    """
+    if condensed and item.get("short"):
+        return item["short"]
+    return item["text"]
+
+
+def resolve_bullet_text(bullet, experience_by_id, condensed=False):
     if "ref" in bullet:
         exp_id, bullet_id = bullet["ref"].split(":")
         job = experience_by_id[exp_id]
         for b in job["bullets"]:
             if b["id"] == bullet_id:
-                return b["text"]
+                return pick_text(b, condensed)
         raise KeyError(f"bullet ref not found: {bullet['ref']}")
-    return bullet["text"]
+    return pick_text(bullet, condensed)
 
 
 def resolve_ids(cfg, all_items, bullets_key=None):
@@ -84,7 +175,7 @@ def resolve_ids(cfg, all_items, bullets_key=None):
     raise ValueError(f"Unrecognised selector: {cfg!r}")
 
 
-def build_experience(cfg, experience):
+def build_experience(cfg, experience, condensed=False):
     ids, bullets_override = resolve_ids(cfg, experience, bullets_key="bullets")
     if ids is None:
         return None
@@ -94,9 +185,9 @@ def build_experience(cfg, experience):
         job = by_id[jid]
         bsel = bullets_override.get(jid, "all")
         if bsel == "all":
-            bullets = [b["text"] for b in job["bullets"]]
+            bullets = [pick_text(b, condensed) for b in job["bullets"]]
         else:
-            bmap = {b["id"]: b["text"] for b in job["bullets"]}
+            bmap = {b["id"]: pick_text(b, condensed) for b in job["bullets"]}
             bullets = [bmap[bid] for bid in bsel]
         result.append(
             {
@@ -110,15 +201,23 @@ def build_experience(cfg, experience):
     return result
 
 
-def build_projects(cfg, projects, experience_by_id):
-    ids, _ = resolve_ids(cfg, projects)
+def build_projects(cfg, projects, experience_by_id, condensed=False):
+    ids, bullets_override = resolve_ids(cfg, projects, bullets_key="bullets")
     if ids is None:
         return None
     by_id = {p["id"]: p for p in projects}
     result = []
     for pid in ids:
         proj = by_id[pid]
-        bullets = [resolve_bullet_text(b, experience_by_id) for b in proj["bullets"]]
+        selected = proj["bullets"]
+        bsel = bullets_override.get(pid, "all")
+        if bsel != "all":
+            bmap = {b["id"]: b for b in proj["bullets"] if "id" in b}
+            missing = [bid for bid in bsel if bid not in bmap]
+            if missing:
+                raise KeyError(f"project {pid}: unknown bullet id(s) {missing}")
+            selected = [bmap[bid] for bid in bsel]
+        bullets = [resolve_bullet_text(b, experience_by_id, condensed) for b in selected]
         result.append(
             {
                 "title": proj["title"],
@@ -131,31 +230,55 @@ def build_projects(cfg, projects, experience_by_id):
     return result
 
 
-def build_education(cfg, education):
+def build_education(cfg, education, condensed=False):
     ids, _ = resolve_ids(cfg, education)
     if ids is None:
         return None
     by_id = {e["id"]: e for e in education}
-    return [by_id[eid] for eid in ids]
+    result = []
+    for eid in ids:
+        edu = dict(by_id[eid])
+        if condensed and "short_highlights" in edu:
+            edu["highlights"] = edu["short_highlights"]
+        result.append(edu)
+    return result
 
 
-def build_skills(cfg, skills):
+def build_skills(cfg, skills, condensed=False):
     if cfg is None or cfg == "none":
         return None
     if cfg == "all":
-        return skills
-    if isinstance(cfg, dict):
+        selected = skills
+    elif isinstance(cfg, dict):
         tags = set(cfg.get("include", []))
-        return [d for d in skills if d["tag"] in tags]
-    raise ValueError(f"Unrecognised skills selector: {cfg!r}")
+        selected = [d for d in skills if d["tag"] in tags]
+    else:
+        raise ValueError(f"Unrecognised skills selector: {cfg!r}")
+    if not condensed:
+        return selected
+    return [
+        {
+            **d,
+            "domain": d.get("short_domain", d["domain"]),
+            "entries": d.get("short_entries") or d["entries"],
+        }
+        for d in selected
+    ]
 
 
-def build_awards(cfg, awards):
+def build_awards(cfg, awards, condensed=False):
     ids, _ = resolve_ids(cfg, awards)
     if ids is None:
         return None
     by_id = {a["id"]: a for a in awards}
-    return [by_id[aid] for aid in ids]
+    result = []
+    for aid in ids:
+        award = by_id[aid]
+        if condensed and award.get("short"):
+            # One-line wording that replaces the name/date (or the whole entries list).
+            award = {"name": award["short"]}
+        result.append(award)
+    return result
 
 
 def build_summary(cfg, summaries):
@@ -173,7 +296,7 @@ def build_summary(cfg, summaries):
     return by_id[cfg]["text"]
 
 
-def build_volunteering(cfg, volunteering):
+def build_volunteering(cfg, volunteering, condensed=False):
     ids, _ = resolve_ids(cfg, volunteering)
     if ids is None:
         return None
@@ -185,7 +308,7 @@ def build_volunteering(cfg, volunteering):
             {
                 "name": v["name"],
                 "dates": v.get("dates"),
-                "bullets": [b["text"] for b in v["bullets"]],
+                "bullets": [pick_text(b, condensed) for b in v["bullets"]],
             }
         )
     return result
@@ -212,17 +335,29 @@ def main():
         sys.exit(f"Unknown variant '{args.variant}'. Available: {available}")
 
     experience_by_id = {j["id"]: j for j in experience}
+    condensed = bool(variant.get("condensed", False))
+
+    awards_built = build_awards(variant.get("awards"), awards, condensed)
+    # `certifications_in_skills: true` renders the selected awards as one labelled
+    # "Certifications:" line at the end of the Skills section instead of as their
+    # own section -- saves a section heading on the one-page variants.
+    certifications_line = None
+    if variant.get("certifications_in_skills") and awards_built:
+        certifications_line = "; ".join(a["name"] for a in awards_built)
 
     ctx = {
         "personal": personal,
+        "certifications_line": certifications_line,
         "summary": build_summary(variant.get("summary"), summaries),
         "sections": variant["sections"],
-        "experience": build_experience(variant.get("experience"), experience),
-        "projects": build_projects(variant.get("projects"), projects, experience_by_id),
-        "education": build_education(variant.get("education"), education),
-        "skills": build_skills(variant.get("skills"), skills),
-        "awards": build_awards(variant.get("awards"), awards),
-        "volunteering": build_volunteering(variant.get("volunteering"), volunteering),
+        # Optional per-variant section-heading overrides, e.g. {awards: "CERTIFICATIONS"}.
+        "headings": variant.get("headings", {}),
+        "experience": build_experience(variant.get("experience"), experience, condensed),
+        "projects": build_projects(variant.get("projects"), projects, experience_by_id, condensed),
+        "education": build_education(variant.get("education"), education, condensed),
+        "skills": build_skills(variant.get("skills"), skills, condensed),
+        "awards": awards_built,
+        "volunteering": build_volunteering(variant.get("volunteering"), volunteering, condensed),
     }
 
     env = Environment(
@@ -248,8 +383,12 @@ def main():
 
     common = ["pandoc", str(md_path), "--from", "markdown+raw_attribute", "--lua-filter", lua_filter]
 
+    # Optional page-margin override (inches), used by the one-page variants only.
+    margin_in = variant.get("margin_in")
+    latex_vars = ["-V", f"margin={margin_in}in"] if margin_in else []
+
     subprocess.run(
-        common + ["--template", latex_template, "--pdf-engine", "pdflatex", "-o", str(pdf_path)],
+        common + latex_vars + ["--template", latex_template, "--pdf-engine", "pdflatex", "-o", str(pdf_path)],
         check=True,
         cwd=variant_build_dir,
     )
@@ -262,6 +401,10 @@ def main():
             cwd=variant_build_dir,
         )
         dedupe_docx_styles(docx_path)
+        if margin_in:
+            apply_docx_margin(docx_path, float(margin_in))
+        if condensed:
+            match_docx_list_indent(docx_path)
         print(f"Built {docx_path}")
     else:
         print(f"Skipped docx build: {reference_docx} not found (run scripts/build_reference_docx.py first)")

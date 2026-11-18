@@ -14,10 +14,17 @@
   dates: "Aug 2026 – Apr 2027"
   tags: [robotics-embedded, hardware-mechatronics, leadership, uav]
   bullets:
-    - text: "Leading a 3-person team, working from an approved proposal, to build a proof-of-concept indoor drone for end user MHA that is harder to detect by sound, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope."
-    - text: "Selected a low-noise propulsion stack: 5-inch injection-molded toroidal propellers, custom ducts with acoustic lining and serrated trailing edges, 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning to shift tonal whine into less perceptible bands."
-    - text: "Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), sized to preserve control headroom for manually piloted indoor flight."
-    - text: "Planned the acoustic validation to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference; the tests will benchmark against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements."
+    - id: capstone-lead
+      text: "Leading a 3-person team, working from an approved proposal, to build a proof-of-concept indoor drone for end user MHA that is harder to detect by sound, targeting a 78 dBA ceiling at a 1 m reference during steady hover, 10-minute hover endurance, and a 370 mm square airframe envelope."
+      short: "Leading a 3-person team building a proof-of-concept indoor drone for end user MHA that is harder to detect by sound, targeting a 78 dBA ceiling at 1 m in steady hover, 10-minute hover endurance and a 370 mm square airframe."
+    - id: capstone-propulsion
+      text: "Selected a low-noise propulsion stack: 5-inch injection-molded toroidal propellers, custom ducts with acoustic lining and serrated trailing edges, 1300 KV low-RPM motors, and AM32 ESC PWM frequency tuning to shift tonal whine into less perceptible bands."
+      # short: one-page wording; absorbs capstone-avionics.
+      short: "Selected low-noise propulsion (injection-molded toroidal propellers, acoustically lined ducts with serrated trailing edges, 1300 KV motors, AM32 ESC PWM tuning) and specified Pixhawk 6C Mini avionics and 150 A power distribution."
+    - id: capstone-avionics
+      text: "Specified the avionics and power architecture (Holybro Pixhawk 6C Mini, PM02 V2 power module, dedicated 150 A power distribution board), sized to preserve control headroom for manually piloted indoor flight."
+    - id: capstone-validation
+      text: "Planned the acoustic validation to the Von Karman Institute four-microphone methodology with TU Berlin distance normalization to a 1 m reference; the tests will benchmark against HKUST's 90.52 dBA commercial quadcopter baseline and VKI's DJI Phantom 3 SE measurements."
 
 - id: trolley-robot
   title: "Autonomous Airport Trolley Return Robot (SIT–DigiPen Coursework)"
@@ -25,8 +32,12 @@
   dates: null
   tags: [robotics-embedded, hardware-mechatronics]
   bullets:
-    - text: "Built LiDAR-based perception in C++ and ROS for a robot that autonomously returns airport trolleys, integrating obstacle detection, SLAM mapping, and localization with IMU and wheel-odometry sensor fusion on an onboard computer; the robot completed the final demo task."
-    - text: "Developed RTOS firmware on an STM32F7 microcontroller with concurrent tasks for obstacle detection and joystick control, and a custom serial protocol linking it to ROS for reliable motor control."
+    - id: trolley-perception
+      text: "Built LiDAR-based perception in C++ and ROS for a robot that autonomously returns airport trolleys, integrating obstacle detection, SLAM mapping, and localization with IMU and wheel-odometry sensor fusion on an onboard computer; the robot completed the final demo task."
+      # short: one-page wording; absorbs trolley-firmware.
+      short: "Built LiDAR perception in C++/ROS (obstacle detection, SLAM, IMU and wheel-odometry fusion) and STM32F7 RTOS firmware with a custom serial link to ROS for an autonomous airport trolley-return robot that completed its final demo."
+    - id: trolley-firmware
+      text: "Developed RTOS firmware on an STM32F7 microcontroller with concurrent tasks for obstacle detection and joystick control, and a custom serial protocol linking it to ROS for reliable motor control."
 
 - id: custom-3d-printer
   title: "Custom 3D Printer Development"
